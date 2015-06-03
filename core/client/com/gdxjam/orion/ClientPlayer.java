@@ -5,15 +5,19 @@ import com.badlogic.gdx.math.Vector2;
 public class ClientPlayer {
 
 	private Vector2 position;
-	private final int id;
+	private int id;
 
-	public ClientPlayer(float x, float y, int id) {
-		this(new Vector2(x, y), id);
+	public ClientPlayer() {
 	}
 
-	public ClientPlayer(Vector2 position, int id) {
+	public ClientPlayer init(float x, float y, int id) {
+		return init(new Vector2(x, y), id);
+	}
+
+	public ClientPlayer init(Vector2 position, int id) {
 		this.position = position;
 		this.id = id;
+		return this;
 	}
 
 	public void setPosition(Vector2 position) {

@@ -26,8 +26,6 @@ public class GameManager {
 	}
 
 	public static World getWorld() {
-		if (world == null)
-			return new World(new Vector2(0, 0), true);
 		return world;
 	}
 

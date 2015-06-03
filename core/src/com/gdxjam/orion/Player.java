@@ -21,7 +21,7 @@ public class Player extends Entity {
 		fixture.shape = circle;
 		fixture.density = 1;
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.StaticBody;
+		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position);
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
@@ -47,7 +47,7 @@ public class Player extends Entity {
 	}
 
 	public void up() {
-		body.applyForceToCenter(new Vector2(0, 1000), true);
+		body.applyForceToCenter(new Vector2(1000, 1000), true);
 		System.out.println("GOING UP IN THE CLUB ON A TUESDAY!");
 	}
 }

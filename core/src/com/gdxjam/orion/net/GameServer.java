@@ -24,7 +24,8 @@ public class GameServer {
 	private Array<ClientPlayer> clientPlayers = new Array<ClientPlayer>();
 
 	public GameServer() throws IOException {
-		Log.set(Log.LEVEL_DEBUG);
+		// Log.set(Log.LEVEL_DEBUG);
+		Log.set(Log.LEVEL_NONE);
 
 		server = new Server() {
 
@@ -58,7 +59,7 @@ public class GameServer {
 					server.sendToTCP(c.getID(), reply);
 				}
 
-				if (message instanceof RequestUpdate) {
+				else if (message instanceof RequestUpdate) {
 					RequestUpdate request = (RequestUpdate) message;
 					handleInput(c, request);
 				}
@@ -115,7 +116,7 @@ public class GameServer {
 
 	public void update() {
 		update = new ReplyUpdate();
-		clientPlayers.clear();
+		clientPlayers = new Array<ClientPlayer>();
 		for (Player p : GameManager.getPlayers().values()) {
 			clientPlayers.add(convertToClient(p));
 		}
@@ -137,6 +138,7 @@ public class GameServer {
 	}
 
 	public ClientPlayer convertToClient(Player player) {
-		return new ClientPlayer(player.getBody().getPosition(), player.getId());
+		return new ClientPlayer().init(player.getBody().getPosition(),
+				player.getId());
 	}
 }

@@ -3,6 +3,7 @@ package com.gdxjam.orion;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -17,7 +18,7 @@ public class GameClient {
 
 	private Client client;
 	private ClientPlayer player;
-	private Vector2 defaultPos = new Vector2();
+	private Vector2 defaultPos;
 
 	public GameClient() throws IOException { // final GameMap game,
 		client = new Client();
@@ -43,17 +44,20 @@ public class GameClient {
 
 		client.connect(5000, Network.getIP(), 1881, 1882);
 		RequestAddPlayer request = new RequestAddPlayer();
+		// defaultPos = new Vector2(MathUtils.random(-10, 10), MathUtils.random(
+		//		-10, 10));
+		defaultPos = new Vector2();
 		request.position = defaultPos;
 		client.sendTCP(request);
 
 	}
 
-	protected synchronized void handleRecieved(Connection connection,
+	public synchronized void handleRecieved(Connection connection,
 			Object message) {
 
 		if (message instanceof ReplyAddPlayer) {
 			ReplyAddPlayer reply = (ReplyAddPlayer) message;
-			player = new ClientPlayer(defaultPos, reply.id);
+			player = new ClientPlayer().init(defaultPos, reply.id);
 			ClientGameManager.setPlayer(player);
 			ClientGameManager.getPlayers().add(player);
 		}

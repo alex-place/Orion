@@ -23,6 +23,8 @@ public class Network {
 		kryo.register(ReplyAddPlayer.class);
 		kryo.register(RequestUpdate.class);
 		kryo.register(ReplyUpdate.class);
+		kryo.register(Object[].class);
+		kryo.register(ClientPlayer.class);
 
 	}
 
