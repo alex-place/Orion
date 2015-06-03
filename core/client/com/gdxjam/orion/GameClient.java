@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
@@ -18,7 +18,7 @@ public class GameClient {
 
 	private Client client;
 	private ClientPlayer player;
-	private Vector2 defaultPos;
+	private Vector3 defaultPos;
 
 	public GameClient() throws IOException { // final GameMap game,
 		client = new Client();
@@ -44,9 +44,9 @@ public class GameClient {
 
 		client.connect(5000, Network.getIP(), 1881, 1882);
 		RequestAddPlayer request = new RequestAddPlayer();
-		// defaultPos = new Vector2(MathUtils.random(-10, 10), MathUtils.random(
-		//		-10, 10));
-		defaultPos = new Vector2();
+		defaultPos = new Vector3(MathUtils.random(-10, 10), MathUtils.random(
+				-10, 10), MathUtils.random(-10, 10));
+		defaultPos = new Vector3();
 		request.position = defaultPos;
 		client.sendTCP(request);
 

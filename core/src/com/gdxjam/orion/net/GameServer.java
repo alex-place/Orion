@@ -3,6 +3,7 @@ package com.gdxjam.orion.net;
 import java.io.IOException;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage.KeepAlive;
@@ -138,7 +139,7 @@ public class GameServer {
 	}
 
 	public ClientPlayer convertToClient(Player player) {
-		return new ClientPlayer().init(player.getBody().getPosition(),
-				player.getId());
+		return new ClientPlayer().init(new Vector3(player.getBody()
+				.getPosition(), 0), player.getId());
 	}
 }

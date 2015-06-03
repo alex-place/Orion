@@ -47,13 +47,6 @@ public class GameScreen implements Screen {
 
 	private void update() {
 		GameManager.getWorld().step(1 / 60f, 8, 8);
-		if (GameManager.getPlayers().size() > 0) {
-			for (Player player : GameManager.getPlayers().values()) {
-				System.out.println(player.getBody().getPosition().x + " "
-						+ player.getBody().getPosition().y);
-			}
-		}
-
 		server.update();
 	}
 

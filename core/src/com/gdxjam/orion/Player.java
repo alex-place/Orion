@@ -2,6 +2,7 @@ package com.gdxjam.orion;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -14,7 +15,7 @@ public class Player extends Entity {
 	private final int id;
 	private final int speed = 100;
 
-	public Player(Vector2 position, int id) {
+	public Player(Vector3 position, int id) {
 		this.id = id;
 
 		CircleShape circle = new CircleShape();
@@ -24,7 +25,8 @@ public class Player extends Entity {
 		fixture.density = 1;
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(position);
+		bodyDef.position.set(position.x, position.y);
+		bodyDef.angle = position.z;
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
 		// body.setTransform(position, 0);
@@ -32,8 +34,8 @@ public class Player extends Entity {
 		GameManager.getPlayers().put(id, this);
 	}
 
-	public Player(int x, int y, int id) {
-		this(new Vector2(x, y), id);
+	public Player(int x, int y, int rotation, int id) {
+		this(new Vector3(x, y, rotation), id);
 	}
 
 	public Body getBody() {
@@ -51,5 +53,5 @@ public class Player extends Entity {
 	public void up() {
 		body.applyForceToCenter(
 				new Vector2(0, speed * Gdx.graphics.getDeltaTime()), true);
- 	}
+	}
 }

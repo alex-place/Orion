@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class ClientGameScreen implements Screen {
 
@@ -52,8 +53,9 @@ public class ClientGameScreen implements Screen {
 		batch.begin();
 
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
-			Vector2 pos = player.getPosition();
-			batch.draw(green, pos.x, pos.y, 1, 1);
+			Vector3 pos = player.getPosition();
+			batch.draw(green, pos.x, pos.y, 0, 0, 1, 1, 1, 1, pos.z, 0, 0, 1,
+					1, false, false);
 		}
 
 		batch.end();
