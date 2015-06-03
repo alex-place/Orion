@@ -9,8 +9,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 public class Player extends Entity {
 
-	Body body;
-	int id;
+	private Body body;
+	private final int id;
 
 	public Player(Vector2 position, int id) {
 		this.id = id;
@@ -23,14 +23,31 @@ public class Player extends Entity {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.StaticBody;
 		bodyDef.position.set(position);
-		Body body = GameManager.getWorld().createBody(bodyDef);
+		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
 		// body.setTransform(position, 0);
 
-		GameManager.getPlayers().add(this);
+		GameManager.getPlayers().put(id, this);
 	}
 
 	public Player(int x, int y, int id) {
 		this(new Vector2(x, y), id);
+	}
+
+	public Body getBody() {
+		return body;
+	}
+
+	public void setBody(Body body) {
+		this.body = body;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void up() {
+		body.applyForceToCenter(new Vector2(0, 1000), true);
+		System.out.println("GOING UP IN THE CLUB ON A TUESDAY!");
 	}
 }

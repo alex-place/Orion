@@ -2,22 +2,26 @@ package com.gdxjam.orion.net;
 
 import java.io.IOException;
 
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage.KeepAlive;
 import com.esotericsoftware.kryonet.FrameworkMessage.Ping;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
+import com.gdxjam.orion.ClientPlayer;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.Player;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
+import com.gdxjam.orion.net.Network.RequestUpdate;
 
 public class GameServer {
 	private Server server;
-
 	private ReplyUpdate update;
+	private Array<ClientPlayer> clientPlayers = new Array<ClientPlayer>();
 
 	public GameServer() throws IOException {
 		Log.set(Log.LEVEL_DEBUG);
@@ -46,12 +50,17 @@ public class GameServer {
 
 				if (message instanceof RequestAddPlayer) {
 					Player player = new Player(
-							((RequestAddPlayer) message).position, 0);
-					GameManager.getPlayers().add(player);
+							((RequestAddPlayer) message).position, c.getID());
+					GameManager.getPlayers().put(c.getID(), player);
 
 					ReplyAddPlayer reply = new ReplyAddPlayer();
-					reply.id = 0;
+					reply.id = c.getID();
 					server.sendToTCP(c.getID(), reply);
+				}
+
+				if (message instanceof RequestUpdate) {
+					RequestUpdate request = (RequestUpdate) message;
+					handleInput(c, request);
 				}
 
 				else if ((message instanceof Ping)
@@ -60,7 +69,8 @@ public class GameServer {
 				}
 
 				else {
-					System.out.println("Server recieved unhandled message");
+					System.out.println("Server recieved unhandled message "
+							+ message);
 
 				}
 
@@ -73,6 +83,18 @@ public class GameServer {
 
 		server.bind(1881, 1882);
 		server.start();
+	}
+
+	protected void handleInput(Connection c, RequestUpdate request) {
+		switch (request.key) {
+		case Keys.W:
+			Player player = GameManager.getPlayers().get(c.getID());
+			player.up();
+			break;
+		case Keys.ESCAPE:
+			c.close();
+			break;
+		}
 	}
 
 	protected void logInfo(String string) {
@@ -93,7 +115,12 @@ public class GameServer {
 
 	public void update() {
 		update = new ReplyUpdate();
-		update.players = GameManager.getPlayers();
+		clientPlayers.clear();
+		for (Player p : GameManager.getPlayers().values()) {
+			clientPlayers.add(convertToClient(p));
+		}
+
+		update.players = clientPlayers;
 		server.sendToAllTCP(update);
 	}
 
@@ -107,5 +134,9 @@ public class GameServer {
 	public static void main(String[] args) throws IOException {
 		Log.set(Log.LEVEL_DEBUG);
 		new GameServer();
+	}
+
+	public ClientPlayer convertToClient(Player player) {
+		return new ClientPlayer(player.getBody().getPosition(), player.getId());
 	}
 }

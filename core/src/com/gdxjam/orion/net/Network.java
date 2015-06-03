@@ -2,8 +2,10 @@ package com.gdxjam.orion.net;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.IntArray;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
+import com.gdxjam.orion.ClientPlayer;
 import com.gdxjam.orion.Player;
 
 public class Network {
@@ -19,6 +21,7 @@ public class Network {
 		kryo.register(Vector2.class);
 		kryo.register(RequestAddPlayer.class);
 		kryo.register(ReplyAddPlayer.class);
+		kryo.register(RequestUpdate.class);
 		kryo.register(ReplyUpdate.class);
 
 	}
@@ -47,8 +50,12 @@ public class Network {
 		public int id;
 	}
 
+	public static class RequestUpdate {
+		public int key;
+	}
+
 	public static class ReplyUpdate {
-		public Array<Player> players;
+		public Array<ClientPlayer> players;
 	}
 
 }

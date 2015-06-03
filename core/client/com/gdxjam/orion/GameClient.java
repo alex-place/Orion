@@ -2,6 +2,7 @@ package com.gdxjam.orion;
 
 import java.io.IOException;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -9,6 +10,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.net.Network;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
+import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
 
 public class GameClient {
@@ -27,9 +29,7 @@ public class GameClient {
 
 		client.addListener(new Listener() {
 			public void connected(Connection connection) {
-				RequestAddPlayer request = new RequestAddPlayer();
-				request.position = defaultPos;
-				client.sendTCP(request);
+
 			}
 
 			public void received(Connection connection, Object object) {
@@ -42,6 +42,9 @@ public class GameClient {
 		});
 
 		client.connect(5000, Network.getIP(), 1881, 1882);
+		RequestAddPlayer request = new RequestAddPlayer();
+		request.position = defaultPos;
+		client.sendTCP(request);
 
 	}
 
@@ -52,6 +55,12 @@ public class GameClient {
 			ReplyAddPlayer reply = (ReplyAddPlayer) message;
 			player = new ClientPlayer(defaultPos, reply.id);
 			ClientGameManager.setPlayer(player);
+			ClientGameManager.getPlayers().add(player);
+		}
+
+		if (message instanceof ReplyUpdate) {
+			ReplyUpdate update = (ReplyUpdate) message;
+			ClientGameManager.setPlayers(update.players);
 		}
 
 	}
@@ -68,6 +77,16 @@ public class GameClient {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	public void sendTCP(Object object) {
+		client.sendTCP(object);
+	}
+
+	public void update() {
+		if (!client.isConnected()) {
+			Gdx.app.exit();
 		}
 	}
 
