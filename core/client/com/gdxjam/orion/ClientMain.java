@@ -2,11 +2,11 @@ package com.gdxjam.orion;
 
 import com.badlogic.gdx.Game;
 
-public class Main extends Game {
+public class ClientMain extends Game {
 
 	@Override
 	public void create() {
-		GameManager.init();
-		setScreen(new GameScreen());
+		setScreen(new ClientGameScreen());
 	}
+
 }

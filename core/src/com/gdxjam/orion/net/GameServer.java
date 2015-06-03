@@ -29,6 +29,12 @@ public class GameServer {
 		Network.register(server);
 
 		server.addListener(new Listener() {
+
+			@Override
+			public void connected(Connection connection) {
+				super.connected(connection);
+			}
+
 			public void received(Connection c, Object message) {
 
 				if ((message instanceof Ping) || (message instanceof KeepAlive)) {

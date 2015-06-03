@@ -1,4 +1,4 @@
-package com.gdxjam.orion.net;
+package com.gdxjam.orion;
 
 import java.io.IOException;
 
@@ -6,6 +6,7 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.minlog.Log;
+import com.gdxjam.orion.net.Network;
 
 public class GameClient {
 
