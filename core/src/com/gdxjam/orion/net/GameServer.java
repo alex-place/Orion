@@ -8,9 +8,16 @@ import com.esotericsoftware.kryonet.FrameworkMessage.Ping;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
+import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.Player;
+import com.gdxjam.orion.net.Network.ReplyAddPlayer;
+import com.gdxjam.orion.net.Network.ReplyUpdate;
+import com.gdxjam.orion.net.Network.RequestAddPlayer;
 
 public class GameServer {
-	Server server;
+	private Server server;
+
+	private ReplyUpdate update;
 
 	public GameServer() throws IOException {
 		Log.set(Log.LEVEL_DEBUG);
@@ -37,7 +44,18 @@ public class GameServer {
 
 			public void received(Connection c, Object message) {
 
-				if ((message instanceof Ping) || (message instanceof KeepAlive)) {
+				if (message instanceof RequestAddPlayer) {
+					Player player = new Player(
+							((RequestAddPlayer) message).position, 0);
+					GameManager.getPlayers().add(player);
+
+					ReplyAddPlayer reply = new ReplyAddPlayer();
+					reply.id = 0;
+					server.sendToTCP(c.getID(), reply);
+				}
+
+				else if ((message instanceof Ping)
+						|| (message instanceof KeepAlive)) {
 
 				}
 
@@ -74,6 +92,9 @@ public class GameServer {
 	}
 
 	public void update() {
+		update = new ReplyUpdate();
+		update.players = GameManager.getPlayers();
+		server.sendToAllTCP(update);
 	}
 
 	public class ClientConnection extends Connection {

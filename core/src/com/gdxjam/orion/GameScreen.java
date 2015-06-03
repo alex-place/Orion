@@ -1,17 +1,13 @@
 package com.gdxjam.orion;
 
+import java.io.IOException;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.World;
+import com.gdxjam.orion.net.GameServer;
 
 public class GameScreen implements Screen {
 
@@ -21,11 +17,21 @@ public class GameScreen implements Screen {
 	Box2DDebugRenderer renderer = new Box2DDebugRenderer();
 	OrthographicCamera camera;
 
+	GameServer server;
+
 	@Override
 	public void show() {
+
+		try {
+			server = new GameServer();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Gdx.app.exit();
+		}
+
 		camera = new OrthographicCamera(100, 100);
 		renderer = new Box2DDebugRenderer();
-		Player player = new Player(1, 1, 0);
+		// Player player = new Player(1, 1, 0);
 
 	}
 

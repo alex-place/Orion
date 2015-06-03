@@ -1,7 +1,10 @@
 package com.gdxjam.orion.net;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
+import com.gdxjam.orion.Player;
 
 public class Network {
 
@@ -11,6 +14,12 @@ public class Network {
 	// This registers objects that are going to be sent over the network.
 	static public void register(EndPoint endPoint) {
 		Kryo kryo = endPoint.getKryo();
+		kryo.register(Array.class);
+		kryo.register(Player.class);
+		kryo.register(Vector2.class);
+		kryo.register(RequestAddPlayer.class);
+		kryo.register(ReplyAddPlayer.class);
+		kryo.register(ReplyUpdate.class);
 
 	}
 
@@ -28,6 +37,18 @@ public class Network {
 
 	public static void setServer(boolean isServer) {
 		Network.isServer = isServer;
+	}
+
+	public static class RequestAddPlayer {
+		public Vector2 position;
+	}
+
+	public static class ReplyAddPlayer {
+		public int id;
+	}
+
+	public static class ReplyUpdate {
+		public Array<Player> players;
 	}
 
 }
