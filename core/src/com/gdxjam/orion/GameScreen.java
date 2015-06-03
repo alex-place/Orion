@@ -49,11 +49,12 @@ public class GameScreen implements Screen {
 		GameManager.getWorld().step(1 / 60f, 8, 8);
 		if (GameManager.getPlayers().size() > 0) {
 			for (Player player : GameManager.getPlayers().values()) {
-				player.getBody().applyForceToCenter(0.001f, 0.01f, true);
 				System.out.println(player.getBody().getPosition().x + " "
 						+ player.getBody().getPosition().y);
 			}
 		}
+
+		server.update();
 	}
 
 	@Override

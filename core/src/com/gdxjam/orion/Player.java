@@ -1,5 +1,6 @@
 package com.gdxjam.orion;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -11,6 +12,7 @@ public class Player extends Entity {
 
 	private Body body;
 	private final int id;
+	private final int speed = 100;
 
 	public Player(Vector2 position, int id) {
 		this.id = id;
@@ -47,7 +49,7 @@ public class Player extends Entity {
 	}
 
 	public void up() {
-		body.applyForceToCenter(new Vector2(1000, 1000), true);
-		System.out.println("GOING UP IN THE CLUB ON A TUESDAY!");
-	}
+		body.applyForceToCenter(
+				new Vector2(0, speed * Gdx.graphics.getDeltaTime()), true);
+ 	}
 }
