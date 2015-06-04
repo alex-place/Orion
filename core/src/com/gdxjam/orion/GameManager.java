@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
+import com.gdxjam.orion.net.GameServer;
 
 public class GameManager {
 
@@ -27,6 +27,10 @@ public class GameManager {
 
 	public static World getWorld() {
 		return world;
+	}
+
+	public static enum ShipType {
+		DEFAULT, FIGHTER;
 	}
 
 }

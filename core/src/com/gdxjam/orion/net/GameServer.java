@@ -13,7 +13,10 @@ import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.ClientPlayer;
 import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.Player;
+import com.gdxjam.orion.controls.ControlBehavior;
+import com.gdxjam.orion.controls.DefaultControlBehavior;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
@@ -51,8 +54,20 @@ public class GameServer {
 			public void received(Connection c, Object message) {
 
 				if (message instanceof RequestAddPlayer) {
+					RequestAddPlayer request = (RequestAddPlayer) message;
+					ControlBehavior behavior;
+
+					if (request.type == ShipType.FIGHTER) {
+						// TODO create fighter behavior
+						behavior = new DefaultControlBehavior();
+					} else {
+						behavior = new DefaultControlBehavior();
+					}
+
 					Player player = new Player(
-							((RequestAddPlayer) message).position, c.getID());
+							((RequestAddPlayer) message).position, c.getID(),
+							behavior);
+					behavior.init(player);
 					GameManager.getPlayers().put(c.getID(), player);
 
 					ReplyAddPlayer reply = new ReplyAddPlayer();
@@ -89,13 +104,14 @@ public class GameServer {
 
 	protected void handleInput(Connection c, RequestUpdate request) {
 		switch (request.key) {
-		case Keys.W:
-			Player player = GameManager.getPlayers().get(c.getID());
-			player.up();
-			break;
 		case Keys.ESCAPE:
 			c.close();
 			break;
+		default:
+			Player player = GameManager.getPlayers().get(c.getID());
+			player.getBehavior().handleKey(request.key);
+			break;
+
 		}
 	}
 

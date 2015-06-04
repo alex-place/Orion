@@ -1,22 +1,23 @@
 package com.gdxjam.orion;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.gdxjam.orion.controls.ControlBehavior;
 
 public class Player extends Entity {
 
 	private Body body;
 	private final int id;
 	private final int speed = 100;
+	private ControlBehavior behavior;
 
-	public Player(Vector3 position, int id) {
+	public Player(Vector3 position, int id, ControlBehavior behavior) {
 		this.id = id;
+		this.behavior = behavior;
 
 		CircleShape circle = new CircleShape();
 		circle.setRadius(1);
@@ -29,13 +30,12 @@ public class Player extends Entity {
 		bodyDef.angle = position.z;
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
-		// body.setTransform(position, 0);
 
 		GameManager.getPlayers().put(id, this);
 	}
 
-	public Player(int x, int y, int rotation, int id) {
-		this(new Vector3(x, y, rotation), id);
+	public Player(int x, int y, int rotation, int id, ControlBehavior behavior) {
+		this(new Vector3(x, y, rotation), id, behavior);
 	}
 
 	public Body getBody() {
@@ -50,8 +50,12 @@ public class Player extends Entity {
 		return id;
 	}
 
-	public void up() {
-		body.applyForceToCenter(
-				new Vector2(0, speed * Gdx.graphics.getDeltaTime()), true);
+	public ControlBehavior getBehavior() {
+		return behavior;
 	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
 }

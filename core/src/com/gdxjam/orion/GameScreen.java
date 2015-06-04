@@ -31,7 +31,6 @@ public class GameScreen implements Screen {
 
 		camera = new OrthographicCamera(10, 10);
 		renderer = new Box2DDebugRenderer();
-		// Player player = new Player(1, 1, 0);
 
 	}
 

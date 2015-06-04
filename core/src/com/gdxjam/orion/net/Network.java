@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.gdxjam.orion.ClientPlayer;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.Player;
 
 public class Network {
@@ -24,6 +25,7 @@ public class Network {
 		kryo.register(ReplyUpdate.class);
 		kryo.register(Object[].class);
 		kryo.register(ClientPlayer.class);
+		kryo.register(ShipType.class);
 
 	}
 
@@ -45,6 +47,7 @@ public class Network {
 
 	public static class RequestAddPlayer {
 		public Vector3 position;
+		public ShipType type;
 	}
 
 	public static class ReplyAddPlayer {
