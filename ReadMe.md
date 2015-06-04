@@ -1,5 +1,4 @@
 Game Design Document for Orion (working title) 0.0.1
-Alex Place & Nate Baker
 
 Project goal:
 
