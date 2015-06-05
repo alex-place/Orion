@@ -54,8 +54,7 @@ public class GameClient {
 
 	}
 
-	public synchronized void handleRecieved(Connection connection,
-			Object message) {
+	public synchronized void handleRecieved(Connection connection, Object message) {
 
 		if (message instanceof ReplyAddPlayer) {
 			ReplyAddPlayer reply = (ReplyAddPlayer) message;

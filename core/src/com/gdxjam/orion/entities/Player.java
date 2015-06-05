@@ -1,11 +1,14 @@
 package com.gdxjam.orion.entities;
 
+import utils.Constants;
+
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 
@@ -19,16 +22,17 @@ public class Player extends Entity {
 	public Player(Vector3 position, int id, ControlBehavior behavior) {
 		this.id = id;
 		this.behavior = behavior;
-
-		CircleShape circle = new CircleShape();
-		circle.setRadius(1);
+		PolygonShape rect = new PolygonShape();
+		rect.setAsBox(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
 		FixtureDef fixture = new FixtureDef();
-		fixture.shape = circle;
+		fixture.shape = rect;
 		fixture.density = 1;
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position.x, position.y);
 		bodyDef.angle = position.z;
+		bodyDef.angularDamping = Constants.ANGULAR_DAMPING;
+		bodyDef.linearDamping = Constants.LINEAR_DAMPING;
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
 
@@ -57,6 +61,10 @@ public class Player extends Entity {
 
 	public int getSpeed() {
 		return speed;
+	}
+	public float getOrientation(){
+		return body.getAngle();
+		
 	}
 
 }

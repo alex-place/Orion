@@ -2,6 +2,8 @@ package com.gdxjam.orion.screens;
 
 import java.io.IOException;
 
+import utils.Constants;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
@@ -37,7 +39,7 @@ public class ClientGameScreen implements Screen {
 			e.printStackTrace();
 		}
 
-		camera = new OrthographicCamera(10, 10);
+		camera = new OrthographicCamera(Constants.CAMERA_WIDTH, Constants.CAMERA_HEIGHT);
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
 
@@ -60,7 +62,7 @@ public class ClientGameScreen implements Screen {
 
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
 			Vector3 pos = player.getPosition();
-			batch.draw(green, pos.x, pos.y, 0, 0, 1, 1, 1, 1, pos.z, 0, 0, 1,
+			batch.draw(green, pos.x, pos.y, 0, 0, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1, pos.z, 0, 0, 1,
 					1, false, false);
 		}
 

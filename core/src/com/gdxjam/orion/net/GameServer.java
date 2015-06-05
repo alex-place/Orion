@@ -15,6 +15,7 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.DefaultControlBehavior;
+import com.gdxjam.orion.controls.FighterControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
@@ -61,7 +62,7 @@ public class GameServer {
 						// TODO create fighter behavior
 						behavior = new DefaultControlBehavior();
 					} else {
-						behavior = new DefaultControlBehavior();
+						behavior = new FighterControlBehavior();
 					}
 
 					Player player = new Player(

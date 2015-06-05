@@ -2,6 +2,8 @@ package com.gdxjam.orion.screens;
 
 import java.io.IOException;
 
+import utils.Constants;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -30,7 +32,7 @@ public class GameScreen implements Screen {
 			Gdx.app.exit();
 		}
 
-		camera = new OrthographicCamera(10, 10);
+		camera = new OrthographicCamera(Constants.CAMERA_WIDTH, Constants.CAMERA_HEIGHT);
 		renderer = new Box2DDebugRenderer();
 
 	}

@@ -11,12 +11,14 @@ import com.gdxjam.orion.entities.Player;
  * requests (exiting to menu, toggling UI overlays)... these behaviors are
  * handled exclusively on the server
  * */
-public class DefaultControlBehavior implements ControlBehavior {
+public class FighterControlBehavior implements ControlBehavior {
 
 	private Player player;
-	private final float speed = 1000000;
+	float speed = 15000;
+	float rotation;
+	float rotationSpeed = 10.0f;
 
-	public DefaultControlBehavior() {
+	public FighterControlBehavior() {
 	}
 
 	@Override
@@ -26,9 +28,14 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.getBody()
-				.applyForceToCenter(new Vector2(0, speed * delta), true);
+		Gdx.app.log("balls", "dicks");
+		rotation = player.getOrientation();
+		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
+		if (direction.len() > 0) {
+			direction.nor();
+		}
 
+		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
