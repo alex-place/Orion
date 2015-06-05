@@ -1,7 +1,8 @@
-package com.gdxjam.orion;
+package com.gdxjam.orion.input;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestUpdate;
 
 public class DefaultInputHandler implements InputProcessor {
