@@ -7,8 +7,8 @@ import com.gdxjam.orion.ClientMain;
 public class ClientLauncher {
 	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 1080;
-		config.height = 800;
+		config.width = 600;
+		config.height = 400;
 		new LwjglApplication(new ClientMain(), config);
 	}
 }

@@ -1,29 +1,38 @@
 package com.gdxjam.orion.input;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
+import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestUpdate;
 
 public class DefaultInputHandler implements InputProcessor {
 
 	private GameClient client;
+	private OrthographicCamera camera;
 
-	public DefaultInputHandler(GameClient client) {
+	public DefaultInputHandler(GameClient client, OrthographicCamera camera) {
 		this.client = client;
+		this.camera = camera;
 	}
 
 	@Override
 	public boolean keyDown(int keycode) {
 
 		switch (keycode) {
-		case Keys.W:
-		case Keys.A:
-		case Keys.S:
-		case Keys.D:
+
+		case Keys.ESCAPE:
+			Gdx.app.exit();
+			break;
+
 		default:
 			RequestUpdate update = new RequestUpdate();
 			update.key = keycode;
+
 			client.sendTCP(update);
 			break;
 		}
