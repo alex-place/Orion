@@ -35,16 +35,15 @@ public class GameScreen implements Screen {
 			Gdx.app.exit();
 		}
 
-
-		camera = new OrthographicCamera(Constants.CAMERA_WIDTH, Constants.CAMERA_HEIGHT);
+		camera = new OrthographicCamera(10, 10);
 		camera.position.set(5, 5, 0);
 		camera.update();
 
 		renderer = new Box2DDebugRenderer();
 
 		WorldParameters parameters = new WorldParameters();
-		parameters.height = Constants.height;
-		parameters.width = Constants.width;
+		parameters.height = Constants.WORLD_HEIGHT;
+		parameters.width = Constants.WORLD_WIDTH;
 		new WorldGenerator(parameters);
 		Gdx.input.setInputProcessor(new GestureDetector(new DevInput(camera)));
 

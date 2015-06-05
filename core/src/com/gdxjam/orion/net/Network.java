@@ -1,5 +1,6 @@
 package com.gdxjam.orion.net;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryo.Kryo;
@@ -26,6 +27,7 @@ public class Network {
 		kryo.register(Object[].class);
 		kryo.register(ClientPlayer.class);
 		kryo.register(ShipType.class);
+		kryo.register(RequestClick.class);
 
 	}
 
@@ -60,6 +62,10 @@ public class Network {
 
 	public static class ReplyUpdate {
 		public Array<ClientPlayer> players;
+	}
+
+	public static class RequestClick {
+		public Vector2 position;
 	}
 
 }

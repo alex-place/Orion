@@ -21,6 +21,7 @@ import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
+import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdate;
 
 public class GameServer {
@@ -62,12 +63,10 @@ public class GameServer {
 						// TODO create fighter behavior
 						behavior = new FighterControlBehavior();
 					} else {
-						behavior = new FighterControlBehavior();
+						behavior = new DefaultControlBehavior();
 					}
 
-					Player player = new Player(
-							((RequestAddPlayer) message).position, c.getID(),
-							behavior);
+					Player player = new Player(((RequestAddPlayer) message).position, c.getID(), behavior);
 					behavior.init(player);
 					GameManager.getPlayers().put(c.getID(), player);
 
@@ -81,14 +80,17 @@ public class GameServer {
 					handleInput(c, request);
 				}
 
-				else if ((message instanceof Ping)
-						|| (message instanceof KeepAlive)) {
+				else if (message instanceof RequestClick) {
+					RequestClick request = (RequestClick) message;
+					handleClick(c, request);
+				}
+
+				else if ((message instanceof Ping) || (message instanceof KeepAlive)) {
 
 				}
 
 				else {
-					System.out.println("Server recieved unhandled message "
-							+ message);
+					System.out.println("Server recieved unhandled message " + message);
 
 				}
 
@@ -114,6 +116,12 @@ public class GameServer {
 			break;
 
 		}
+	}
+
+	protected void handleClick(Connection c, RequestClick request) {
+		Player player = GameManager.getPlayers().get(c.getID());
+		player.getBehavior().fire(request.position);
+
 	}
 
 	protected void logInfo(String string) {
@@ -156,7 +164,6 @@ public class GameServer {
 	}
 
 	public ClientPlayer convertToClient(Player player) {
-		return new ClientPlayer().init(new Vector3(player.getBody()
-				.getPosition(), 0), player.getId());
+		return new ClientPlayer().init(new Vector3(player.getBody().getPosition(), 0), player.getId());
 	}
 }

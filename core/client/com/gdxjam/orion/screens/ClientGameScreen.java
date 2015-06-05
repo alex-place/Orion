@@ -60,8 +60,7 @@ public class ClientGameScreen implements Screen {
 
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
 			Vector3 pos = player.getPosition();
-			batch.draw(green, pos.x, pos.y, 0, 0, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1, pos.z, 0, 0, 1,
-					1, false, false);
+			batch.draw(green, pos.x, pos.y, 0, 0, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1, pos.z, 0, 0, 1, 1, false, false);
 		}
 
 		batch.end();
