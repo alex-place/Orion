@@ -77,6 +77,7 @@ public class FighterControlBehavior implements ControlBehavior {
 	public void lookAt(Vector2 position) {
 		float angle = MathUtils.degreesToRadians* position.sub(player.getBody().getPosition()).angle();
 		player.getBody().setTransform(player.getBody().getPosition(), angle);
+
 	}
 
 	@Override
@@ -99,5 +100,6 @@ public class FighterControlBehavior implements ControlBehavior {
 		}
 
 	}
+
 
 }

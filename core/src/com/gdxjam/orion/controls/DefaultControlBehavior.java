@@ -77,7 +77,6 @@ public class DefaultControlBehavior implements ControlBehavior {
 		default:
 			break;
 		}
-
 	}
 
 }

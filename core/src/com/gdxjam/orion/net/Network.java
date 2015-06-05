@@ -1,5 +1,6 @@
 package com.gdxjam.orion.net;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryo.Kryo;
@@ -56,6 +57,7 @@ public class Network {
 
 	public static class RequestUpdate {
 		public int key;
+		public Vector2 mousePos;
 	}
 
 	public static class ReplyUpdate {

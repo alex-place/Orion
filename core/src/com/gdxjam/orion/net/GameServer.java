@@ -111,6 +111,7 @@ public class GameServer {
 		default:
 			Player player = GameManager.getPlayers().get(c.getID());
 			player.getBehavior().handleKey(request.key);
+			player.getBehavior().lookAt(request.mousePos);
 			break;
 
 		}

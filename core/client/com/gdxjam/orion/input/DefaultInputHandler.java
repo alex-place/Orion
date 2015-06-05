@@ -72,7 +72,9 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
+		RequestUpdate update = new RequestUpdate();
+		update.mousePos = new Vector2(screenX, screenY);
+		client.sendTCP(update);
 		return false;
 	}
 
