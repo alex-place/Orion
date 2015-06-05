@@ -1,10 +1,9 @@
 package com.gdxjam.orion.desktop;
 
-import utils.Constants;
-
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.gdxjam.orion.ClientMain;
+import com.gdxjam.orion.utils.Constants;
 
 public class ClientLauncher {
 	public static void main(String[] arg) {
