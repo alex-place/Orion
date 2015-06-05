@@ -60,7 +60,7 @@ public class GameServer {
 
 					if (request.type == ShipType.FIGHTER) {
 						// TODO create fighter behavior
-						behavior = new DefaultControlBehavior();
+						behavior = new FighterControlBehavior();
 					} else {
 						behavior = new FighterControlBehavior();
 					}

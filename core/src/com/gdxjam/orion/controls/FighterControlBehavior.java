@@ -14,7 +14,7 @@ import com.gdxjam.orion.entities.Player;
 public class FighterControlBehavior implements ControlBehavior {
 
 	private Player player;
-	float speed = 15000;
+	float speed = 1500000;
 	float rotation;
 	float rotationSpeed = 10.0f;
 
@@ -34,31 +34,48 @@ public class FighterControlBehavior implements ControlBehavior {
 			direction.nor();
 		}
 
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta),
+				player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
 	public void reverse(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta),
-				true);
+		rotation = player.getOrientation();
+		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
+		if (direction.len() > 0) {
+			direction.nor();
+		}
+
+		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * speed * delta),
+				player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
 	public void left(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0),
-				true);
+		rotation = (float) (player.getOrientation() + Math.PI / 2);
+		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
+		if (direction.len() > 0) {
+			direction.nor();
+		}
+
+		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+	
 	}
 
 	@Override
 	public void right(float delta) {
-		player.getBody()
-				.applyForceToCenter(new Vector2(speed * delta, 0), true);
+		rotation = (float) (player.getOrientation() - Math.PI / 2);
+		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
+		if (direction.len() > 0) {
+			direction.nor();
+		}
+
+		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
 	public void lookAt(Vector2 position) {
-		float angle = MathUtils.degreesToRadians
-				* position.sub(player.getBody().getPosition()).angle();
+		float angle = MathUtils.degreesToRadians* position.sub(player.getBody().getPosition()).angle();
 		player.getBody().setTransform(player.getBody().getPosition(), angle);
 	}
 
