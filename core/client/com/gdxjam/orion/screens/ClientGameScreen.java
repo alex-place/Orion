@@ -2,22 +2,20 @@ package com.gdxjam.orion.screens;
 
 import java.io.IOException;
 
-import utils.Constants;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.input.DefaultInputHandler;
 import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestUpdate;
+import com.gdxjam.orion.utils.Constants;
 
 public class ClientGameScreen implements Screen {
 

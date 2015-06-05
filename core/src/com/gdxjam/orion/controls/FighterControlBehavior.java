@@ -28,7 +28,6 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		Gdx.app.log("balls", "dicks");
 		rotation = player.getOrientation();
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
