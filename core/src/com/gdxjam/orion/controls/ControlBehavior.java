@@ -1,7 +1,7 @@
 package com.gdxjam.orion.controls;
 
 import com.badlogic.gdx.math.Vector2;
-import com.gdxjam.orion.Player;
+import com.gdxjam.orion.entities.Player;
 
 public interface ControlBehavior {
 

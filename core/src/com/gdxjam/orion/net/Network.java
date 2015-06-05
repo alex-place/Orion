@@ -4,9 +4,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
-import com.gdxjam.orion.ClientPlayer;
 import com.gdxjam.orion.GameManager.ShipType;
-import com.gdxjam.orion.Player;
+import com.gdxjam.orion.entities.ClientPlayer;
+import com.gdxjam.orion.entities.Player;
 
 public class Network {
 

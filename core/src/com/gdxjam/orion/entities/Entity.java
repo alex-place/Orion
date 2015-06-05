@@ -1,4 +1,4 @@
-package com.gdxjam.orion;
+package com.gdxjam.orion.entities;
 
 public abstract class Entity {
 

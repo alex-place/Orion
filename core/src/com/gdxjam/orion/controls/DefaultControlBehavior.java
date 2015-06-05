@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.gdxjam.orion.Player;
+import com.gdxjam.orion.entities.Player;
 
 /**
  * These behaviors will define how a ship moves these should not handle client
@@ -14,7 +14,7 @@ import com.gdxjam.orion.Player;
 public class DefaultControlBehavior implements ControlBehavior {
 
 	private Player player;
-	private final float speed = 1;
+	private final float speed = 100;
 
 	public DefaultControlBehavior() {
 	}
@@ -26,34 +26,26 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		float rotation = player.getBody().getAngle();
-		Vector2 direction = new Vector2(MathUtils.cos(rotation),
-				MathUtils.sin(rotation));
-		if (direction.len() > 0) {
-			direction.nor();
-		}
-
-		player.getBody().applyForceToCenter(
-				new Vector2(direction.x * speed * delta, direction.y * speed
-						* delta), true);
-
+		player.getBody()
+				.applyForceToCenter(new Vector2(0, speed * delta), true);
 	}
 
 	@Override
 	public void reverse(float delta) {
-		// TODO delete this shit
-		player.getBody().applyForceToCenter(new Vector2(0, 100 * delta), true);
-
+		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta),
+				true);
 	}
 
 	@Override
 	public void left(float delta) {
-
+		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0),
+				true);
 	}
 
 	@Override
 	public void right(float delta) {
-
+		player.getBody()
+				.applyForceToCenter(new Vector2(speed * delta, 0), true);
 	}
 
 	@Override
@@ -67,8 +59,19 @@ public class DefaultControlBehavior implements ControlBehavior {
 	public void handleKey(int keycode) {
 		switch (keycode) {
 		case Keys.W:
-		default:
+			forward(Gdx.graphics.getDeltaTime());
+			break;
+		case Keys.A:
+			left(Gdx.graphics.getDeltaTime());
+			break;
+		case Keys.S:
 			reverse(Gdx.graphics.getDeltaTime());
+			break;
+		case Keys.D:
+			right(Gdx.graphics.getDeltaTime());
+			break;
+		default:
+			break;
 		}
 
 	}

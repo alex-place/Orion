@@ -1,4 +1,4 @@
-package com.gdxjam.orion;
+package com.gdxjam.orion.screens;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.net.GameServer;
 
 public class GameScreen implements Screen {

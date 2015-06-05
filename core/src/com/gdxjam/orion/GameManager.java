@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.net.GameServer;
 
 public class GameManager {
