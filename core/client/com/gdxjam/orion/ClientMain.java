@@ -1,7 +1,9 @@
 package com.gdxjam.orion;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.gdxjam.orion.screens.ClientGameScreen;
+import com.gdxjam.orion.screens.TempJoinGameScrren;
 
 public class ClientMain extends Game {
 

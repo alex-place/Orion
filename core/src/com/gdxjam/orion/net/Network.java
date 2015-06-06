@@ -63,5 +63,8 @@ public class Network {
 	public static class ReplyUpdate {
 		public Array<ClientPlayer> players;
 	}
+	public static void steIp(String newIp){
+		ip = newIp;
+	}
 
 }
