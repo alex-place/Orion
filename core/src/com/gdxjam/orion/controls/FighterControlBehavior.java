@@ -34,7 +34,8 @@ public class FighterControlBehavior implements ControlBehavior {
 			direction.nor();
 		}
 
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta),
+				player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
@@ -45,7 +46,8 @@ public class FighterControlBehavior implements ControlBehavior {
 			direction.nor();
 		}
 
-		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * speed * delta),
+				player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
@@ -57,7 +59,7 @@ public class FighterControlBehavior implements ControlBehavior {
 		}
 
 		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
-
+	
 	}
 
 	@Override
@@ -73,8 +75,9 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void lookAt(Vector2 position) {
-		float angle = MathUtils.degreesToRadians * position.sub(player.getBody().getPosition()).angle();
+		float angle = MathUtils.degreesToRadians* position.sub(player.getBody().getPosition()).angle();
 		player.getBody().setTransform(player.getBody().getPosition(), angle);
+
 	}
 
 	@Override
@@ -98,10 +101,5 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	}
 
-	@Override
-	public void fire(Vector2 position) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

@@ -27,7 +27,6 @@ public class Network {
 		kryo.register(Object[].class);
 		kryo.register(ClientPlayer.class);
 		kryo.register(ShipType.class);
-		kryo.register(RequestClick.class);
 
 	}
 
@@ -58,14 +57,11 @@ public class Network {
 
 	public static class RequestUpdate {
 		public int key;
+		public Vector2 mousePos;
 	}
 
 	public static class ReplyUpdate {
 		public Array<ClientPlayer> players;
-	}
-
-	public static class RequestClick {
-		public Vector2 position;
 	}
 
 }

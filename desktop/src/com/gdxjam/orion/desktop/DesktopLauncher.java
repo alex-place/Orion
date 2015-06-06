@@ -8,9 +8,8 @@ import com.gdxjam.orion.utils.Constants;
 public class DesktopLauncher {
 	public static void main(String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = LauncherConstants.SCREEN_WIDTH;
-		config.height = LauncherConstants.SCREEN_HEIGHT;
-
+		config.width = Constants.SCREEN_WIDTH;
+		config.height = Constants.SCREEN_HEIGHT;
 		new LwjglApplication(new Main(), config);
 	}
 }

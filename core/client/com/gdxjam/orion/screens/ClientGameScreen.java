@@ -69,6 +69,7 @@ public class ClientGameScreen implements Screen {
 			Vector3 pos = player.getPosition();
 			batch.draw(green, pos.x, pos.y, -Constants.PLAYER_WIDTH / 2, -Constants.PLAYER_HEIGHT / 2, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1,
 					pos.z, 0, 0, 1, 1, false, false);
+
 		}
 
 		batch.end();

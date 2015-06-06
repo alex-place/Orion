@@ -5,10 +5,9 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.net.GameClient;
-import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdate;
 
 public class DefaultInputHandler implements InputProcessor {
@@ -55,13 +54,7 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (pointer == Buttons.LEFT) {
-			Vector3 position = camera.unproject(new Vector3(screenX, screenY, 0));
-			RequestClick request = new RequestClick();
-			request.position = new Vector2(position.x, position.y);
-			client.sendTCP(request);
-		}
-
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -79,7 +72,9 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-
+		RequestUpdate update = new RequestUpdate();
+		update.mousePos = new Vector2(screenX, screenY);
+		client.sendTCP(update);
 		return false;
 	}
 

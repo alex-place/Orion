@@ -17,4 +17,7 @@ public class Constants {
 	public static final int ANGULAR_DAMPING = 1;
 	public static final int LINEAR_DAMPING = 1;
 
+	public static final int SCREEN_WIDTH = 1280;
+	public static final int SCREEN_HEIGHT = 720;
+
 }

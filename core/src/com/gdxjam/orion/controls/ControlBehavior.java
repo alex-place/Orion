@@ -1,7 +1,6 @@
 package com.gdxjam.orion.controls;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.entities.Player;
 
 public interface ControlBehavior {
@@ -19,7 +18,5 @@ public interface ControlBehavior {
 	public void lookAt(Vector2 position);
 
 	public void handleKey(int keycode);
-
-	public void fire(Vector2 position);
 
 }

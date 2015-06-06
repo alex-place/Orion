@@ -15,7 +15,9 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	private Player player;
 
+
 	private final float speed = 1000;
+
 
 	public DefaultControlBehavior() {
 	}
@@ -27,28 +29,33 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(0, speed * delta), true);
+		player.getBody()
+				.applyForceToCenter(new Vector2(0, speed * delta), true);
 
 	}
 
 	@Override
 	public void reverse(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta), true);
+		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta),
+				true);
 	}
 
 	@Override
 	public void left(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0), true);
+		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0),
+				true);
 	}
 
 	@Override
 	public void right(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(speed * delta, 0), true);
+		player.getBody()
+				.applyForceToCenter(new Vector2(speed * delta, 0), true);
 	}
 
 	@Override
 	public void lookAt(Vector2 position) {
-		float angle = MathUtils.degreesToRadians * position.sub(player.getBody().getPosition()).angle();
+		float angle = MathUtils.degreesToRadians
+				* position.sub(player.getBody().getPosition()).angle();
 		player.getBody().setTransform(player.getBody().getPosition(), angle);
 	}
 
@@ -70,12 +77,6 @@ public class DefaultControlBehavior implements ControlBehavior {
 		default:
 			break;
 		}
-
-	}
-
-	@Override
-	public void fire(Vector2 position) {
-		player.getBody().setTransform(position, player.getBody().getAngle());
 	}
 
 }
