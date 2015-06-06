@@ -16,7 +16,7 @@ public class DefaultControlBehavior implements ControlBehavior {
 	private Player player;
 
 
-	private final float speed = 100000;
+	private final float speed = 10;
 
 
 	public DefaultControlBehavior() {
@@ -54,9 +54,7 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void lookAt(Vector2 position) {
-		float angle = MathUtils.degreesToRadians
-				* position.sub(player.getBody().getPosition()).angle();
-		player.getBody().setTransform(player.getBody().getPosition(), angle);
+
 	}
 
 	@Override

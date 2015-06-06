@@ -15,7 +15,7 @@ public class Player extends Entity {
 
 	private Body body;
 	private final int id;
-	private final int speed = 100;
+	private final float speed = 1.0f;
 	private ControlBehavior behavior;
 
 	public Player(Vector3 position, int id, ControlBehavior behavior) {
@@ -58,7 +58,7 @@ public class Player extends Entity {
 		return behavior;
 	}
 
-	public int getSpeed() {
+	public float getSpeed() {
 		return speed;
 	}
 
