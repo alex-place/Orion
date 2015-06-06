@@ -15,6 +15,7 @@ import com.gdxjam.orion.net.Network;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
+import com.gdxjam.orion.utils.Constants;
 
 public class GameClient {
 
@@ -46,9 +47,10 @@ public class GameClient {
 
 		client.connect(5000, Network.getIP(), 1881, 1882);
 		RequestAddPlayer request = new RequestAddPlayer();
-		defaultPos = new Vector3(MathUtils.random(-10, 10), MathUtils.random(
-				-10, 10), MathUtils.random(-10, 10));
-		defaultPos = new Vector3();
+		// defaultPos = new Vector3(MathUtils.random(0, Constants.WORLD_WIDTH *
+		// 0.1f), MathUtils.random(1, Constants.WORLD_HEIGHT), 90);
+
+		defaultPos = new Vector3(1, 1, 0);
 		request.position = defaultPos;
 		client.sendTCP(request);
 

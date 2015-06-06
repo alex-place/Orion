@@ -3,13 +3,15 @@ package com.gdxjam.orion.screens;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.gdxjam.orion.GameManager;
-import com.gdxjam.orion.input.DevInput;
+import com.gdxjam.orion.input.DevGestureInput;
+import com.gdxjam.orion.input.DevInputProcessor;
 import com.gdxjam.orion.net.GameServer;
 import com.gdxjam.orion.utils.Constants;
 import com.gdxjam.orion.utils.WorldGenerator;
@@ -35,7 +37,7 @@ public class GameScreen implements Screen {
 			Gdx.app.exit();
 		}
 
-		camera = new OrthographicCamera(10, 10);
+		camera = new OrthographicCamera(Constants.CAMERA_WIDTH, Constants.CAMERA_HEIGHT);
 		camera.position.set(5, 5, 0);
 		camera.update();
 
@@ -45,7 +47,11 @@ public class GameScreen implements Screen {
 		parameters.height = Constants.WORLD_HEIGHT;
 		parameters.width = Constants.WORLD_WIDTH;
 		new WorldGenerator(parameters);
-		Gdx.input.setInputProcessor(new GestureDetector(new DevInput(camera)));
+
+		InputMultiplexer input = new InputMultiplexer();
+		input.addProcessor(new GestureDetector(new DevGestureInput(camera)));
+		input.addProcessor(new DevInputProcessor(camera));
+		Gdx.input.setInputProcessor(input);
 
 	}
 
@@ -85,6 +91,7 @@ public class GameScreen implements Screen {
 	}
 
 	@Override
+	
 	public void dispose() {
 
 	}

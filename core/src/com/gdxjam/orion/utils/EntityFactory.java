@@ -14,6 +14,7 @@ public class EntityFactory {
 		EdgeShape edge = new EdgeShape();
 		edge.set(start, end);
 		def.shape = edge;
+		def.isSensor = true;
 
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.StaticBody;

@@ -21,7 +21,7 @@ public class Player extends Entity {
 		this.id = id;
 		this.behavior = behavior;
 		PolygonShape rect = new PolygonShape();
-		rect.setAsBox(Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT);
+		rect.setAsBox(Constants.PLAYER_HALFWIDTH, Constants.PLAYER_HALFHEIGHT);
 		FixtureDef fixture = new FixtureDef();
 		fixture.shape = rect;
 		fixture.density = 1;
@@ -60,9 +60,10 @@ public class Player extends Entity {
 	public int getSpeed() {
 		return speed;
 	}
-	public float getOrientation(){
+
+	public float getOrientation() {
 		return body.getAngle();
-		
+
 	}
 
 }

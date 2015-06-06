@@ -23,6 +23,7 @@ import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
 import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdate;
+import com.sun.media.jfxmedia.events.PlayerStateEvent.PlayerState;
 
 public class GameServer {
 	private Server server;
@@ -97,6 +98,10 @@ public class GameServer {
 			}
 
 			public void disconnected(Connection c) {
+				Player player = GameManager.getPlayers().get(c.getID());
+				GameManager.getWorld().destroyBody(player.getBody());
+				player = null;
+				c.close();
 
 			}
 		});

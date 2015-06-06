@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,8 +25,6 @@ public class ClientGameScreen implements Screen {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 
-	private DefaultInputHandler input;
-
 	private Texture green;
 
 	@Override
@@ -38,6 +37,8 @@ public class ClientGameScreen implements Screen {
 		}
 
 		camera = new OrthographicCamera(Constants.CAMERA_WIDTH, Constants.CAMERA_HEIGHT);
+		camera.position.set(5, 5, 0);
+		camera.update();
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(camera.combined);
 
@@ -58,13 +59,19 @@ public class ClientGameScreen implements Screen {
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		batch.begin();
 
+		batch.setColor(Color.BLUE);
+
+		batch.draw(green, 0, 0, 10, 10);
+
+		batch.setColor(Color.WHITE);
+
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
 			Vector3 pos = player.getPosition();
-			batch.draw(green, pos.x, pos.y, 0, 0, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1, pos.z, 0, 0, 1, 1, false, false);
+			batch.draw(green, pos.x, pos.y, -Constants.PLAYER_WIDTH / 2, -Constants.PLAYER_HEIGHT / 2, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1,
+					pos.z, 0, 0, 1, 1, false, false);
 		}
 
 		batch.end();
-
 	}
 
 	private void handleInput() {
