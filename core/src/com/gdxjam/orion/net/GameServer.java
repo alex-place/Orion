@@ -22,10 +22,11 @@ import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
+import com.gdxjam.orion.net.Network.RequestUpdateMouse;
+import com.gdxjam.orion.utils.Constants;
 
 public class GameServer {
 	private Server server;
-	private ReplyUpdate update;
 	private Array<ClientPlayer> clientPlayers = new Array<ClientPlayer>();
 
 	public GameServer() throws IOException {
@@ -65,9 +66,7 @@ public class GameServer {
 						behavior = new DefaultControlBehavior();
 					}
 
-					Player player = new Player(
-							((RequestAddPlayer) message).position, c.getID(),
-							behavior);
+					Player player = new Player(((RequestAddPlayer) message).position, c.getID(), behavior);
 					behavior.init(player);
 					GameManager.getPlayers().put(c.getID(), player);
 
@@ -78,17 +77,20 @@ public class GameServer {
 
 				else if (message instanceof RequestUpdateKey) {
 					RequestUpdateKey request = (RequestUpdateKey) message;
-					handleInput(c, request);
+					handleInputKey(c, request);
 				}
 
-				else if ((message instanceof Ping)
-						|| (message instanceof KeepAlive)) {
+				else if (message instanceof RequestUpdateMouse) {
+					RequestUpdateMouse request = (RequestUpdateMouse) message;
+					handleInputMouse(c, request);
+				}
+
+				else if ((message instanceof Ping) || (message instanceof KeepAlive)) {
 
 				}
 
 				else {
-					System.out.println("Server recieved unhandled message "
-							+ message);
+					System.out.println("Server recieved unhandled message " + message);
 
 				}
 
@@ -107,7 +109,12 @@ public class GameServer {
 		server.start();
 	}
 
-	protected void handleInput(Connection c, RequestUpdateKey request) {
+	protected void handleInputMouse(Connection c, RequestUpdateMouse request) {
+		Player player = GameManager.getPlayers().get(c.getID());
+		player.getBehavior().handleMouse(request.mousePos);
+	}
+
+	protected void handleInputKey(Connection c, RequestUpdateKey request) {
 		switch (request.key) {
 		case Keys.ESCAPE:
 			c.close();
@@ -115,7 +122,6 @@ public class GameServer {
 		default:
 			Player player = GameManager.getPlayers().get(c.getID());
 			player.getBehavior().handleKey(request.key);
-			player.getBehavior().lookAt(request.mousePos);
 			break;
 
 		}
@@ -136,6 +142,8 @@ public class GameServer {
 		server.sendToAllTCP(message);
 
 	}
+
+	private ReplyUpdate update;
 
 	public void update() {
 		update = new ReplyUpdate();
@@ -161,7 +169,8 @@ public class GameServer {
 	}
 
 	public ClientPlayer convertToClient(Player player) {
-		return new ClientPlayer().init(new Vector3(player.getBody()
-				.getPosition(), 0), player.getId());
+		return new ClientPlayer().init(new Vector3(player.getBody().getPosition().x - Constants.PLAYER_HALFWIDTH, player.getBody().getPosition().y
+				- Constants.PLAYER_HALFHEIGHT, 0), player.getId());
+
 	}
 }

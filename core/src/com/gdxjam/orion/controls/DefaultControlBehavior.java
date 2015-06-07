@@ -53,7 +53,7 @@ public class DefaultControlBehavior implements ControlBehavior {
 	}
 
 	@Override
-	public void lookAt(Vector2 position) {
+	public void handleMouse(Vector2 position) {
 
 	}
 

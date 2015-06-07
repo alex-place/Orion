@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 public class DevInputProcessor implements InputProcessor {
 
 	OrthographicCamera camera;
+	float zoom = 1.0f;
 
 	public DevInputProcessor(OrthographicCamera camera) {
 		this.camera = camera;
@@ -55,8 +56,18 @@ public class DevInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean scrolled(int amount) {
-		// TODO Auto-generated method stub
+		// Zoom out
+		if (amount > 0) {
+			zoom += 0.1f;
+		}
+
+		// Zoom in
+		if (amount < 0) {
+			zoom -= 0.1f;
+		}
+		camera.zoom = zoom;
+		camera.update();
+
 		return false;
 	}
-
 }

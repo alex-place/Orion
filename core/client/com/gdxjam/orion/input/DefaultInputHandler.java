@@ -1,19 +1,19 @@
 package com.gdxjam.orion.input;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
+import com.gdxjam.orion.net.Network.RequestUpdateMouse;
 
 public class DefaultInputHandler implements InputProcessor {
 
 	private GameClient client;
 	private OrthographicCamera camera;
+	private float zoom;
 
 	public DefaultInputHandler(GameClient client, OrthographicCamera camera) {
 		this.client = client;
@@ -22,7 +22,6 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		Gdx.app.log("balls", "ass");
 		switch (keycode) {
 
 		case Keys.ESCAPE:
@@ -69,7 +68,7 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		RequestUpdateKey update = new RequestUpdateKey();
+		RequestUpdateMouse update = new RequestUpdateMouse();
 		update.mousePos = new Vector2(screenX, screenY);
 		client.sendTCP(update);
 		return false;
@@ -77,6 +76,18 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean scrolled(int amount) {
+
+		if (amount > 0) {
+			zoom += 0.1f;
+		}
+
+		// Zoom in
+		if (amount < 0) {
+			zoom -= 0.1f;
+		}
+		camera.zoom = zoom;
+		camera.update();
+
 		return false;
 	}
 

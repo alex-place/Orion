@@ -15,7 +15,7 @@ public interface ControlBehavior {
 
 	public void right(float delta);
 
-	public void lookAt(Vector2 position);
+	public void handleMouse(Vector2 position);
 
 	public void handleKey(int keycode);
 

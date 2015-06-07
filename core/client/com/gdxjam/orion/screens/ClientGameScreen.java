@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
+import com.gdxjam.orion.input.DefaultInputHandler;
 import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
@@ -44,8 +45,8 @@ public class ClientGameScreen implements Screen {
 
 		green = new Texture(Gdx.files.internal("green.png"));
 
-		// input = new DefaultInputHandler(client);
-		// ClientGameManager.getInput().addProcessor(input);
+		DefaultInputHandler input = new DefaultInputHandler(client, camera);
+		ClientGameManager.getInput().addProcessor(input);
 
 		Gdx.input.setInputProcessor(ClientGameManager.getInput());
 
@@ -59,12 +60,9 @@ public class ClientGameScreen implements Screen {
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		batch.begin();
 
-		batch.draw(green, 0, 0, 1, 1);
-
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
 			Vector3 pos = player.getPosition();
 			batch.draw(green, pos.x, pos.y, 1, 1);
-
 		}
 
 		batch.end();
