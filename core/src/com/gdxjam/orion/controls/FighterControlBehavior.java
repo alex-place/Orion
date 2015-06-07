@@ -14,7 +14,7 @@ import com.gdxjam.orion.entities.Player;
 public class FighterControlBehavior implements ControlBehavior {
 
 	private Player player;
-	float speed = 1500000;
+	float speed = 1000;
 	float rotation;
 	float rotationSpeed = 10.0f;
 
@@ -75,8 +75,9 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void lookAt(Vector2 position) {
+		Gdx.app.log("lookat", "x "+position.x+" y "+position.y+"");
 		float angle = MathUtils.degreesToRadians* position.sub(player.getBody().getPosition()).angle();
-		player.getBody().setTransform(player.getBody().getPosition(), angle);
+	//	player.getBody().setTransform(player.getBody().getPosition(), angle);
 
 	}
 

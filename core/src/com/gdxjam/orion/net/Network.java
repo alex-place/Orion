@@ -20,6 +20,7 @@ public class Network {
 		kryo.register(Array.class);
 		kryo.register(Player.class);
 		kryo.register(Vector3.class);
+		kryo.register(Vector2.class);
 		kryo.register(RequestAddPlayer.class);
 		kryo.register(ReplyAddPlayer.class);
 		kryo.register(RequestUpdate.class);
