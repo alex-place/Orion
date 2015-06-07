@@ -42,6 +42,7 @@ public class GameScreen implements Screen {
 		camera.update();
 
 		renderer = new Box2DDebugRenderer();
+		renderer.setDrawVelocities(true);
 
 		WorldParameters parameters = new WorldParameters();
 		parameters.height = Constants.WORLD_HEIGHT;
@@ -57,17 +58,12 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		update();
-
+		GameManager.getWorld().step(1 / 60f, 8, 8);
+		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		renderer.render(GameManager.getWorld(), camera.combined);
 
-	}
-
-	private void update() {
-		GameManager.getWorld().step(1 / 60f, 8, 8);
-		server.update();
 	}
 
 	@Override

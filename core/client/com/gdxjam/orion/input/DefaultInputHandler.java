@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.net.GameClient;
-import com.gdxjam.orion.net.Network.RequestUpdate;
+import com.gdxjam.orion.net.Network.RequestUpdateKey;
 
 public class DefaultInputHandler implements InputProcessor {
 
@@ -30,7 +30,7 @@ public class DefaultInputHandler implements InputProcessor {
 			break;
 
 		default:
-			RequestUpdate update = new RequestUpdate();
+			RequestUpdateKey update = new RequestUpdateKey();
 			update.key = keycode;
 
 			client.sendTCP(update);
@@ -69,7 +69,7 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		RequestUpdate update = new RequestUpdate();
+		RequestUpdateKey update = new RequestUpdateKey();
 		update.mousePos = new Vector2(screenX, screenY);
 		client.sendTCP(update);
 		return false;

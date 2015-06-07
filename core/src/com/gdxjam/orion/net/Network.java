@@ -23,7 +23,8 @@ public class Network {
 		kryo.register(Vector2.class);
 		kryo.register(RequestAddPlayer.class);
 		kryo.register(ReplyAddPlayer.class);
-		kryo.register(RequestUpdate.class);
+		kryo.register(RequestUpdateKey.class);
+		kryo.register(RequestUpdateMouse.class);
 		kryo.register(ReplyUpdate.class);
 		kryo.register(Object[].class);
 		kryo.register(ClientPlayer.class);
@@ -56,16 +57,16 @@ public class Network {
 		public int id;
 	}
 
-	public static class RequestUpdate {
+	public static class RequestUpdateKey {
 		public int key;
+	}
+
+	public static class RequestUpdateMouse {
 		public Vector2 mousePos;
 	}
 
 	public static class ReplyUpdate {
 		public Array<ClientPlayer> players;
-	}
-	public static void steIp(String newIp){
-		ip = newIp;
 	}
 
 }

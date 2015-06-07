@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,9 +13,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
-import com.gdxjam.orion.input.DefaultInputHandler;
 import com.gdxjam.orion.net.GameClient;
-import com.gdxjam.orion.net.Network.RequestUpdate;
+import com.gdxjam.orion.net.Network.RequestUpdateKey;
+import com.gdxjam.orion.net.Network.RequestUpdateMouse;
 import com.gdxjam.orion.utils.Constants;
 
 public class ClientGameScreen implements Screen {
@@ -60,16 +59,11 @@ public class ClientGameScreen implements Screen {
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		batch.begin();
 
-		batch.setColor(Color.BLUE);
-
-		batch.draw(green, 0, 0, 10, 10);
-
-		batch.setColor(Color.WHITE);
+		batch.draw(green, 0, 0, 1, 1);
 
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
 			Vector3 pos = player.getPosition();
-			batch.draw(green, pos.x, pos.y, -Constants.PLAYER_WIDTH / 2, -Constants.PLAYER_HEIGHT / 2, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT, 1, 1,
-					pos.z, 0, 0, 1, 1, false, false);
+			batch.draw(green, pos.x, pos.y, 1, 1);
 
 		}
 
@@ -93,18 +87,23 @@ public class ClientGameScreen implements Screen {
 			sendKey(Keys.D);
 
 		}
-		sendMouse(new Vector2(Gdx.input.getX(),Gdx.input.getY()));
+		sendMouse(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
 	}
 
+	private RequestUpdateKey updateKey;
+
 	public void sendKey(int keycode) {
-		RequestUpdate update = new RequestUpdate();
-		update.key = keycode;
-		client.sendTCP(update);
+		updateKey = new RequestUpdateKey();
+		updateKey.key = keycode;
+		client.sendTCP(updateKey);
 	}
+
+	private RequestUpdateMouse updateMouse;
+
 	public void sendMouse(Vector2 mosePos) {
-		RequestUpdate update = new RequestUpdate();
-		update.mousePos = mosePos;
-		client.sendTCP(update);
+		updateMouse = new RequestUpdateMouse();
+		updateMouse.mousePos = mosePos;
+		client.sendTCP(updateMouse);
 	}
 
 	@Override

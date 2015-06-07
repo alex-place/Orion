@@ -21,8 +21,7 @@ import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
-import com.gdxjam.orion.net.Network.RequestUpdate;
-import com.sun.media.jfxmedia.events.PlayerStateEvent.PlayerState;
+import com.gdxjam.orion.net.Network.RequestUpdateKey;
 
 public class GameServer {
 	private Server server;
@@ -63,7 +62,7 @@ public class GameServer {
 						// TODO create fighter behavior
 						behavior = new FighterControlBehavior();
 					} else {
-						behavior = new FighterControlBehavior();
+						behavior = new DefaultControlBehavior();
 					}
 
 					Player player = new Player(
@@ -77,8 +76,8 @@ public class GameServer {
 					server.sendToTCP(c.getID(), reply);
 				}
 
-				else if (message instanceof RequestUpdate) {
-					RequestUpdate request = (RequestUpdate) message;
+				else if (message instanceof RequestUpdateKey) {
+					RequestUpdateKey request = (RequestUpdateKey) message;
 					handleInput(c, request);
 				}
 
@@ -108,7 +107,7 @@ public class GameServer {
 		server.start();
 	}
 
-	protected void handleInput(Connection c, RequestUpdate request) {
+	protected void handleInput(Connection c, RequestUpdateKey request) {
 		switch (request.key) {
 		case Keys.ESCAPE:
 			c.close();

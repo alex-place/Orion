@@ -10,6 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.ClientGameManager;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.net.Network;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
@@ -47,11 +48,10 @@ public class GameClient {
 
 		client.connect(5000, Network.getIP(), 1881, 1882);
 		RequestAddPlayer request = new RequestAddPlayer();
-		// defaultPos = new Vector3(MathUtils.random(0, Constants.WORLD_WIDTH *
-		// 0.1f), MathUtils.random(1, Constants.WORLD_HEIGHT), 90);
 
 		defaultPos = new Vector3(1, 1, 0);
 		request.position = defaultPos;
+		request.type = Constants.TEMP_SHIP_TYPE;
 		client.sendTCP(request);
 
 	}

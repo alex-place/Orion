@@ -1,10 +1,13 @@
 package com.gdxjam.orion;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
 import com.gdxjam.orion.entities.ClientPlayer;
 
 public class ClientGameManager {
+	private static Game game;
 
 	private static ClientPlayer player;
 	private static Array<ClientPlayer> players = new Array<ClientPlayer>();
@@ -13,7 +16,8 @@ public class ClientGameManager {
 	private ClientGameManager() {
 	}
 
-	public void init() {
+	public static void init(Game game) {
+		ClientGameManager.game = game;
 	}
 
 	public static ClientPlayer getPlayer() {
@@ -34,6 +38,10 @@ public class ClientGameManager {
 
 	public static InputMultiplexer getInput() {
 		return input;
+	}
+
+	public static void setScreen(Screen screen) {
+		game.setScreen(screen);
 	}
 
 }
