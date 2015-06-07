@@ -93,7 +93,7 @@ public class ClientGameScreen implements Screen {
 			sendKey(Keys.D);
 
 		}
-		sendMouse(new Vector2(Gdx.input.getX(),Gdx.input.getY()));
+	//	sendMouse(new Vector2(Gdx.input.getX(),Gdx.input.getY()));
 	}
 
 	public void sendKey(int keycode) {
