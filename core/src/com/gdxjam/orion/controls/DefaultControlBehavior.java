@@ -16,7 +16,7 @@ public class DefaultControlBehavior implements ControlBehavior {
 	private Player player;
 
 
-	private final float speed = 10;
+	private final float speed = 1000;
 
 
 	public DefaultControlBehavior() {

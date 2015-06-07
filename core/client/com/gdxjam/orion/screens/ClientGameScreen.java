@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
@@ -92,12 +93,17 @@ public class ClientGameScreen implements Screen {
 			sendKey(Keys.D);
 
 		}
-
+		sendMouse(new Vector2(Gdx.input.getX(),Gdx.input.getY()));
 	}
 
 	public void sendKey(int keycode) {
 		RequestUpdate update = new RequestUpdate();
 		update.key = keycode;
+		client.sendTCP(update);
+	}
+	public void sendMouse(Vector2 mosePos) {
+		RequestUpdate update = new RequestUpdate();
+		update.mousePos = mosePos;
 		client.sendTCP(update);
 	}
 

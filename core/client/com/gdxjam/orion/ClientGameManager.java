@@ -14,7 +14,6 @@ public class ClientGameManager {
 	}
 
 	public void init() {
-
 	}
 
 	public static ClientPlayer getPlayer() {
