@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,6 +29,8 @@ public class ClientGameScreen implements Screen {
 
 	private Texture green;
 
+	FPSLogger fps;
+
 	@Override
 	public void show() {
 		try {
@@ -50,6 +53,8 @@ public class ClientGameScreen implements Screen {
 
 		Gdx.input.setInputProcessor(ClientGameManager.getInput());
 
+		fps = new FPSLogger();
+
 	}
 
 	@Override
@@ -63,9 +68,11 @@ public class ClientGameScreen implements Screen {
 		for (ClientPlayer player : ClientGameManager.getPlayers()) {
 			Vector3 pos = player.getPosition();
 			batch.draw(green, pos.x, pos.y, 1, 1);
+			fps.log();
 		}
 
 		batch.end();
+
 	}
 
 	private void handleInput() {

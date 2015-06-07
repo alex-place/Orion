@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
@@ -26,6 +27,8 @@ public class GameScreen implements Screen {
 	OrthographicCamera camera;
 
 	GameServer server;
+
+	FPSLogger fps;
 
 	@Override
 	public void show() {
@@ -63,6 +66,7 @@ public class GameScreen implements Screen {
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		renderer.render(GameManager.getWorld(), camera.combined);
+		fps.log();
 
 	}
 
