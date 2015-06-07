@@ -1,10 +1,13 @@
 package com.gdxjam.orion.net;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pools;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage.KeepAlive;
 import com.esotericsoftware.kryonet.FrameworkMessage.Ping;
@@ -27,9 +30,13 @@ import com.gdxjam.orion.utils.Constants;
 
 public class GameServer {
 	private Server server;
-	private Array<ClientPlayer> clientPlayers = new Array<ClientPlayer>();
+	private HashMap<Integer, ClientPlayer> clientPlayers = new HashMap<Integer, ClientPlayer>();
+
+	private Pool<ClientPlayer> clientPool;
 
 	public GameServer() throws IOException {
+		clientPool = Pools.get(ClientPlayer.class);
+
 		// Log.set(Log.LEVEL_DEBUG);
 		Log.set(Log.LEVEL_NONE);
 
@@ -147,9 +154,8 @@ public class GameServer {
 
 	public void update() {
 		update = new ReplyUpdate();
-		clientPlayers = new Array<ClientPlayer>();
 		for (Player p : GameManager.getPlayers().values()) {
-			clientPlayers.add(convertToClient(p));
+			clientPlayers.put(p.getId(), convertToClient(p));
 		}
 
 		update.players = clientPlayers;

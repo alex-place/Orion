@@ -65,9 +65,8 @@ public class ClientGameScreen implements Screen {
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		batch.begin();
 
-		for (ClientPlayer player : ClientGameManager.getPlayers()) {
-			Vector3 pos = player.getPosition();
-			batch.draw(green, pos.x, pos.y, 1, 1);
+		for (ClientPlayer player : ClientGameManager.getPlayers().values()) {
+			batch.draw(green, player.position.x, player.position.y, 1, 1);
 			fps.log();
 		}
 

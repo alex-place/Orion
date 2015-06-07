@@ -62,7 +62,7 @@ public class GameClient {
 			ReplyAddPlayer reply = (ReplyAddPlayer) message;
 			player = new ClientPlayer().init(defaultPos, reply.id);
 			ClientGameManager.setPlayer(player);
-			ClientGameManager.getPlayers().add(player);
+			ClientGameManager.getPlayers().put(player.id, player);
 		}
 
 		if (message instanceof ReplyUpdate) {

@@ -1,5 +1,7 @@
 package com.gdxjam.orion;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -10,7 +12,7 @@ public class ClientGameManager {
 	private static Game game;
 
 	private static ClientPlayer player;
-	private static Array<ClientPlayer> players = new Array<ClientPlayer>();
+	private static HashMap<Integer, ClientPlayer> players = new HashMap<Integer, ClientPlayer>();
 	private static InputMultiplexer input = new InputMultiplexer();
 
 	private ClientGameManager() {
@@ -28,11 +30,11 @@ public class ClientGameManager {
 		ClientGameManager.player = player;
 	}
 
-	public static Array<ClientPlayer> getPlayers() {
+	public static HashMap<Integer, ClientPlayer> getPlayers() {
 		return players;
 	}
 
-	public static void setPlayers(Array<ClientPlayer> players) {
+	public static void setPlayers(HashMap<Integer, ClientPlayer> players) {
 		ClientGameManager.players = players;
 	}
 

@@ -1,5 +1,7 @@
 package com.gdxjam.orion.net;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -29,6 +31,7 @@ public class Network {
 		kryo.register(Object[].class);
 		kryo.register(ClientPlayer.class);
 		kryo.register(ShipType.class);
+		kryo.register(HashMap.class);
 
 	}
 
@@ -66,7 +69,7 @@ public class Network {
 	}
 
 	public static class ReplyUpdate {
-		public Array<ClientPlayer> players;
+		public HashMap<Integer, ClientPlayer> players;
 	}
 
 }

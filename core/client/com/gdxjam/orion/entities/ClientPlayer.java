@@ -1,11 +1,12 @@
 package com.gdxjam.orion.entities;
 
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
-public class ClientPlayer {
+public class ClientPlayer implements Poolable {
 
-	private Vector3 position;
-	private int id;
+	public Vector3 position;
+	public int id;
 
 	public ClientPlayer() {
 	}
@@ -20,16 +21,10 @@ public class ClientPlayer {
 		return this;
 	}
 
-	public void setPosition(Vector3 position) {
-		this.position = position;
-	}
-
-	public Vector3 getPosition() {
-		return position;
-	}
-
-	public int getId() {
-		return id;
+	@Override
+	public void reset() {
+		position = null;
+		id = -1;
 	}
 
 }

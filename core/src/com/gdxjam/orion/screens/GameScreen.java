@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pools;
 import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.input.DevGestureInput;
 import com.gdxjam.orion.input.DevInputProcessor;
 import com.gdxjam.orion.net.GameServer;
@@ -32,7 +35,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
-
+		fps = new FPSLogger();
 		try {
 			server = new GameServer();
 		} catch (IOException e) {
