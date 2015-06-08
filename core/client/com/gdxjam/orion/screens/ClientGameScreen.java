@@ -5,11 +5,13 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.ClientGameManager;
@@ -30,6 +32,8 @@ public class ClientGameScreen implements Screen {
 	private Texture green;
 
 	FPSLogger fps;
+
+	Color a, b, c, d;
 
 	@Override
 	public void show() {
@@ -55,6 +59,11 @@ public class ClientGameScreen implements Screen {
 
 		fps = new FPSLogger();
 
+		a = randomColor();
+		b = randomColor();
+		c = randomColor();
+		d = randomColor();
+
 	}
 
 	@Override
@@ -66,12 +75,30 @@ public class ClientGameScreen implements Screen {
 		batch.begin();
 
 		for (ClientPlayer player : ClientGameManager.getPlayers().values()) {
+			if (player.id == 0) {
+				batch.setColor(a);
+			}
+			if (player.id == 1) {
+				batch.setColor(b);
+			}
+			if (player.id == 2) {
+				batch.setColor(c);
+			}
+			if (player.id == 3) {
+				batch.setColor(d);
+			}
+
 			batch.draw(green, player.position.x, player.position.y, 1, 1);
-			fps.log();
+			batch.setColor(0, 0, 0, 1);
 		}
 
 		batch.end();
+		fps.log();
 
+	}
+
+	public Color randomColor() {
+		return new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
 	}
 
 	private void handleInput() {
