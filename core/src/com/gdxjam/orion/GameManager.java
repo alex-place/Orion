@@ -31,7 +31,7 @@ public class GameManager {
 	}
 
 	public static enum ShipType {
-		DEFAULT, FIGHTER;
+		DEFAULT, FIGHTER, CRUISER, CORVETTE;
 	}
 
 }
