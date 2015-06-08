@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.esotericsoftware.kryonet.Connection;
@@ -17,6 +16,8 @@ import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.controls.ControlBehavior;
+import com.gdxjam.orion.controls.CorvetteControlBehavior;
+import com.gdxjam.orion.controls.CruiserControlBehavior;
 import com.gdxjam.orion.controls.DefaultControlBehavior;
 import com.gdxjam.orion.controls.FighterControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
@@ -24,6 +25,7 @@ import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
+import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
 import com.gdxjam.orion.utils.Constants;
@@ -67,20 +69,18 @@ public class GameServer {
 					ControlBehavior behavior;
 
 					if (request.type == ShipType.FIGHTER) {
-						// TODO create fighter behavior
 						behavior = new FighterControlBehavior();
 					}
 					if (request.type == ShipType.CRUISER) {
-						// TODO create fighter behavior
-						behavior = new FighterControlBehavior();
+						behavior = new CruiserControlBehavior();
 					}
 					if (request.type == ShipType.CORVETTE) {
-						// TODO create fighter behavior
-						behavior = new FighterControlBehavior();
-					}
-					else {
+						behavior = new CorvetteControlBehavior();
+					} else {
 						behavior = new DefaultControlBehavior();
 					}
+
+					behavior = new DefaultControlBehavior();
 
 					Player player = new Player(((RequestAddPlayer) message).position, c.getID(), behavior);
 					behavior.init(player);
@@ -99,6 +99,11 @@ public class GameServer {
 				else if (message instanceof RequestUpdateMouse) {
 					RequestUpdateMouse request = (RequestUpdateMouse) message;
 					handleInputMouse(c, request);
+				}
+
+				else if (message instanceof RequestClick) {
+					RequestClick request = (RequestClick) message;
+					handleClick(c, request);
 				}
 
 				else if ((message instanceof Ping) || (message instanceof KeepAlive)) {
@@ -128,6 +133,11 @@ public class GameServer {
 	protected void handleInputMouse(Connection c, RequestUpdateMouse request) {
 		Player player = GameManager.getPlayers().get(c.getID());
 		player.getBehavior().handleMouse(request.mousePos);
+	}
+
+	protected void handleClick(Connection c, RequestClick request) {
+		Player player = GameManager.getPlayers().get(c.getID());
+		player.getBehavior().handleClick(request.mousePos);
 	}
 
 	protected void handleInputKey(Connection c, RequestUpdateKey request) {

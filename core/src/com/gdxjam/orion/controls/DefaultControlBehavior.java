@@ -2,7 +2,6 @@ package com.gdxjam.orion.controls;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.entities.Player;
 
@@ -48,8 +47,12 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void handleMouse(Vector2 position) {
-		player.getBody().setTransform(position, 0);
 
+	}
+
+	@Override
+	public void handleClick(Vector2 position) {
+		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
 	}
 
 	@Override

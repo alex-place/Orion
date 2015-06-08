@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		renderer.render(GameManager.getWorld(), camera.combined);
-		fps.log();
+		// fps.log();
 
 	}
 

@@ -78,4 +78,10 @@ public class CorvetteControlBehavior implements ControlBehavior {
 		
 	}
 
+	@Override
+	public void handleClick(Vector2 position) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

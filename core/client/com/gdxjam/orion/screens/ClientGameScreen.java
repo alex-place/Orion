@@ -3,6 +3,7 @@ package com.gdxjam.orion.screens;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -19,6 +20,7 @@ import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.input.DefaultInputHandler;
 import com.gdxjam.orion.net.GameClient;
+import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
 import com.gdxjam.orion.utils.Constants;
@@ -123,7 +125,8 @@ public class ClientGameScreen implements Screen {
 			sendKey(Keys.D);
 
 		}
-		handleMouse();
+		handleMouseMove();
+		handleMouseClick();
 	}
 
 	private RequestUpdateKey updateKey;
@@ -136,7 +139,7 @@ public class ClientGameScreen implements Screen {
 
 	private RequestUpdateMouse updateMouse;
 
-	public void handleMouse() {
+	public void handleMouseMove() {
 
 		if (Gdx.input.getX() == Gdx.input.getDeltaX() && Gdx.input.getY() == Gdx.input.getDeltaY()) {
 			return;
@@ -145,8 +148,33 @@ public class ClientGameScreen implements Screen {
 			updateMouse = new RequestUpdateMouse();
 			mouse = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			updateMouse.mousePos = new Vector2(mouse.x, mouse.y);
+			mouse = null;
 			client.sendTCP(updateMouse);
 		}
+	}
+
+	private RequestClick requestClick;
+
+	public void handleMouseClick() {
+		if (!Gdx.input.isTouched()) {
+			return;
+		}
+
+		requestClick = new RequestClick();
+
+		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+			requestClick.left = true;
+		}
+
+		if (Gdx.input.isButtonPressed(Buttons.LEFT)) {
+			requestClick.right = true;
+		}
+
+		mouse = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+		requestClick.mousePos = new Vector2(mouse.x, mouse.y);
+		mouse = null;
+		client.sendTCP(requestClick);
+
 	}
 
 	@Override

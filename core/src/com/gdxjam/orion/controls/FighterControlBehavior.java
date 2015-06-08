@@ -102,5 +102,11 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	}
 
+	@Override
+	public void handleClick(Vector2 position) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

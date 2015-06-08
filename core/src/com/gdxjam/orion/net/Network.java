@@ -32,6 +32,7 @@ public class Network {
 		kryo.register(ClientPlayer.class);
 		kryo.register(ShipType.class);
 		kryo.register(HashMap.class);
+		kryo.register(RequestClick.class);
 
 	}
 
@@ -66,6 +67,12 @@ public class Network {
 
 	public static class RequestUpdateMouse {
 		public Vector2 mousePos;
+	}
+
+	public static class RequestClick {
+		public Vector2 mousePos;
+		public boolean left;
+		public boolean right;
 	}
 
 	public static class ReplyUpdate {

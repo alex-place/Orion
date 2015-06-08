@@ -51,7 +51,7 @@ public class GameClient {
 
 		defaultPos = new Vector3(1, 1, 0);
 		request.position = defaultPos;
-		request.type = Constants.TEMP_SHIP_TYPE;
+		request.type = ShipType.DEFAULT;
 		client.sendTCP(request);
 
 	}
