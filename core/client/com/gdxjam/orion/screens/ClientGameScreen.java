@@ -48,14 +48,12 @@ public class ClientGameScreen implements Screen {
 		camera.position.set(5, 5, 0);
 		camera.update();
 		batch = new SpriteBatch();
-		batch.setProjectionMatrix(camera.combined);
 
 		green = new Texture(Gdx.files.internal("green.png"));
 
 		DefaultInputHandler input = new DefaultInputHandler(client, camera);
-		ClientGameManager.getInput().addProcessor(input);
 
-		Gdx.input.setInputProcessor(ClientGameManager.getInput());
+		Gdx.input.setInputProcessor(input);
 
 		fps = new FPSLogger();
 
@@ -63,6 +61,8 @@ public class ClientGameScreen implements Screen {
 		b = randomColor();
 		c = randomColor();
 		d = randomColor();
+
+		batch.setProjectionMatrix(camera.combined);
 
 	}
 
@@ -159,6 +159,8 @@ public class ClientGameScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		batch.dispose();
+		green.dispose();
 
 	}
 

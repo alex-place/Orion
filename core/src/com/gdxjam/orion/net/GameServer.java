@@ -147,7 +147,7 @@ public class GameServer {
 		Log.info(string);
 	}
 
-	public void shutdown() {
+	public void dispose() {
 		server.close();
 		server.stop();
 		System.out.println("Shutting down");

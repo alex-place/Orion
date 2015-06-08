@@ -4,8 +4,8 @@ import com.gdxjam.orion.GameManager.ShipType;
 
 public class Constants {
 
-	public static final int WORLD_WIDTH = 100; // 10 Billion
-	public static final int WORLD_HEIGHT = 100; // 10 Billion
+	public static final int WORLD_WIDTH = 100;
+	public static final int WORLD_HEIGHT = 100;
 
 	public static final float PLAYER_HEIGHT = 1f;
 	public static final float PLAYER_WIDTH = 1f;

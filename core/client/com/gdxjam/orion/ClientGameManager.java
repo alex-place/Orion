@@ -13,7 +13,8 @@ public class ClientGameManager {
 
 	private static ClientPlayer player;
 	private static HashMap<Integer, ClientPlayer> players = new HashMap<Integer, ClientPlayer>();
-	private static InputMultiplexer input = new InputMultiplexer();
+
+	// private static InputMultiplexer input = new InputMultiplexer();
 
 	private ClientGameManager() {
 	}
@@ -36,10 +37,6 @@ public class ClientGameManager {
 
 	public static void setPlayers(HashMap<Integer, ClientPlayer> players) {
 		ClientGameManager.players = players;
-	}
-
-	public static InputMultiplexer getInput() {
-		return input;
 	}
 
 	public static void setScreen(Screen screen) {

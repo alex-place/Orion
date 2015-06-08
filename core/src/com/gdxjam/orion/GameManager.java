@@ -19,9 +19,6 @@ public class GameManager {
 		Assets.load();
 	}
 
-	public static void init(Player player) {
-	}
-
 	public static HashMap<Integer, Player> getPlayers() {
 		return players;
 	}
