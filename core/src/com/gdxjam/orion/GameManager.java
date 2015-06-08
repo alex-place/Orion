@@ -16,7 +16,6 @@ public class GameManager {
 
 	public static void init() {
 		world = new World(new Vector2(0, 0), true);
-		Assets.load();
 	}
 
 	public static HashMap<Integer, Player> getPlayers() {

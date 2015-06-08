@@ -10,7 +10,7 @@ public class Assets implements Disposable {
 
 	public static final String TAG = Assets.class.getSimpleName();
 
-	public static boolean rebuildAtlas = false;
+	public static boolean rebuildAtlas = true;
 	public static boolean drawDebugOutline = false;
 
 	public static boolean loaded = false;
@@ -39,13 +39,13 @@ public class Assets implements Disposable {
 
 	public static void create() {
 		TextureAtlas atlas = manager.get(TEXTURE_ATLAS_OBJECTS);
-
+		square = new AssetSquare(atlas);
 		skin = manager.get(SKIN);
 
 	}
 
-	public class AssetSquare {
-		AtlasRegion reg;
+	public static class AssetSquare {
+		public AtlasRegion reg;
 
 		public AssetSquare(TextureAtlas atlas) {
 			reg = atlas.findRegion("square");
