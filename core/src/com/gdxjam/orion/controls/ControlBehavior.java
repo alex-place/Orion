@@ -17,6 +17,8 @@ public interface ControlBehavior {
 
 	public void handleMouse(Vector2 position);
 
+	public void handleClick(Vector2 position);
+
 	public void handleKey(int keycode);
 
 }

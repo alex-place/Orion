@@ -21,10 +21,10 @@ public class ClientGameManager {
 
 	public static void init(Game game) {
 		ClientGameManager.game = game;
-		Assets.load();
-		while (!Assets.getManager().update()) {
-			Assets.create();
-		}
+		// Assets.load();
+		// while (!Assets.getManager().update()) {
+		// Assets.create();
+		// }
 	}
 
 	public static ClientPlayer getPlayer() {

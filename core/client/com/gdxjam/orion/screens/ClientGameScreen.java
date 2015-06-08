@@ -36,6 +36,8 @@ public class ClientGameScreen implements Screen {
 
 	Color a, b, c, d;
 
+	private Vector3 mouse;
+
 	@Override
 	public void show() {
 		try {
@@ -89,8 +91,9 @@ public class ClientGameScreen implements Screen {
 				batch.setColor(d);
 			}
 
-			// batch.draw(green, player.position.x, player.position.y, 1, 1);
-			batch.draw(Assets.square.reg, player.position.x, player.position.y, 1, 1);
+			batch.draw(green, player.position.x, player.position.y, 1, 1);
+			// batch.draw(Assets.square.reg, player.position.x,
+			// player.position.y, 1, 1);
 			batch.setColor(0, 0, 0, 1);
 		}
 
@@ -120,7 +123,7 @@ public class ClientGameScreen implements Screen {
 			sendKey(Keys.D);
 
 		}
-		sendMouse(new Vector2(Gdx.input.getX(), Gdx.input.getY()));
+		handleMouse();
 	}
 
 	private RequestUpdateKey updateKey;
@@ -133,10 +136,17 @@ public class ClientGameScreen implements Screen {
 
 	private RequestUpdateMouse updateMouse;
 
-	public void sendMouse(Vector2 mosePos) {
-		updateMouse = new RequestUpdateMouse();
-		updateMouse.mousePos = mosePos;
-		client.sendTCP(updateMouse);
+	public void handleMouse() {
+
+		if (Gdx.input.getX() == Gdx.input.getDeltaX() && Gdx.input.getY() == Gdx.input.getDeltaY()) {
+			return;
+			// Mouse didn't move
+		} else {
+			updateMouse = new RequestUpdateMouse();
+			mouse = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			updateMouse.mousePos = new Vector2(mouse.x, mouse.y);
+			client.sendTCP(updateMouse);
+		}
 	}
 
 	@Override
