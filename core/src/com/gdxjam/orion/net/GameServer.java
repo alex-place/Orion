@@ -34,11 +34,7 @@ public class GameServer {
 	private Server server;
 	private HashMap<Integer, ClientPlayer> clientPlayers = new HashMap<Integer, ClientPlayer>();
 
-	private Pool<ClientPlayer> clientPool;
-
 	public GameServer() throws IOException {
-		clientPool = Pools.get(ClientPlayer.class);
-
 		// Log.set(Log.LEVEL_DEBUG);
 		Log.set(Log.LEVEL_NONE);
 
@@ -66,21 +62,17 @@ public class GameServer {
 
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
-					ControlBehavior behavior = new CruiserControlBehavior();
+					ControlBehavior behavior; // = new CruiserControlBehavior();
 					/*
-					if (request.type == ShipType.FIGHTER) {
-						behavior = new FighterControlBehavior();
-					}
-					if (request.type == ShipType.CRUISER) {
-						behavior = new CruiserControlBehavior();
-					}
-					if (request.type == ShipType.CORVETTE) {
-						behavior = new CorvetteControlBehavior();
-					} else {
-						behavior = new DefaultControlBehavior();
-					}
-	*/
-					//behavior = new DefaultControlBehavior();
+					 * if (request.type == ShipType.FIGHTER) { behavior = new
+					 * FighterControlBehavior(); } if (request.type ==
+					 * ShipType.CRUISER) { behavior = new
+					 * CruiserControlBehavior(); } if (request.type ==
+					 * ShipType.CORVETTE) { behavior = new
+					 * CorvetteControlBehavior(); } else { behavior = new
+					 * DefaultControlBehavior(); }
+					 */
+					behavior = new DefaultControlBehavior();
 
 					Player player = new Player(((RequestAddPlayer) message).position, c.getID(), behavior);
 					behavior.init(player);

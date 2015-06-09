@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
+import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.input.DevGestureInput;
 import com.gdxjam.orion.input.DevInputProcessor;
 import com.gdxjam.orion.net.GameServer;
@@ -64,13 +65,41 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		GameManager.getWorld().step(1 / 60f, 8, 8);
+
+		updateQ();
+		updateEntities(delta);
+
 		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		renderer.render(GameManager.getWorld(), camera.combined);
 		// fps.log();
+		GameManager.getWorld().step(1 / 60f, 8, 8);
 
+	}
+
+	public void updateQ() {
+		if (!GameManager.getWorld().isLocked()) {
+
+			for (Entity e : GameManager.getToBeDestroyed()) {
+				e.destroy();
+				GameManager.getToBeDestroyed().removeValue(e, true);
+
+			}
+
+			for (Entity e : GameManager.getToBeAdded()) {
+				e.add();
+				GameManager.getToBeAdded().removeValue(e, true);
+				GameManager.getActive().add(e);
+
+			}
+		}
+	}
+
+	private void updateEntities(float delta) {
+		for (Entity e : GameManager.getActive()) {
+			e.update(delta);
+		}
 	}
 
 	@Override

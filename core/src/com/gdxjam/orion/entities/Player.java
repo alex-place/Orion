@@ -14,12 +14,24 @@ import com.gdxjam.orion.utils.Constants;
 
 public class Player extends Entity {
 
+	public Player() {
+	}
+
 	private Body body;
-	private final int id;
+	private FixtureDef fixture;
+	private int id;
 	private final float speed = 1.0f;
 	private ControlBehavior behavior;
 
 	public Player(Vector3 position, int id, ControlBehavior behavior) {
+		init(position, id, behavior);
+	}
+
+	public Player(int x, int y, int rotation, int id, ControlBehavior behavior) {
+		this(new Vector3(x, y, rotation), id, behavior);
+	}
+
+	public void init(Vector3 position, int id, ControlBehavior behavior) {
 		this.id = id;
 		this.behavior = behavior;
 		PolygonShape rect = new PolygonShape();
@@ -28,7 +40,7 @@ public class Player extends Entity {
 		CircleShape circle = new CircleShape();
 		circle.setRadius(Constants.PLAYER_HALFHEIGHT);
 
-		FixtureDef fixture = new FixtureDef();
+		fixture = new FixtureDef();
 		// fixture.shape = rect;
 		fixture.shape = circle;
 		fixture.density = 1;
@@ -43,10 +55,6 @@ public class Player extends Entity {
 		body.setUserData(this);
 
 		GameManager.getPlayers().put(id, this);
-	}
-
-	public Player(int x, int y, int rotation, int id, ControlBehavior behavior) {
-		this(new Vector3(x, y, rotation), id, behavior);
 	}
 
 	public Body getBody() {

@@ -60,8 +60,7 @@ public class TempJoinGameScrren implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
+		stage.getViewport().setScreenSize(width, height);
 	}
 
 	@Override

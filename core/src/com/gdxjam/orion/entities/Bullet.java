@@ -11,13 +11,17 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.utils.Constants;
 
 public class Bullet extends Entity implements Poolable {
-	float speed = 5;
-	public boolean flagged = false;
+	private float speed = 5;
+	private Body body;
+	private Vector2 start;
+	private Vector2 target;
 
 	public Bullet() {
 	}
 
 	public void init(Vector2 start, Vector2 target) {
+		this.start = start;
+		this.target = target;
 		CircleShape circle = new CircleShape();
 		circle.setRadius(0.1f);
 
@@ -27,32 +31,43 @@ public class Bullet extends Entity implements Poolable {
 		fixture.isSensor = true;
 		// fixture.isSensor = false;
 		BodyDef bodyDef = new BodyDef();
+		// bodyDef.bullet = true;
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(start.x, start.y);
 		bodyDef.angularDamping = Constants.ANGULAR_DAMPING;
 		// bodyDef.linearDamping = Constants.LINEAR_DAMPING;
-		if (!GameManager.getWorld().isLocked()) {
-			Body body = GameManager.getWorld().createBody(bodyDef);
-			body.createFixture(fixture);
+		body = GameManager.getWorld().createBody(bodyDef);
+		body.createFixture(fixture);
 
-			Vector2 angle = new Vector2();
-			angle = start.sub(target).nor();
-			angle.scl(speed);
-			angle.rotate(180);
+		Vector2 angle = new Vector2();
+		angle = start.sub(target).nor();
+		angle.scl(speed);
+		angle.rotate(180);
 
-			body.applyForceToCenter(angle, true);
-			body.setUserData(this);
-		}
+		body.applyForceToCenter(angle, true);
+		body.setUserData(this);
 	}
 
 	@Override
 	public void reset() {
-		// System.out.println("There trying to destroy me!!!");
-		// for (Fixture fixture : body.getFixtureList()) {
-		// body.destroyFixture(fixture);
-		// }
-		// body.setUserData(null);
-		// GameManager.getWorld().destroyBody(body);
+		destroy();
 	}
 
+	@Override
+	public void destroy() {
+		super.destroy();
+		GameManager.getActive().removeValue(this, true);
+		GameManager.getWorld().destroyBody(body);
+		body = null;
+		start = null;
+		target = null;
+	}
+
+	@Override
+	public void update(float delta) {
+		super.update(delta);
+		if (body.getPosition().dst(start) > 1) {
+			GameManager.getToBeDestroyed().add(this);
+		}
+	}
 }

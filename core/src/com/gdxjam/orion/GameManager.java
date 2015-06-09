@@ -3,10 +3,14 @@ package com.gdxjam.orion;
 import java.util.HashMap;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.gdxjam.orion.entities.Bullet;
+import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Player;
 
 public class GameManager {
@@ -18,6 +22,10 @@ public class GameManager {
 	private static World world;
 
 	private static Pool<Bullet> bullets = Pools.get(Bullet.class, 1000000);
+
+	private static Array<Entity> toBeAdded = new Array<Entity>();
+	private static Array<Entity> active = new Array<Entity>();
+	private static Array<Entity> toBeDestroyed = new Array<Entity>();
 
 	public static void init() {
 		world = new World(new Vector2(0, 0), true);
@@ -38,6 +46,23 @@ public class GameManager {
 
 	public static Pool<Bullet> getBullets() {
 		return bullets;
+	}
+
+	public static void addEntity(BodyDef bodyDef, FixtureDef fixture, Vector2 angle, Bullet bullet) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static Array<Entity> getToBeAdded() {
+		return toBeAdded;
+	}
+
+	public static Array<Entity> getActive() {
+		return active;
+	}
+
+	public static Array<Entity> getToBeDestroyed() {
+		return toBeDestroyed;
 	}
 
 }
