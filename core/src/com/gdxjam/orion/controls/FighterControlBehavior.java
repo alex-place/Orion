@@ -77,7 +77,7 @@ public class FighterControlBehavior implements ControlBehavior {
 	public void handleMouse(Vector2 position) {
 		Gdx.app.log("lookat", "x "+position.x+" y "+position.y+"");
 		float angle = MathUtils.degreesToRadians* position.sub(player.getBody().getPosition()).angle();
-	//	player.getBody().setTransform(player.getBody().getPosition(), angle);
+		player.getBody().setTransform(player.getBody().getPosition(), angle);
 
 	}
 

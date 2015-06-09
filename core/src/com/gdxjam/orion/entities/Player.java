@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.gdxjam.orion.GameManager;
@@ -23,8 +24,13 @@ public class Player extends Entity {
 		this.behavior = behavior;
 		PolygonShape rect = new PolygonShape();
 		rect.setAsBox(Constants.PLAYER_HALFWIDTH, Constants.PLAYER_HALFHEIGHT);
+
+		CircleShape circle = new CircleShape();
+		circle.setRadius(Constants.PLAYER_HALFHEIGHT);
+
 		FixtureDef fixture = new FixtureDef();
-		fixture.shape = rect;
+		// fixture.shape = rect;
+		fixture.shape = circle;
 		fixture.density = 1;
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
@@ -34,6 +40,7 @@ public class Player extends Entity {
 		bodyDef.linearDamping = Constants.LINEAR_DAMPING;
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
+		body.setUserData(this);
 
 		GameManager.getPlayers().put(id, this);
 	}
