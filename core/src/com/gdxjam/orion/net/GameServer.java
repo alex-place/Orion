@@ -66,7 +66,7 @@ public class GameServer {
 
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
-					ControlBehavior behavior = new FighterControlBehavior();
+					ControlBehavior behavior = new CruiserControlBehavior();
 					/*
 					if (request.type == ShipType.FIGHTER) {
 						behavior = new FighterControlBehavior();

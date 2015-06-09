@@ -2,9 +2,9 @@ package com.gdxjam.orion.controls;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.utils.EntityFactory;
 
 /**
  * These behaviors will define how a ship moves these should not handle client
@@ -15,9 +15,11 @@ public class CorvetteControlBehavior implements ControlBehavior {
 
 	private Player player;
 
-
 	private final float speed = 1000;
 
+	private final float attackSpeed = 0;
+
+	private float attackCounter = 0;
 
 	public CorvetteControlBehavior() {
 	}
@@ -29,32 +31,39 @@ public class CorvetteControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.getBody()
-				.applyForceToCenter(new Vector2(0, speed * delta), true);
+		player.getBody().applyForceToCenter(new Vector2(0, speed * delta), true);
 
 	}
 
 	@Override
 	public void reverse(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta),
-				true);
+		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta), true);
 	}
 
 	@Override
 	public void left(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0),
-				true);
+		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0), true);
 	}
 
 	@Override
 	public void right(float delta) {
-		player.getBody()
-				.applyForceToCenter(new Vector2(speed * delta, 0), true);
+		player.getBody().applyForceToCenter(new Vector2(speed * delta, 0), true);
 	}
 
 	@Override
 	public void handleMouse(Vector2 position) {
 
+	}
+
+	@Override
+	public void handleClick(Vector2 position) {
+		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
+		if (attackCounter >= attackSpeed) {
+			EntityFactory.createBullet(player.getBody().getPosition(), position);
+			attackCounter = 0;
+		} else {
+			attackCounter++;
+		}
 	}
 
 	@Override
@@ -75,13 +84,7 @@ public class CorvetteControlBehavior implements ControlBehavior {
 		default:
 			break;
 		}
-		
-	}
 
-	@Override
-	public void handleClick(Vector2 position) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
