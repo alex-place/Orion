@@ -34,8 +34,7 @@ public class FighterControlBehavior implements ControlBehavior {
 			direction.nor();
 		}
 
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta),
-				player.getBody().getWorldCenter(), true);
+		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
@@ -46,8 +45,7 @@ public class FighterControlBehavior implements ControlBehavior {
 			direction.nor();
 		}
 
-		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * speed * delta),
-				player.getBody().getWorldCenter(), true);
+		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
 	}
 
 	@Override
@@ -59,7 +57,7 @@ public class FighterControlBehavior implements ControlBehavior {
 		}
 
 		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
-	
+
 	}
 
 	@Override
@@ -75,8 +73,10 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void handleMouse(Vector2 position) {
-		Gdx.app.log("lookat", "x "+position.x+" y "+position.y+"");
-		float angle = MathUtils.degreesToRadians* position.sub(player.getBody().getPosition()).angle();
+		Gdx.app.log("lookat", "x " + position.x + " y " + position.y + "");
+
+		float angle = MathUtils.atan2(player.getBody().getPosition().y - position.y, player.getBody().getPosition().y - position.x);
+
 		player.getBody().setTransform(player.getBody().getPosition(), angle);
 
 	}
@@ -105,8 +105,7 @@ public class FighterControlBehavior implements ControlBehavior {
 	@Override
 	public void handleClick(Vector2 position) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 }

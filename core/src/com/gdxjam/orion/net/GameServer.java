@@ -66,8 +66,8 @@ public class GameServer {
 
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
-					ControlBehavior behavior;
-
+					ControlBehavior behavior = new FighterControlBehavior();
+					/*
 					if (request.type == ShipType.FIGHTER) {
 						behavior = new FighterControlBehavior();
 					}
@@ -79,8 +79,8 @@ public class GameServer {
 					} else {
 						behavior = new DefaultControlBehavior();
 					}
-
-					behavior = new DefaultControlBehavior();
+	*/
+					//behavior = new DefaultControlBehavior();
 
 					Player player = new Player(((RequestAddPlayer) message).position, c.getID(), behavior);
 					behavior.init(player);
