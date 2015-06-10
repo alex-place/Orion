@@ -46,11 +46,11 @@ public class EntityFactory {
 		}
 		Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " + unlocked);
 	}
-	public static void creatSun(){
+	public static void createSun(){
 		new Sun(new Vector2(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2));
 		
 	}
-	public static void creatPlanet(float radius, Vector2 position){
+	public static void createPlanet(float radius, Vector2 position){
 
 		new Planet(position, radius);
 	}

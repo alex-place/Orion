@@ -32,7 +32,7 @@ public class WorldGenerator {
 
 	}
 	public void createSolarSystem(){
-		EntityFactory.creatSun();
-		EntityFactory.creatPlanet(5, new Vector2(25, 25));
+		EntityFactory.createSun();
+		EntityFactory.createPlanet(5, new Vector2(25, 25));
 	}
 }
