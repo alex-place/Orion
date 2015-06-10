@@ -19,7 +19,6 @@ public class CruiserControlBehavior implements ControlBehavior {
 
 	private final float speed = 1000;
 
-
 	public CruiserControlBehavior() {
 	}
 
@@ -82,13 +81,13 @@ public class CruiserControlBehavior implements ControlBehavior {
 		default:
 			break;
 		}
-		
+
 	}
 
 	@Override
 	public void handleClick(Vector2 position) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

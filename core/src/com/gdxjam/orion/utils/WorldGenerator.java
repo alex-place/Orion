@@ -13,7 +13,7 @@ public class WorldGenerator {
 	}
 
 	public void createBoundaries() {
-	
+
 		EntityFactory.createBoundry(new Vector2(0, 0), new Vector2(0, p.height));
 		EntityFactory.createBoundry(new Vector2(p.width / 2, 0), new Vector2(p.width / 2, p.height));
 
@@ -31,7 +31,8 @@ public class WorldGenerator {
 		// 0));
 
 	}
-	public void createSolarSystem(){
+
+	public void createSolarSystem() {
 		EntityFactory.createSun();
 		EntityFactory.createPlanet(5, new Vector2(25, 25));
 	}

@@ -48,7 +48,7 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void left(float delta) {
-		rotation = player.getBody().getAngle()+MathUtils.PI/2;
+		rotation = player.getBody().getAngle() + MathUtils.PI / 2;
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
@@ -58,7 +58,7 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void right(float delta) {
-		rotation = player.getBody().getAngle()-MathUtils.PI/2;
+		rotation = player.getBody().getAngle() - MathUtils.PI / 2;
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
@@ -68,7 +68,7 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void handleMouse(Vector2 position) {
-		float angle = MathUtils.atan2(position.y-player.getBody().getPosition().y, position.x-player.getBody().getPosition().y);
+		float angle = MathUtils.atan2(position.y - player.getBody().getPosition().y, position.x - player.getBody().getPosition().y);
 		player.getBody().setTransform(player.getBody().getPosition(), angle);
 
 	}

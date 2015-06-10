@@ -3,9 +3,7 @@ package com.gdxjam.orion;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.Array;
 import com.gdxjam.orion.entities.ClientPlayer;
 
 public class ClientGameManager {
