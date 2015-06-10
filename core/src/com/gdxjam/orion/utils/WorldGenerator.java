@@ -34,5 +34,7 @@ public class WorldGenerator {
 	public void createSolarSystem(){
 		EntityFactory.creatSun();
 		EntityFactory.creatPlanet(5, new Vector2(25, 25));
+		EntityFactory.creatPlanet(5, new Vector2(25, Constants.WORLD_HEIGHT/2));
+		EntityFactory.creatPlanet(7, new Vector2(100, Constants.WORLD_HEIGHT/2));
 	}
 }

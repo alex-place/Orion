@@ -47,12 +47,13 @@ public class EntityFactory {
 		Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " + unlocked);
 	}
 	public static void creatSun(){
-		new Sun(new Vector2(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2));
+		Sun sun = new Sun(new Vector2(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2));
 		
 	}
 	public static void creatPlanet(float radius, Vector2 position){
 
-		new Planet(position, radius);
+		Planet planet = new Planet(position, radius);
+		GameManager.getActive().add(planet);
 	}
 
 }
