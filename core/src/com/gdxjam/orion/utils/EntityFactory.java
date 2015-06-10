@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Bullet;
+import com.gdxjam.orion.entities.Planet;
+import com.gdxjam.orion.entities.Sun;
 
 public class EntityFactory {
 
@@ -45,21 +47,12 @@ public class EntityFactory {
 		Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " + unlocked);
 	}
 	public static void creatSun(){
-		FixtureDef def = new FixtureDef();
-		CircleShape circle = new CircleShape();
-		circle.setRadius(10);
-		
-		def.shape = circle;
-		def.isSensor = true;
-		
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.KinematicBody;
-		bodyDef.position.set(new Vector2(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2));
-		GameManager.getWorld().createBody(bodyDef).createFixture(circle, 1.0f);
+		new Sun(new Vector2(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2));
 		
 	}
-	public static void creatPlanet(){
-		
+	public static void creatPlanet(float radius, Vector2 position){
+
+		new Planet(position, radius);
 	}
 
 }
