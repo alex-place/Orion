@@ -66,7 +66,8 @@ public class Bullet extends Entity implements Poolable {
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		if (body.getPosition().dst(start) > 1) {
+		if (Math.abs(body.getPosition().dst(start)) > 1) {
+			System.out.println("Destroy me!");
 			GameManager.getToBeDestroyed().add(this);
 		}
 	}

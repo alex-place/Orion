@@ -82,15 +82,24 @@ public class GameScreen implements Screen {
 		if (!GameManager.getWorld().isLocked()) {
 
 			for (Entity e : GameManager.getToBeDestroyed()) {
-				e.destroy();
-				GameManager.getToBeDestroyed().removeValue(e, true);
+				if (!GameManager.getWorld().isLocked()) {
+					e.destroy();
+					GameManager.getToBeDestroyed().removeValue(e, true);
+				} else {
+					System.out.println("What in the actual fuck?");
+
+				}
 
 			}
 
 			for (Entity e : GameManager.getToBeAdded()) {
-				e.add();
-				GameManager.getToBeAdded().removeValue(e, true);
-				GameManager.getActive().add(e);
+				if (!GameManager.getWorld().isLocked()) {
+					e.add();
+					GameManager.getToBeAdded().removeValue(e, true);
+					GameManager.getActive().add(e);
+				} else {
+					System.out.println("What in the actual fuck?");
+				}
 
 			}
 		}
