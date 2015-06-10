@@ -1,10 +1,8 @@
 package com.gdxjam.orion.utils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gdxjam.orion.GameManager;
@@ -44,13 +42,16 @@ public class EntityFactory {
 
 			locked++;
 		}
-		Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " + unlocked);
+		// Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " +
+		// unlocked);
 	}
-	public static void creatSun(){
-		Sun sun = new Sun(new Vector2(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2));
-		
+
+	public static void createSun() {
+		new Sun(new Vector2(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
+
 	}
-	public static void creatPlanet(float radius, Vector2 position){
+
+	public static void createPlanet(float radius, Vector2 position) {
 
 		Planet planet = new Planet(position, radius);
 		GameManager.getActive().add(planet);

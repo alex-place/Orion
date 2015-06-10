@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.gdxjam.orion.Assets;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.input.DefaultInputHandler;
@@ -100,7 +99,7 @@ public class ClientGameScreen implements Screen {
 		}
 
 		batch.end();
-		fps.log();
+		// fps.log();
 
 	}
 

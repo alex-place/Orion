@@ -3,7 +3,6 @@ package com.gdxjam.orion.net;
 import java.io.IOException;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -12,11 +11,9 @@ import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.entities.ClientPlayer;
-import com.gdxjam.orion.net.Network;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
-import com.gdxjam.orion.utils.Constants;
 
 public class GameClient {
 

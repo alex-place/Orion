@@ -5,8 +5,6 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Pool;
-import com.badlogic.gdx.utils.Pools;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.FrameworkMessage.KeepAlive;
 import com.esotericsoftware.kryonet.FrameworkMessage.Ping;
@@ -14,14 +12,12 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
-import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.controls.ControlBehavior;
-import com.gdxjam.orion.controls.CorvetteControlBehavior;
-import com.gdxjam.orion.controls.CruiserControlBehavior;
 import com.gdxjam.orion.controls.DefaultControlBehavior;
-import com.gdxjam.orion.controls.FighterControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.entities.PlayerAttributes;
+import com.gdxjam.orion.entities.ships.Ship;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
@@ -74,7 +70,12 @@ public class GameServer {
 					 */
 					behavior = new DefaultControlBehavior();
 
-					Player player = new Player(((RequestAddPlayer) message).position, c.getID(), behavior);
+					PlayerAttributes a = new PlayerAttributes(c.getID());
+
+					Player player = new Player(a, new Ship(request.position, behavior));
+
+					// Player player = new Player(((RequestAddPlayer)
+					// message).position, c.getID(), behavior);
 					behavior.init(player);
 					GameManager.getPlayers().put(c.getID(), player);
 
@@ -166,7 +167,7 @@ public class GameServer {
 	public void update() {
 		update = new ReplyUpdate();
 		for (Player p : GameManager.getPlayers().values()) {
-			clientPlayers.put(p.getId(), convertToClient(p));
+			clientPlayers.put(p.getID(), convertToClient(p));
 		}
 
 		update.players = clientPlayers;
@@ -187,7 +188,7 @@ public class GameServer {
 
 	public ClientPlayer convertToClient(Player player) {
 		return new ClientPlayer().init(new Vector3(player.getBody().getPosition().x - Constants.PLAYER_HALFWIDTH, player.getBody().getPosition().y
-				- Constants.PLAYER_HALFHEIGHT, 0), player.getId());
+				- Constants.PLAYER_HALFHEIGHT, 0), player.getID());
 
 	}
 }

@@ -14,14 +14,12 @@ public class Bullet extends Entity implements Poolable {
 	private float speed = 5;
 	private Body body;
 	private Vector2 start;
-	private Vector2 target;
 
 	public Bullet() {
 	}
 
 	public void init(Vector2 start, Vector2 target) {
 		this.start = start;
-		this.target = target;
 		CircleShape circle = new CircleShape();
 		circle.setRadius(0.1f);
 
@@ -60,13 +58,13 @@ public class Bullet extends Entity implements Poolable {
 		GameManager.getWorld().destroyBody(body);
 		body = null;
 		start = null;
-		target = null;
 	}
 
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		if (body.getPosition().dst(start) > 1) {
+		if (Math.abs(body.getPosition().dst(start)) > 1) {
+			System.out.println("Destroy me!");
 			GameManager.getToBeDestroyed().add(this);
 		}
 	}
