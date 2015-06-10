@@ -18,6 +18,8 @@ public class WorldGenerator {
 
 		EntityFactory.createBoundry(new Vector2(0, p.height / 2), new Vector2(p.width, p.height / 2));
 		EntityFactory.createBoundry(new Vector2(0, 0), new Vector2(p.width, 0));
+		
+		EntityFactory.creatSun();
 
 		// EntityFactory.createBoundry(new Vector2(0, 0), new Vector2(0,
 		// p.height));
