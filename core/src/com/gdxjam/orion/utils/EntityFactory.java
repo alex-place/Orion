@@ -8,7 +8,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Bullet;
 import com.gdxjam.orion.entities.Entity;
-import com.gdxjam.orion.entities.Planet;
+import com.gdxjam.orion.entities.Sattelite;
+import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
 import com.gdxjam.orion.entities.Sun;
 
 public class EntityFactory {
@@ -52,9 +53,15 @@ public class EntityFactory {
 
 	}
 
-	public static Planet createPlanet(float distants, float radius, Entity parent) {
+	public static Sattelite createPlanet(float distance, float radius, Entity parent) {
 
-		Planet planet = new Planet(distants, radius, parent);
+		Sattelite planet = new Sattelite(distance, radius, parent);
+		GameManager.getActive().add(planet);
+		return planet;
+	}
+
+	public static Sattelite createSattelite(SatteliteParameters p) {
+		Sattelite planet = new Sattelite(p);
 		GameManager.getActive().add(planet);
 		return planet;
 	}

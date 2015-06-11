@@ -1,10 +1,9 @@
 package com.gdxjam.orion.utils;
 
-import sun.security.provider.Sun;
-
 import com.badlogic.gdx.math.Vector2;
-import com.gdxjam.orion.entities.Planet;
-import com.sun.xml.internal.stream.Entity;
+import com.gdxjam.orion.entities.Sattelite;
+import com.gdxjam.orion.entities.Sun;
+import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
 
 public class WorldGenerator {
 
@@ -36,11 +35,23 @@ public class WorldGenerator {
 
 	}
 
-
 	public void createSolarSystem() {
-		com.gdxjam.orion.entities.Sun i = EntityFactory.createSun();
-		Planet j = EntityFactory.createPlanet(50.0f, 5.0f, i);
-		EntityFactory.createPlanet(10.0f, 2.0f, j);
+		// The sun has a radius of 10
+		Sun sun = EntityFactory.createSun();
+
+		// Create a planet and its moon !VERY SENSITIVE RELATIONSHIP!
+		SatteliteParameters p1 = new SatteliteParameters(sun, 2, 30, 360, 10, 1);
+		Sattelite planet1 = EntityFactory.createSattelite(p1);
+
+		SatteliteParameters m1 = new SatteliteParameters(planet1, 1, 6, 360, 10, 1f);
+		EntityFactory.createSattelite(m1);
+
+		// Create a planet and its moon !VERY SENSITIVE RELATIONSHIP!
+		SatteliteParameters p2 = new SatteliteParameters(sun, 10, 300, 3600, 50, 1);
+		Sattelite planet2 = EntityFactory.createSattelite(p2);
+
+		SatteliteParameters m = new SatteliteParameters(planet2, 5, 50, 360, 10, 1f);
+		//EntityFactory.createPlanet(m);
 
 	}
 }

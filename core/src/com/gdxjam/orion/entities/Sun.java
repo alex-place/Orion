@@ -23,11 +23,11 @@ public class Sun extends Entity {
 
 		fixture = new FixtureDef();
 		fixture.shape = circle;
-		fixture.density = 1;
+		fixture.density = 10000;
 		fixture.isSensor = true;
 
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.KinematicBody;
+		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(position.x, position.y);
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
