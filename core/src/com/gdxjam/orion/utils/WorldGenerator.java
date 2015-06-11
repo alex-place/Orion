@@ -47,11 +47,11 @@ public class WorldGenerator {
 		EntityFactory.createSattelite(m1);
 
 		// Create a planet and its moon !VERY SENSITIVE RELATIONSHIP!
-		SatteliteParameters p2 = new SatteliteParameters(sun, 10, 300, 3600, 50, 1);
+		SatteliteParameters p2 = new SatteliteParameters(sun, 5, 300, 360, 10, 1);
 		Sattelite planet2 = EntityFactory.createSattelite(p2);
 
-		SatteliteParameters m = new SatteliteParameters(planet2, 5, 50, 360, 10, 1f);
-		//EntityFactory.createPlanet(m);
+		SatteliteParameters m = new SatteliteParameters(planet2, 2, 12, 360, 10, 1f);
+		EntityFactory.createSattelite(m);
 
 	}
 }
