@@ -1,6 +1,10 @@
 package com.gdxjam.orion.utils;
 
+import sun.security.provider.Sun;
+
 import com.badlogic.gdx.math.Vector2;
+import com.gdxjam.orion.entities.Planet;
+import com.sun.xml.internal.stream.Entity;
 
 public class WorldGenerator {
 
@@ -34,8 +38,9 @@ public class WorldGenerator {
 
 
 	public void createSolarSystem() {
-		EntityFactory.createSun();
-		EntityFactory.createPlanet(5, new Vector2(25, 25));
+		com.gdxjam.orion.entities.Sun i = EntityFactory.createSun();
+		Planet j = EntityFactory.createPlanet(50.0f, 5.0f, i);
+		EntityFactory.createPlanet(10.0f, 2.0f, j);
 
 	}
 }

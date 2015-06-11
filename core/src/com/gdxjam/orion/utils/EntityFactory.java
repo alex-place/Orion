@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Bullet;
+import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Planet;
 import com.gdxjam.orion.entities.Sun;
 
@@ -46,15 +47,16 @@ public class EntityFactory {
 		// unlocked);
 	}
 
-	public static void createSun() {
-		new Sun(new Vector2(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
+	public static Sun createSun() {
+		return new Sun(new Vector2(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
 
 	}
 
-	public static void createPlanet(float radius, Vector2 position) {
+	public static Planet createPlanet(float distants, float radius, Entity parent) {
 
-		Planet planet = new Planet(position, radius);
+		Planet planet = new Planet(distants, radius, parent);
 		GameManager.getActive().add(planet);
+		return planet;
 	}
 
 }

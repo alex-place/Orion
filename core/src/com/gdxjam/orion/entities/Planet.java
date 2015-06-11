@@ -13,16 +13,18 @@ import com.gdxjam.orion.utils.Constants;
 
 public class Planet extends Entity {
 	private Body body;
+	private Entity parent;
 	private FixtureDef fixture;
 
 	private float angle = 0.0f;
 	private float orabitSpeed = MathUtils.random()*0.01f;
 	
-	public Planet(Vector2 position, float radius){
-		init(position, radius);
+	public Planet(float distants, float radius, Entity parent){
+		init(distants,radius,parent);
 	}
 
-	public void init(Vector2 position, float radius) {
+	public void init(float distants, float radius, Entity parent) {
+		this.parent = parent;
 		CircleShape circle = new CircleShape();
 		circle.setRadius(radius);
 
@@ -33,7 +35,7 @@ public class Planet extends Entity {
 
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
-		bodyDef.position.set(position.x, position.y);
+		bodyDef.position.set(parent.getBody().getPosition().x+distants, parent.getBody().getPosition().x);
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
 		body.setUserData(this);
@@ -43,8 +45,8 @@ public class Planet extends Entity {
 	public void update(float delta){
 		angle += orabitSpeed;
 
-		float x = MathUtils.cos(angle) * (body.getPosition().x - Constants.WORLD_WIDTH/2) - MathUtils.sin(angle) * (body.getPosition().y - Constants.WORLD_HEIGHT/2) + Constants.WORLD_WIDTH/2;
-		float y = MathUtils.sin(angle) * (body.getPosition().x - Constants.WORLD_WIDTH/2) + MathUtils.cos(angle) * (body.getPosition().y - Constants.WORLD_HEIGHT/2) + Constants.WORLD_HEIGHT/2;
+		float x = MathUtils.cos(angle) * (body.getPosition().x - parent.getBody().getPosition().x - MathUtils.sin(angle) * (body.getPosition().y - parent.getBody().getPosition().y) + parent.getBody().getPosition().x);
+		float y = MathUtils.sin(angle) * (body.getPosition().x - parent.getBody().getPosition().x) + MathUtils.cos(angle) * (body.getPosition().y - parent.getBody().getPosition().y) + parent.getBody().getPosition().y;
 		Gdx.app.log("planet", "x: "+x+" y "+y);
 		body.setTransform(x, y, body.getAngle()+0.001f);
 		if(angle <= MathUtils.PI*2){
