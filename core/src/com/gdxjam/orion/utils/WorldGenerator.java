@@ -51,14 +51,23 @@ public class WorldGenerator {
 		float dist = (MathUtils.random()*30)+20;
 		for(int i = 0; i < planetsPerSide; i++){
 			dist = dist + (MathUtils.random()*30)+20;
+			int sats = (int)(MathUtils.random()*4);
 			
-			SatteliteParameters j = new SatteliteParameters(sun, (MathUtils.random()*8)+2, dist, (MathUtils.random()*500)+10000, 10, 1);
+			SatteliteParameters j = new SatteliteParameters(sun, (MathUtils.random()*8)+2, dist, (MathUtils.random()*500)+10000, 100, 1);
 			Sattelite redPlanet = EntityFactory.createSattelite(j);
+			for(int l = 0; l < sats; l++){
+				SatteliteParameters m = new SatteliteParameters(redPlanet, (MathUtils.random()*2), (MathUtils.random()*10)+5, (MathUtils.random()*500)+10000, 100, 1);
+				EntityFactory.createSattelite(m);
+			}
 			
 			dist = dist + (MathUtils.random()*30)+20;
 			
-			SatteliteParameters k = new SatteliteParameters(sun, (MathUtils.random()*8)+2, -dist, (MathUtils.random()*500)+10000, 10, 1);
-			Sattelite bluePlanet2 = EntityFactory.createSattelite(k);
+			SatteliteParameters k = new SatteliteParameters(sun, (MathUtils.random()*8)+2, -dist, (MathUtils.random()*500)+10000, 100, 1);
+			Sattelite bluePlanet = EntityFactory.createSattelite(k);
+			for(int l = 0; l < sats; l++){
+				SatteliteParameters m = new SatteliteParameters(bluePlanet, (MathUtils.random()*2), (MathUtils.random()*10)+5, (MathUtils.random()*500)+10000, 100, 1);
+				EntityFactory.createSattelite(m);
+			}
 		}
 
 
