@@ -1,5 +1,6 @@
 package com.gdxjam.orion.input;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -57,12 +58,12 @@ public class DevInputProcessor implements InputProcessor {
 	public boolean scrolled(int amount) {
 		// Zoom out
 		if (amount > 0) {
-			zoom += 0.1f;
+			zoom += 10f;
 		}
 
 		// Zoom in
 		if (amount < 0) {
-			zoom -= 0.1f;
+			zoom -= 10f;
 		}
 		camera.zoom = zoom;
 		camera.update();

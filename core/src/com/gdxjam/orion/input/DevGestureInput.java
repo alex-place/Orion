@@ -41,7 +41,7 @@ public class DevGestureInput implements GestureListener {
 	@Override
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
 		if (Gdx.input.isButtonPressed(Buttons.RIGHT)) {
-			camera.translate(-deltaX * 0.05f, deltaY * 0.05f);
+			camera.translate(-deltaX * 5.0f, deltaY * 5.0f);
 			camera.update();
 		}
 		return false;

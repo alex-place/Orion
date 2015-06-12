@@ -41,31 +41,33 @@ public class WorldGenerator {
 		Sun sun = EntityFactory.createSun();
 		
 		
-		SatteliteParameters p1 = new SatteliteParameters(sun, 2, 30, 360, 10, 1);
-		Sattelite planet1 = EntityFactory.createSattelite(p1);
+		SatteliteParameters p1 = new SatteliteParameters(sun, 2, 1500, 360, 10, 1);
+		EntityFactory.createSattelite(p1);
 		
-		SatteliteParameters p2 = new SatteliteParameters(sun, 2, -30, 360, 10, 1);
-		Sattelite planet2 = EntityFactory.createSattelite(p2);
+		SatteliteParameters p2 = new SatteliteParameters(sun, 2, -1500, 360, 10, 1);
+		EntityFactory.createSattelite(p2);
 		
 		int planetsPerSide = (int)(MathUtils.random()*4)+4;
-		float dist = (MathUtils.random()*30)+20;
+		float dist = 1500;
+		float radius;
 		for(int i = 0; i < planetsPerSide; i++){
-			dist = dist + (MathUtils.random()*30)+20;
 			int sats = (int)(MathUtils.random()*4);
 			
-			SatteliteParameters j = new SatteliteParameters(sun, (MathUtils.random()*8)+2, dist, (MathUtils.random()*500)+10000, 100, 1);
+			dist = dist + (MathUtils.random()*500)+700;
+			radius = (MathUtils.random()*75)+75;
+			SatteliteParameters j = new SatteliteParameters(sun, radius, dist, (MathUtils.random()*500)+10000, 100, 1);
 			Sattelite redPlanet = EntityFactory.createSattelite(j);
 			for(int l = 0; l < sats; l++){
-				SatteliteParameters m = new SatteliteParameters(redPlanet, (MathUtils.random()*2), (MathUtils.random()*10)+5, (MathUtils.random()*500)+10000, 100, 1);
+				SatteliteParameters m = new SatteliteParameters(redPlanet, (MathUtils.random()*50)+50, (MathUtils.random()*50)+radius+100, (MathUtils.random()*500)+10000, 100000, 1);
 				EntityFactory.createSattelite(m);
 			}
 			
-			dist = dist + (MathUtils.random()*30)+20;
-			
-			SatteliteParameters k = new SatteliteParameters(sun, (MathUtils.random()*8)+2, -dist, (MathUtils.random()*500)+10000, 100, 1);
+			dist = dist + (MathUtils.random()*500)+700;
+			radius = (MathUtils.random()*75)+75;
+			SatteliteParameters k = new SatteliteParameters(sun, radius, -dist, (MathUtils.random()*500)+10000, 100, 1);
 			Sattelite bluePlanet = EntityFactory.createSattelite(k);
 			for(int l = 0; l < sats; l++){
-				SatteliteParameters m = new SatteliteParameters(bluePlanet, (MathUtils.random()*2), (MathUtils.random()*10)+5, (MathUtils.random()*500)+10000, 100, 1);
+				SatteliteParameters m = new SatteliteParameters(bluePlanet, (MathUtils.random()*2)+50, (MathUtils.random()*50)+radius+100, (MathUtils.random()*500)+10000, 1000000, 1);
 				EntityFactory.createSattelite(m);
 			}
 		}
