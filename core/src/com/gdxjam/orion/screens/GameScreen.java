@@ -62,14 +62,13 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		GameManager.getWorld().step(1 / 60f, 8, 8);
-		
 		updateQ();
 		updateEntities(delta);
 		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
 		renderer.render(GameManager.getWorld(), camera.combined);
+		GameManager.getWorld().step(1 / 60f, 8, 8);
 		fps.log();
 
 

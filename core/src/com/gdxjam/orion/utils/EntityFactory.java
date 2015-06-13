@@ -55,7 +55,6 @@ public class EntityFactory {
 	}
 	public static void createBulletK(float angle, Vector2 start) {
 		BulletK bullet = new BulletK(angle, start);
-		GameManager.getToBeAdded().add(bullet);
 	}
 
 	public static Sun createSun() {

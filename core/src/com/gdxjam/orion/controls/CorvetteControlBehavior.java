@@ -61,7 +61,7 @@ public class CorvetteControlBehavior implements ControlBehavior {
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
 		if (attackCounter >= attackSpeed) {
-			float angle = MathUtils.atan2(player.getBody().getPosition().y, player.getBody().getPosition().x) - MathUtils.atan2(position.y, position.x);
+			float angle = MathUtils.atan2(position.y, position.x)-MathUtils.atan2(player.getBody().getPosition().y, player.getBody().getPosition().x);
 			EntityFactory.createBulletK(angle, player.getBody().getPosition());
 			attackCounter = 0;
 		} else {

@@ -14,15 +14,16 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.utils.Constants;
 
 public class BulletK extends Entity implements Poolable {
-	private float lenght = 5;
+	private float lenght = 2;
 	private float angle;
-	private float lifeTime = TimeUtils.millis()+5000;
+	private double lifeTime;
 	private Body body;
 	private Vector2 start;
 
 	public BulletK(float angle, Vector2 start) {
 		this.angle = angle;
 		this.start = start;
+		lifeTime = TimeUtils.millis()+5000;
 		init(start);
 	}
 
@@ -33,7 +34,6 @@ public class BulletK extends Entity implements Poolable {
 
 		FixtureDef fixture = new FixtureDef();
 		fixture.shape = circle;
-		fixture.density = 1;
 		fixture.isSensor = true;
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
@@ -50,17 +50,29 @@ public class BulletK extends Entity implements Poolable {
 	@Override
 	public void destroy() {
 		super.destroy();
-		GameManager.getActive().removeValue(this, true);
-		GameManager.getWorld().destroyBody(body);
+		if (!GameManager.getWorld().isLocked()) {
+			System.out.println("1");
+			GameManager.getActive().removeValue(this, true);
+			System.out.println("2");
+			GameManager.getWorld().destroyBody(body);
+			System.out.println("3");
+		}
 		body = null;
 		start = null;
+	}
+	public boolean isReal(){
+		return true;
 	}
 
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		Gdx.app.log("bulletK", "update");
-		body.setTransform(lenght*MathUtils.cos(angle), lenght*MathUtils.sin(angle), 0);
+		
+		//System.out.println("Time to die is "+lifeTime+" The time is "+TimeUtils.millis());
+		if(TimeUtils.millis() > lifeTime){
+			GameManager.getToBeDestroyed().add(this);;
+		}
+		body.setTransform(body.getPosition().x+(lenght*MathUtils.cos(angle)), body.getPosition().y+(lenght*MathUtils.sin(angle)), 0);
 		
 	}
 }
