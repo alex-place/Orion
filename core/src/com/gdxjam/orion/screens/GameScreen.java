@@ -90,9 +90,7 @@ public class GameScreen implements Screen {
 			}
 
 			for (Entity e : GameManager.getToBeAdded()) {
-				System.out.println("1");
 				if (!GameManager.getWorld().isLocked()) {
-					System.out.println("2");
 					e.add();
 					GameManager.getToBeAdded().removeValue(e, true);
 					GameManager.getActive().add(e);

@@ -32,20 +32,21 @@ public class EntityFactory {
 	}
 
 	public static void createBullet(Vector2 start, Vector2 target) {
-		Bullet bullet;
-		if (!GameManager.getWorld().isLocked()) {
+		Bullet bullet = new Bullet();
+		bullet.init(start, target);
+		GameManager.getToBeAdded().add(bullet);
+	/*	if (!GameManager.getWorld().isLocked()) {
 			bullet = GameManager.getBullets().obtain();
-			GameManager.getToBeAdded().add(bullet);
 			bullet.init(start, target);
 			unlocked++;
 		} else {
 			bullet = GameManager.getBullets().obtain();
 			bullet.init(start, target);
 			GameManager.getToBeAdded().add(bullet);
-			GameManager.getToBeAdded().add(bullet);
 
 			locked++;
 		}
+	*/
 		// Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " +
 		// unlocked);
 	}
