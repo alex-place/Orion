@@ -1,5 +1,6 @@
 package com.gdxjam.orion.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -63,7 +64,8 @@ public class Bullet extends Entity implements Poolable {
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		if (Math.abs(body.getPosition().dst(start)) > 1) {
+		Gdx.app.log("bullet", "update");
+		if (Math.abs(body.getPosition().dst(start)) > 4) {
 			System.out.println("Destroy me!");
 			GameManager.getToBeDestroyed().add(this);
 		}

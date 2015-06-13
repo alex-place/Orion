@@ -41,29 +41,30 @@ public class WorldGenerator {
 		Sun sun = EntityFactory.createSun();
 		
 		
-		SatteliteParameters p1 = new SatteliteParameters(sun, 2, 1500, 360, 10, 1);
+		SatteliteParameters p1 = new SatteliteParameters(sun, 50, 2400, Float.MAX_VALUE, 10000000, 1);
 		EntityFactory.createSattelite(p1);
 		
-		SatteliteParameters p2 = new SatteliteParameters(sun, 2, -1500, 360, 10, 1);
+		SatteliteParameters p2 = new SatteliteParameters(sun, 50, -2400, 500, 10, 1);
 		EntityFactory.createSattelite(p2);
 		
+		/*
 		int planetsPerSide = (int)(MathUtils.random()*4)+4;
 		float dist = 1500;
 		float radius;
 		for(int i = 0; i < planetsPerSide; i++){
-			int sats = (int)(MathUtils.random()*4);
+			int sats = MathUtils.random(1, 4);
 			
-			dist = dist + (MathUtils.random()*500)+700;
-			radius = (MathUtils.random()*75)+75;
-			SatteliteParameters j = new SatteliteParameters(sun, radius, dist, (MathUtils.random()*500)+10000, 100, 1);
+			dist = dist + MathUtils.random(500, 700);
+			radius = MathUtils.random(75, 150);
+			SatteliteParameters j = new SatteliteParameters(sun, radius, dist, 5000000, Float.MAX_VALUE, 1);
 			Sattelite redPlanet = EntityFactory.createSattelite(j);
 			for(int l = 0; l < sats; l++){
-				SatteliteParameters m = new SatteliteParameters(redPlanet, (MathUtils.random()*50)+50, (MathUtils.random()*50)+radius+100, (MathUtils.random()*500)+10000, 100000, 1);
+				SatteliteParameters m = new SatteliteParameters(redPlanet, MathUtils.random(25, 75), MathUtils.random(1, 50)+radius+100, 900000000, 1, 1);
 				EntityFactory.createSattelite(m);
 			}
 			
-			dist = dist + (MathUtils.random()*500)+700;
-			radius = (MathUtils.random()*75)+75;
+			dist = dist + MathUtils.random(500, 700);
+			radius = MathUtils.random(75, 150);
 			SatteliteParameters k = new SatteliteParameters(sun, radius, -dist, (MathUtils.random()*500)+10000, 100, 1);
 			Sattelite bluePlanet = EntityFactory.createSattelite(k);
 			for(int l = 0; l < sats; l++){
@@ -73,7 +74,7 @@ public class WorldGenerator {
 		}
 
 
-		/* Create a planet and its moon !VERY SENSITIVE RELATIONSHIP!
+		Create a planet and its moon !VERY SENSITIVE RELATIONSHIP!
 		SatteliteParameters p1 = new SatteliteParameters(sun, 2, 30, 360, 10, 1);
 		Sattelite planet1 = EntityFactory.createSattelite(p1);
 

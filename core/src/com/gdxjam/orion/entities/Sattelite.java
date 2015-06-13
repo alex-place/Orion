@@ -42,7 +42,7 @@ public class Sattelite extends Entity {
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
 		body.setUserData(this);
-		//body.setLinearDamping(0.001f);
+		body.setLinearDamping(0.001f);
 
 		RevoluteJoint j = new RevoluteJoint(p.parent.getBody(), body, true);
 		j.setAnchorA(0, 0);

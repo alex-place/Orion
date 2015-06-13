@@ -35,11 +35,13 @@ public class EntityFactory {
 		Bullet bullet;
 		if (!GameManager.getWorld().isLocked()) {
 			bullet = GameManager.getBullets().obtain();
+			GameManager.getToBeAdded().add(bullet);
 			bullet.init(start, target);
 			unlocked++;
 		} else {
 			bullet = GameManager.getBullets().obtain();
 			bullet.init(start, target);
+			GameManager.getToBeAdded().add(bullet);
 			GameManager.getToBeAdded().add(bullet);
 
 			locked++;
