@@ -49,8 +49,11 @@ public class WorldGenerator {
 		SatteliteParameters1 p2 = new SatteliteParameters1(planet, 25.0f, 500.0f, 0.05f, 0);
 		Sattelite1 planet2 = EntityFactory.createSattelite(p2);
 		
-		SatteliteParameters1 p3 = new SatteliteParameters1(planet2, 12.0f, 500.0f, 0.07f, 0);
+		SatteliteParameters1 p3 = new SatteliteParameters1(planet2, 12.0f, 250.0f, 0.07f, 0);
 		Sattelite1 planet3 = EntityFactory.createSattelite(p3);
+		
+		SatteliteParameters1 p4 = new SatteliteParameters1(planet3, 6, 125.0f, 0.1f, 0);
+		Sattelite1 planet4 = EntityFactory.createSattelite(p4);
 		
 		
 		/*

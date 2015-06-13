@@ -2,7 +2,9 @@ package com.gdxjam.orion.controls;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.utils.EntityFactory;
 
@@ -59,7 +61,8 @@ public class CorvetteControlBehavior implements ControlBehavior {
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
 		if (attackCounter >= attackSpeed) {
-			EntityFactory.createBullet(player.getBody().getPosition(), position);
+			float angle = MathUtils.atan2(player.getBody().getPosition().y, player.getBody().getPosition().x) - MathUtils.atan2(position.y, position.x);
+			EntityFactory.createBulletK(angle, player.getBody().getPosition());
 			attackCounter = 0;
 		} else {
 			attackCounter++;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Bullet;
+import com.gdxjam.orion.entities.BulletK;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Sattelite;
 import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
@@ -51,6 +52,10 @@ public class EntityFactory {
 	*/
 		// Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " +
 		// unlocked);
+	}
+	public static void createBulletK(float angle, Vector2 start) {
+		BulletK bullet = new BulletK(angle, start);
+		GameManager.getToBeAdded().add(bullet);
 	}
 
 	public static Sun createSun() {
