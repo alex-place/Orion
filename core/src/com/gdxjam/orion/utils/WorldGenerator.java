@@ -3,6 +3,8 @@ package com.gdxjam.orion.utils;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.entities.Sattelite;
+import com.gdxjam.orion.entities.Sattelite1;
+import com.gdxjam.orion.entities.Sattelite1.SatteliteParameters1;
 import com.gdxjam.orion.entities.Sun;
 import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
 
@@ -41,11 +43,15 @@ public class WorldGenerator {
 		Sun sun = EntityFactory.createSun();
 		
 		
-		SatteliteParameters p1 = new SatteliteParameters(sun, 50, 2400, Float.MAX_VALUE, 10000000, 1);
-		EntityFactory.createSattelite(p1);
+		SatteliteParameters1 p1 = new SatteliteParameters1(sun, 100.0f, 1500.0f, 0.01f, 0);
+		Sattelite1 planet = EntityFactory.createSattelite(p1);
 		
-		SatteliteParameters p2 = new SatteliteParameters(sun, 50, -2400, 500, 10, 1);
-		EntityFactory.createSattelite(p2);
+		SatteliteParameters1 p2 = new SatteliteParameters1(planet, 25.0f, 500.0f, 0.05f, 0);
+		Sattelite1 planet2 = EntityFactory.createSattelite(p2);
+		
+		SatteliteParameters1 p3 = new SatteliteParameters1(planet2, 12.0f, 500.0f, 0.07f, 0);
+		Sattelite1 planet3 = EntityFactory.createSattelite(p3);
+		
 		
 		/*
 		int planetsPerSide = (int)(MathUtils.random()*4)+4;

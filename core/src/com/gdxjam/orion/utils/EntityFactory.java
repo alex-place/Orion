@@ -10,6 +10,8 @@ import com.gdxjam.orion.entities.Bullet;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Sattelite;
 import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
+import com.gdxjam.orion.entities.Sattelite1;
+import com.gdxjam.orion.entities.Sattelite1.SatteliteParameters1;
 import com.gdxjam.orion.entities.Sun;
 
 public class EntityFactory {
@@ -66,6 +68,11 @@ public class EntityFactory {
 	public static Sattelite createSattelite(SatteliteParameters p) {
 		Sattelite planet = new Sattelite(p);
 		GameManager.getActive().add(planet);
+		return planet;
+	}
+	public static Sattelite1 createSattelite(SatteliteParameters1 p) {
+		Sattelite1 planet = new Sattelite1(p);
+		GameManager.getToBeAdded().add(planet);;
 		return planet;
 	}
 

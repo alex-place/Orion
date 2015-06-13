@@ -1,5 +1,8 @@
 package com.gdxjam.orion.entities;
 
+import javafx.scene.Parent;
+
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -12,50 +15,54 @@ import com.gdxjam.orion.utils.RevoluteJoint;
 public class Sattelite1 extends Entity {
 
 	private Body body;
+	SatteliteParameters1 p;
 
-	public Sattelite1(SatteliteParameters p) {
+	public Sattelite1(SatteliteParameters1 p) {
+		this.p = p;
 		init(p);
 	}
 
 	public Sattelite1(float distance, float radius, Entity parent) {
-		SatteliteParameters p = new SatteliteParameters();
+		SatteliteParameters1 p = new SatteliteParameters1();
 		p.distanceFromOrigin = 5;
 		p.radius = radius;
 		p.parent = parent;
-		p.speed = 360;
-		p.torque = 10;
 		init(p);
 	}
 
-	public void init(SatteliteParameters p) {
+	public void init(SatteliteParameters1 p) {
 		CircleShape circle = new CircleShape();
 		circle.setRadius(p.radius);
 
 		FixtureDef fixture = new FixtureDef();
 		fixture.shape = circle;
-		fixture.density = p.density;
 		fixture.isSensor = true;
 
 		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
+		bodyDef.type = BodyType.KinematicBody;
 		bodyDef.position.set(p.parent.getBody().getPosition().x + p.distanceFromOrigin, p.parent.getBody().getPosition().y);
 		body = GameManager.getWorld().createBody(bodyDef);
 		body.createFixture(fixture);
 		body.setUserData(this);
-		body.setLinearDamping(0.001f);
 
-		RevoluteJoint j = new RevoluteJoint(p.parent.getBody(), body, true);
-		j.setAnchorA(0, 0);
-		j.setAnchorB(p.distanceFromOrigin, 0);
-		j.setMotor(p.speed, p.torque);
-
-		Joint joint = j.createJoint(GameManager.getWorld());
 
 	}
 
 	@Override
 	public void update(float delta) {
 		super.update(delta);
+		if(p.angle > MathUtils.PI*2){p.angle = 0;}
+		   // rotatedX = Math.cos(angle) * (point.x - center.x) - Math.sin(angle) * (point.y-center.y) + center.x;
+		float rotatedX = MathUtils.cos(p.angle) * ((p.parent.getBody().getPosition().x + p.distanceFromOrigin) - p.parent.getBody().getPosition().x) - 
+						 MathUtils.sin(p.angle) * ((p.parent.getBody().getPosition().y + p.distanceFromOrigin) - p.parent.getBody().getPosition().y) + p.parent.getBody().getPosition().x;
+		 
+		   // rotatedY = Math.sin(angle) * (point.x - center.x) + Math.cos(angle) * (point.y - center.y) + center.y;
+		float rotatedY = MathUtils.sin(p.angle) * ((p.parent.getBody().getPosition().x + p.distanceFromOrigin) - p.parent.getBody().getPosition().x) +
+				         MathUtils.cos(p.angle) * ((p.parent.getBody().getPosition().y + p.distanceFromOrigin) - p.parent.getBody().getPosition().y) + p.parent.getBody().getPosition().y;
+		
+		body.setTransform(rotatedX, rotatedY, 0);
+		p.angle += p.angelStep;
+		
 	}
 
 	public Body getBody() {
@@ -66,25 +73,23 @@ public class Sattelite1 extends Entity {
 		this.body = body;
 	}
 
-	public static class SatteliteParameters {
+	public static class SatteliteParameters1 {
 		public Entity parent;
 
 		public float radius;
 		public float distanceFromOrigin;
-		public float speed;
-		public float torque;
-		public float density;
+		public float angelStep;
+		public float angle;
 
-		public SatteliteParameters() {
+		public SatteliteParameters1() {
 		}
 
-		public SatteliteParameters(Entity parent, float radius, float distanceFromOrigin, float speed, float torque, float density) {
+		public SatteliteParameters1(Entity parent, float radius, float distanceFromOrigin, float angelStep, float angle) {
 			this.parent = parent;
 			this.radius = radius;
 			this.distanceFromOrigin = distanceFromOrigin;
-			this.speed = speed;
-			this.torque = torque;
-			this.density = density;
+			this.angelStep = angelStep;
+			this.angle = angle;
 		}
 
 	}
