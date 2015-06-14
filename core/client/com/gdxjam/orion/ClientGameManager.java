@@ -14,17 +14,12 @@ public class ClientGameManager {
 	private static HashMap<Integer, ClientPlayer> players = new HashMap<Integer, ClientPlayer>();
 	private static Array bullets = new Array();
 
-	// private static InputMultiplexer input = new InputMultiplexer();
-
 	private ClientGameManager() {
 	}
 
 	public static void init(Game game) {
 		ClientGameManager.game = game;
-		// Assets.load();
-		// while (!Assets.getManager().update()) {
-		// Assets.create();
-		// }
+
 	}
 
 	public static ClientPlayer getPlayer() {
