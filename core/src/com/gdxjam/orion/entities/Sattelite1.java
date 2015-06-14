@@ -22,14 +22,6 @@ public class Sattelite1 extends Entity {
 		init(p);
 	}
 
-	public Sattelite1(float distance, float radius, Entity parent) {
-		SatteliteParameters1 p = new SatteliteParameters1();
-		p.distanceFromOrigin = 5;
-		p.radius = radius;
-		p.parent = parent;
-		init(p);
-	}
-
 	public void init(SatteliteParameters1 p) {
 		CircleShape circle = new CircleShape();
 		circle.setRadius(p.radius);
@@ -52,15 +44,16 @@ public class Sattelite1 extends Entity {
 	public void update(float delta) {
 		super.update(delta);
 		if(p.angle > MathUtils.PI*2){p.angle = 0;}
-		   // rotatedX = Math.cos(angle) * (point.x - center.x) - Math.sin(angle) * (point.y-center.y) + center.x;
-		float rotatedX = MathUtils.cos(p.angle) * ((p.parent.getBody().getPosition().x + p.distanceFromOrigin) - p.parent.getBody().getPosition().x) - 
-						 MathUtils.sin(p.angle) * ((p.parent.getBody().getPosition().y + p.distanceFromOrigin) - p.parent.getBody().getPosition().y) + p.parent.getBody().getPosition().x;
-		 
-		   // rotatedY = Math.sin(angle) * (point.x - center.x) + Math.cos(angle) * (point.y - center.y) + center.y;
-		float rotatedY = MathUtils.sin(p.angle) * ((p.parent.getBody().getPosition().x + p.distanceFromOrigin) - p.parent.getBody().getPosition().x) +
-				         MathUtils.cos(p.angle) * ((p.parent.getBody().getPosition().y + p.distanceFromOrigin) - p.parent.getBody().getPosition().y) + p.parent.getBody().getPosition().y;
+		if(p.angle < 0){p.angle = p.angle + MathUtils.PI*2;}
+
 		
-		body.setTransform(rotatedX, rotatedY, 0);
+		body.setTransform(
+				MathUtils.cos(p.angle) * ((p.parent.getBody().getPosition().x + p.distanceFromOrigin) - p.parent.getBody().getPosition().x) - 
+				 MathUtils.sin(p.angle) * ((p.parent.getBody().getPosition().y + p.distanceFromOrigin) - p.parent.getBody().getPosition().y) + p.parent.getBody().getPosition().x,
+				 
+				 MathUtils.sin(p.angle) * ((p.parent.getBody().getPosition().x + p.distanceFromOrigin) - p.parent.getBody().getPosition().x) +
+		         MathUtils.cos(p.angle) * ((p.parent.getBody().getPosition().y + p.distanceFromOrigin) - p.parent.getBody().getPosition().y) + p.parent.getBody().getPosition().y, 0);
+		
 		p.angle += p.angelStep;
 		
 	}
@@ -80,9 +73,6 @@ public class Sattelite1 extends Entity {
 		public float distanceFromOrigin;
 		public float angelStep;
 		public float angle;
-
-		public SatteliteParameters1() {
-		}
 
 		public SatteliteParameters1(Entity parent, float radius, float distanceFromOrigin, float angelStep, float angle) {
 			this.parent = parent;

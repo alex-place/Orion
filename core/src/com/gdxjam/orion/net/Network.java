@@ -31,8 +31,11 @@ public class Network {
 		kryo.register(Object[].class);
 		kryo.register(ClientPlayer.class);
 		kryo.register(ShipType.class);
+		kryo.register(ReplyAddSattelite.class);
+		kryo.register(UpdateSattelite.class);
 		kryo.register(HashMap.class);
 		kryo.register(RequestClick.class);
+		
 
 	}
 
@@ -61,6 +64,14 @@ public class Network {
 		public int id;
 	}
 
+	public static class ReplyAddSattelite{
+		public Vector2 position;
+		public float size;
+	}
+	public static class UpdateSattelite{
+		public Vector2 position;
+	}
+	
 	public static class RequestUpdateKey {
 		public int key;
 	}

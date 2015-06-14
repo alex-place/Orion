@@ -76,6 +76,13 @@ public class ClientGameScreen implements Screen {
 		client.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
+		for (ClientPlayer player : ClientGameManager.getPlayers().values()) {
+			if (player.id == ClientGameManager.getPlayer().id){
+				ClientGameManager.getPlayer().position = player.position;
+			}
+			
+		}
+				
 		batch.begin();
 
 		for (ClientPlayer player : ClientGameManager.getPlayers().values()) {
@@ -97,7 +104,6 @@ public class ClientGameScreen implements Screen {
 			// player.position.y, 1, 1);
 			batch.setColor(0, 0, 0, 1);
 		}
-
 		batch.end();
 		// fps.log();
 

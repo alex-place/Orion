@@ -14,6 +14,8 @@ import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
 import com.gdxjam.orion.entities.Sattelite1;
 import com.gdxjam.orion.entities.Sattelite1.SatteliteParameters1;
 import com.gdxjam.orion.entities.Sun;
+import com.gdxjam.orion.net.Network;
+import com.gdxjam.orion.net.Network.ReplyAddSattelite;
 
 public class EntityFactory {
 
@@ -58,7 +60,9 @@ public class EntityFactory {
 	}
 
 	public static Sun createSun() {
-		return new Sun(new Vector2(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
+		Sun sun = new Sun(new Vector2(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2));
+		GameManager.getToBeAdded().add(sun);
+		return sun;
 
 	}
 
@@ -76,7 +80,7 @@ public class EntityFactory {
 	}
 	public static Sattelite1 createSattelite(SatteliteParameters1 p) {
 		Sattelite1 planet = new Sattelite1(p);
-		GameManager.getToBeAdded().add(planet);;
+		GameManager.getToBeAdded().add(planet);
 		return planet;
 	}
 

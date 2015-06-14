@@ -19,7 +19,7 @@ public class Sun extends Entity {
 	public void init(Vector2 position) {
 
 		CircleShape circle = new CircleShape();
-		circle.setRadius(1000);
+		circle.setRadius(5000);
 
 		fixture = new FixtureDef();
 		fixture.shape = circle;

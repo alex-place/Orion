@@ -42,18 +42,30 @@ public class WorldGenerator {
 		// The sun has a radius of 10
 		Sun sun = EntityFactory.createSun();
 		
-		
-		SatteliteParameters1 p1 = new SatteliteParameters1(sun, 100.0f, 1500.0f, 0.01f, 0);
-		Sattelite1 planet = EntityFactory.createSattelite(p1);
-		
-		SatteliteParameters1 p2 = new SatteliteParameters1(planet, 25.0f, 500.0f, 0.05f, 0);
-		Sattelite1 planet2 = EntityFactory.createSattelite(p2);
-		
-		SatteliteParameters1 p3 = new SatteliteParameters1(planet2, 12.0f, 250.0f, 0.07f, 0);
-		Sattelite1 planet3 = EntityFactory.createSattelite(p3);
-		
-		SatteliteParameters1 p4 = new SatteliteParameters1(planet3, 6, 125.0f, 0.1f, 0);
-		Sattelite1 planet4 = EntityFactory.createSattelite(p4);
+		int planetsPerSide = 8;
+		float radius;
+		float dist = 5000;
+		float angelStep;
+		float startAngle;
+		int numberOfMoons;
+		float moonDist;
+		for(int i = 0; i < planetsPerSide; i++){
+			radius = MathUtils.random(300, 750);
+			dist += MathUtils.random(radius+4000, 5000);
+			angelStep = MathUtils.random(0.01f, -0.01f)+0.0001f;
+			startAngle = MathUtils.random(0.0f, MathUtils.PI*2);
+			numberOfMoons = MathUtils.random(0, 4);
+			moonDist = radius;
+			SatteliteParameters1 p = new SatteliteParameters1(sun, radius, dist, angelStep, startAngle);
+			Sattelite1 planet = EntityFactory.createSattelite(p);
+			for(int j = 0; j < numberOfMoons; j++){
+				moonDist += MathUtils.random(100, 150);
+				SatteliteParameters1 m = new SatteliteParameters1(planet, 50, moonDist, p.angelStep+0.02f, (MathUtils.PI/2)*j);
+				Sattelite1 moon = EntityFactory.createSattelite(m);
+			}
+			
+			
+		}
 		
 		
 		/*
