@@ -11,22 +11,6 @@ public class Player extends Entity {
 	private Ship ship;
 	private PlayerAttributes attributes;
 
-	// public Player(Vector3 position, int id, ControlBehavior behavior) {
-	// init(position, id, behavior);
-	// }
-	//
-	// public Player(int x, int y, int rotation, int id, ControlBehavior
-	// behavior) {
-	// this(new Vector3(x, y, rotation), id, behavior);
-	// }
-
-	// public void init(Vector3 position, int id, ControlBehavior behavior) {
-	// attributes = new PlayerAttributes(id);
-	// ship = new Ship(this, position);
-	// init(attributes, ship);
-	//
-	// }
-
 	public Player(PlayerAttributes attributes, Ship ship) {
 		init(attributes, ship);
 	}

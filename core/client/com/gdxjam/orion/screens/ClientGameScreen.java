@@ -126,6 +126,7 @@ public class ClientGameScreen implements Screen {
 			sendKey(Keys.D);
 
 		}
+
 		handleMouseMove();
 		handleMouseClick();
 	}

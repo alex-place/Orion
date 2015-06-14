@@ -2,6 +2,8 @@ package com.gdxjam.orion.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
@@ -22,7 +24,16 @@ public class DevInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
+
+		switch (keycode) {
+		case Keys.SPACE:
+			camera.position.set(0, 0, 0);
+			camera.update();
+			break;
+		default:
+			break;
+		}
+
 		return false;
 	}
 
@@ -34,10 +45,11 @@ public class DevInputProcessor implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		Vector3 mos = camera.unproject(new Vector3(screenX, screenY, 0));
-		camera.position.set(mos);
-		camera.update();
-
+		if (button == Buttons.LEFT) {
+			Vector3 mos = camera.unproject(new Vector3(screenX, screenY, 0));
+			camera.position.set(mos);
+			camera.update();
+		}
 		return false;
 	}
 
@@ -63,7 +75,7 @@ public class DevInputProcessor implements InputProcessor {
 	public boolean scrolled(int amount) {
 		// Zoom out
 
-		int zoomScale = 100;
+		int zoomScale = 50;
 
 		if (amount > 0) {
 			zoom += zoomScale;

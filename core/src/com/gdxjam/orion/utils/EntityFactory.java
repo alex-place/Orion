@@ -31,6 +31,7 @@ public class EntityFactory {
 
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.StaticBody;
+		bodyDef.awake = false;
 		bodyDef.position.set(start);
 
 		GameManager.getWorld().createBody(bodyDef).createFixture(edge, 1.0f);
@@ -40,21 +41,18 @@ public class EntityFactory {
 		Bullet bullet = new Bullet();
 		bullet.init(start, target);
 		GameManager.getToBeAdded().add(bullet);
-	/*	if (!GameManager.getWorld().isLocked()) {
-			bullet = GameManager.getBullets().obtain();
-			bullet.init(start, target);
-			unlocked++;
-		} else {
-			bullet = GameManager.getBullets().obtain();
-			bullet.init(start, target);
-			GameManager.getToBeAdded().add(bullet);
-
-			locked++;
-		}
-	*/
+		/*
+		 * if (!GameManager.getWorld().isLocked()) { bullet =
+		 * GameManager.getBullets().obtain(); bullet.init(start, target);
+		 * unlocked++; } else { bullet = GameManager.getBullets().obtain();
+		 * bullet.init(start, target); GameManager.getToBeAdded().add(bullet);
+		 * 
+		 * locked++; }
+		 */
 		// Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " +
 		// unlocked);
 	}
+
 	public static void createBulletK(float angle, Vector2 start) {
 		BulletK bullet = new BulletK(angle, start);
 	}
@@ -78,6 +76,7 @@ public class EntityFactory {
 		GameManager.getActive().add(planet);
 		return planet;
 	}
+
 	public static Sattelite1 createSattelite(SatteliteParameters1 p) {
 		Sattelite1 planet = new Sattelite1(p);
 		GameManager.getToBeAdded().add(planet);
