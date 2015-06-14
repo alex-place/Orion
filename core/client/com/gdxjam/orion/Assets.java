@@ -34,6 +34,7 @@ public class Assets implements Disposable {
 		getManager(); // Insure the manager exists
 		manager.load(TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
 		manager.load(SKIN, Skin.class);
+		manager.finishLoading();
 		loaded = true;
 	}
 

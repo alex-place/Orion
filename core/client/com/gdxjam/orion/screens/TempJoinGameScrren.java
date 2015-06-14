@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.gdxjam.orion.Assets;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.net.Network;
 
@@ -26,6 +27,12 @@ public class TempJoinGameScrren implements Screen {
 
 	@Override
 	public void show() {
+
+		Assets.load();
+		Assets.create();
+
+		Assets.getManager().finishLoading();
+
 		buttonPlay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {

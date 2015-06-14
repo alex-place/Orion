@@ -26,16 +26,6 @@ public class WorldGenerator {
 		EntityFactory.createBoundry(new Vector2(0, p.height / 2), new Vector2(p.width, p.height / 2));
 		EntityFactory.createBoundry(new Vector2(0, 0), new Vector2(p.width, 0));
 
-		// EntityFactory.createBoundry(new Vector2(0, 0), new Vector2(0,
-		// p.height));
-		// EntityFactory.createBoundry(new Vector2(p.width, 0), new
-		// Vector2(p.width, p.height));
-		//
-		// EntityFactory.createBoundry(new Vector2(0, p.width), new
-		// Vector2(p.height, p.width));
-		// EntityFactory.createBoundry(new Vector2(0, 0), new Vector2(p.height,
-		// 0));
-
 	}
 
 	public void createSolarSystem() {

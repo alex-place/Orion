@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.gdxjam.orion.Assets;
 import com.gdxjam.orion.ClientGameManager;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.input.DefaultInputHandler;
@@ -22,13 +23,12 @@ import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
-import com.gdxjam.orion.utils.Constants;
 
 public class ClientGameScreen implements Screen {
 
 	private GameClient client;
 
-	private OrthographicCamera camera;
+	public OrthographicCamera cam;
 	private SpriteBatch batch;
 
 	private Texture green;
@@ -48,16 +48,12 @@ public class ClientGameScreen implements Screen {
 			e.printStackTrace();
 		}
 
-		camera = new OrthographicCamera(Constants.CAMERA_WIDTH, Constants.CAMERA_HEIGHT);
-		camera.position.set(5, 5, 0);
-		camera.update();
+		cam = new OrthographicCamera(10, 10);
+		cam.position.set(5, 5, 0);
+		cam.update();
 		batch = new SpriteBatch();
 
-		green = new Texture(Gdx.files.internal("green.png"));
-
-		DefaultInputHandler input = new DefaultInputHandler(client, camera);
-
-		Gdx.input.setInputProcessor(input);
+		// green = new Texture(Gdx.files.internal("green.png"));
 
 		fps = new FPSLogger();
 
@@ -66,7 +62,11 @@ public class ClientGameScreen implements Screen {
 		c = randomColor();
 		d = randomColor();
 
-		batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(cam.combined);
+
+		DefaultInputHandler input = new DefaultInputHandler(client, cam);
+
+		Gdx.input.setInputProcessor(input);
 
 	}
 
@@ -74,15 +74,14 @@ public class ClientGameScreen implements Screen {
 	public void render(float delta) {
 		handleInput();
 		client.update();
+		batch.setProjectionMatrix(cam.combined);
+
+		ClientPlayer id = ClientGameManager.getPlayers().get(ClientGameManager.getPlayer().id);
+		cam.position.set(id.position.x, id.position.y, 0);
+		cam.update();
+
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
-		for (ClientPlayer player : ClientGameManager.getPlayers().values()) {
-			if (player.id == ClientGameManager.getPlayer().id){
-				ClientGameManager.getPlayer().position = player.position;
-			}
-			
-		}
-				
 		batch.begin();
 
 		for (ClientPlayer player : ClientGameManager.getPlayers().values()) {
@@ -99,13 +98,10 @@ public class ClientGameScreen implements Screen {
 				batch.setColor(d);
 			}
 
-			batch.draw(green, player.position.x, player.position.y, 1, 1);
-			// batch.draw(Assets.square.reg, player.position.x,
-			// player.position.y, 1, 1);
+			batch.draw(Assets.square.reg, player.position.x, player.position.y, 1, 1);
 			batch.setColor(0, 0, 0, 1);
 		}
 		batch.end();
-		// fps.log();
 
 	}
 
@@ -151,7 +147,7 @@ public class ClientGameScreen implements Screen {
 			// Mouse didn't move
 		} else {
 			updateMouse = new RequestUpdateMouse();
-			mouse = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			mouse = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 			updateMouse.mousePos = new Vector2(mouse.x, mouse.y);
 			mouse = null;
 			client.sendTCP(updateMouse);
@@ -175,7 +171,7 @@ public class ClientGameScreen implements Screen {
 			requestClick.right = true;
 		}
 
-		mouse = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+		mouse = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 		requestClick.mousePos = new Vector2(mouse.x, mouse.y);
 		mouse = null;
 		client.sendTCP(requestClick);

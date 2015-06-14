@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.utils.Array;
 import com.gdxjam.orion.entities.ClientPlayer;
 
 public class ClientGameManager {
@@ -11,6 +12,7 @@ public class ClientGameManager {
 
 	private static ClientPlayer player;
 	private static HashMap<Integer, ClientPlayer> players = new HashMap<Integer, ClientPlayer>();
+	private static Array bullets = new Array();
 
 	// private static InputMultiplexer input = new InputMultiplexer();
 

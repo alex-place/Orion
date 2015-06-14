@@ -1,4 +1,4 @@
-package com.gdxjam.orion;
+package com.gdxjam.orion.screens;
 
 import com.badlogic.gdx.Screen;
 
