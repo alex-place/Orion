@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.gdxjam.orion.GameManager;
-import com.gdxjam.orion.entities.Bullet;
 import com.gdxjam.orion.entities.BulletK;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Sattelite;
@@ -14,8 +13,6 @@ import com.gdxjam.orion.entities.Sattelite.SatteliteParameters;
 import com.gdxjam.orion.entities.Sattelite1;
 import com.gdxjam.orion.entities.Sattelite1.SatteliteParameters1;
 import com.gdxjam.orion.entities.Sun;
-import com.gdxjam.orion.net.Network;
-import com.gdxjam.orion.net.Network.ReplyAddSattelite;
 
 public class EntityFactory {
 
@@ -35,22 +32,6 @@ public class EntityFactory {
 		bodyDef.position.set(start);
 
 		GameManager.getWorld().createBody(bodyDef).createFixture(edge, 1.0f);
-	}
-
-	public static void createBullet(Vector2 start, Vector2 target) {
-		Bullet bullet = new Bullet();
-		bullet.init(start, target);
-		GameManager.getToBeAdded().add(bullet);
-		/*
-		 * if (!GameManager.getWorld().isLocked()) { bullet =
-		 * GameManager.getBullets().obtain(); bullet.init(start, target);
-		 * unlocked++; } else { bullet = GameManager.getBullets().obtain();
-		 * bullet.init(start, target); GameManager.getToBeAdded().add(bullet);
-		 * 
-		 * locked++; }
-		 */
-		// Gdx.app.log("Is it locking?", " locked: " + locked + " unlocked: " +
-		// unlocked);
 	}
 
 	public static void createBulletK(float angle, Vector2 start) {

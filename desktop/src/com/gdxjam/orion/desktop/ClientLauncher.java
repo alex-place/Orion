@@ -27,6 +27,7 @@ public class ClientLauncher {
 		config.width = Constants.SCREEN_WIDTH;
 		config.height = Constants.SCREEN_HEIGHT;
 		config.vSyncEnabled = LauncherConstants.VSYNC;
+		config.useGL30 = true;
 		new LwjglApplication(new ClientMain(), config);
 	}
 }

@@ -9,7 +9,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import com.gdxjam.orion.entities.Bullet;
+import com.gdxjam.orion.entities.BulletK;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Player;
 
@@ -21,7 +21,7 @@ public class GameManager {
 	private static HashMap<Integer, Player> players = new HashMap<Integer, Player>();
 	private static World world;
 
-	private static Pool<Bullet> bullets = Pools.get(Bullet.class, 1000000);
+	private static Pool<BulletK> bullets = Pools.get(BulletK.class, 1000000);
 
 	private static Array<Entity> toBeAdded = new Array<Entity>();
 	private static Array<Entity> active = new Array<Entity>();
@@ -44,11 +44,11 @@ public class GameManager {
 		DEFAULT, FIGHTER, CRUISER, CORVETTE;
 	}
 
-	public static Pool<Bullet> getBullets() {
+	public static Pool<BulletK> getBullets() {
 		return bullets;
 	}
 
-	public static void addEntity(BodyDef bodyDef, FixtureDef fixture, Vector2 angle, Bullet bullet) {
+	public static void addEntity(BodyDef bodyDef, FixtureDef fixture, Vector2 angle, BulletK bullet) {
 		// TODO Auto-generated method stub
 
 	}
