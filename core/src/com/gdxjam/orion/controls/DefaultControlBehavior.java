@@ -32,23 +32,27 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(0, speed * delta), true);
+		// player.getBody().applyForceToCenter(new Vector2(0, speed * delta),
+		// true);
 
 	}
 
 	@Override
 	public void reverse(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(0, -speed * delta), true);
+		// player.getBody().applyForceToCenter(new Vector2(0, -speed * delta),
+		// true);
 	}
 
 	@Override
 	public void left(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0), true);
+		// player.getBody().applyForceToCenter(new Vector2(-speed * delta, 0),
+		// true);
 	}
 
 	@Override
 	public void right(float delta) {
-		player.getBody().applyForceToCenter(new Vector2(speed * delta, 0), true);
+		// player.getBody().applyForceToCenter(new Vector2(speed * delta, 0),
+		// true);
 	}
 
 	@Override
@@ -60,8 +64,9 @@ public class DefaultControlBehavior implements ControlBehavior {
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
 		if (attackCounter >= attackSpeed) {
-			float angle = MathUtils.atan2(position.y, position.x) - MathUtils.atan2(player.getBody().getPosition().y, player.getBody().getPosition().x);
-			EntityFactory.createBulletK(angle, player.getBody().getPosition());
+
+			// Create bullet
+
 			attackCounter = 0;
 		} else {
 			attackCounter++;

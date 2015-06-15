@@ -14,11 +14,9 @@ import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.CorvetteControlBehavior;
-import com.gdxjam.orion.controls.DefaultControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.PlayerAttributes;
-import com.gdxjam.orion.entities.ships.Ship;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
@@ -26,6 +24,7 @@ import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
 import com.gdxjam.orion.utils.Constants;
+import com.gdxjam.orion.utils.EntityFactory;
 
 public class GameServer {
 	private Server server;
@@ -73,7 +72,7 @@ public class GameServer {
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
-					Player player = new Player(a, new Ship(request.position, behavior));
+					Player player = new Player(a, EntityFactory.createShip(request.position.x, request.position.y, request.position.z, behavior));
 
 					// Player player = new Player(((RequestAddPlayer)
 					// message).position, c.getID(), behavior);
@@ -113,7 +112,7 @@ public class GameServer {
 
 			public void disconnected(Connection c) {
 				Player player = GameManager.getPlayers().get(c.getID());
-				GameManager.getWorld().destroyBody(player.getBody());
+				GameManager.getPlayers().remove(player);
 				player = null;
 				c.close();
 
@@ -188,8 +187,8 @@ public class GameServer {
 	}
 
 	public ClientPlayer convertToClient(Player player) {
-		return new ClientPlayer().init(new Vector3(player.getBody().getPosition().x - Constants.PLAYER_HALFWIDTH, player.getBody().getPosition().y
-				- Constants.PLAYER_HALFHEIGHT, 0), player.getID());
+		return new ClientPlayer().init(
+				new Vector3(player.getPosition().x - Constants.PLAYER_HALFWIDTH, player.getPosition().y - Constants.PLAYER_HALFHEIGHT, 0), player.getID());
 
 	}
 }

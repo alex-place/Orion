@@ -8,10 +8,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.math.Circle;
 import com.gdxjam.orion.GameManager;
-import com.gdxjam.orion.entities.Entity;
+import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.input.DevGestureInput;
 import com.gdxjam.orion.input.DevInputProcessor;
 import com.gdxjam.orion.net.GameServer;
@@ -24,12 +26,15 @@ public class GameScreen implements Screen {
 	/**
 	 * Keep in mind this will be discarded on switching to headless
 	 * */
-	Box2DDebugRenderer renderer = new Box2DDebugRenderer();
+	// Box2DDebugRenderer renderer = new Box2DDebugRenderer();
+	ShapeRenderer renderer;
 	OrthographicCamera camera;
 
 	GameServer server;
 
 	FPSLogger fps;
+
+	Circle circle = new Circle(0, 0, 100);
 
 	@Override
 	public void show() {
@@ -45,8 +50,8 @@ public class GameScreen implements Screen {
 		camera.position.set(5, 5, 0);
 		camera.update();
 
-		renderer = new Box2DDebugRenderer();
-		renderer.setDrawVelocities(true);
+		renderer = new ShapeRenderer();
+		renderer.setProjectionMatrix(camera.combined);
 
 		WorldParameters parameters = new WorldParameters();
 		parameters.height = Constants.WORLD_HEIGHT;
@@ -62,49 +67,24 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		updateQ();
-		updateEntities(delta);
 		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
-		renderer.render(GameManager.getWorld(), camera.combined);
-		GameManager.getWorld().step(1 / 60f, 8, 8);
-		fps.log();
 
+		renderer.setProjectionMatrix(camera.combined);
 
-	}
+		renderer.begin(ShapeType.Filled);
+		renderer.setColor(1, 0, 0, 1);
+		// renderer.circle(circle.x, circle.y, circle.radius);
 
-	public void updateQ() {
-		if (!GameManager.getWorld().isLocked()) {
-
-			for (Entity e : GameManager.getToBeDestroyed()) {
-				if (!GameManager.getWorld().isLocked()) {
-					e.destroy();
-					GameManager.getToBeDestroyed().removeValue(e, true);
-				} else {
-					System.out.println("What in the actual fuck?");
-
-				}
-
-			}
-
-			for (Entity e : GameManager.getToBeAdded()) {
-				if (!GameManager.getWorld().isLocked()) {
-					e.add();
-					GameManager.getToBeAdded().removeValue(e, true);
-					GameManager.getActive().add(e);
-				} else {
-					System.out.println("What in the actual fuck?");
-				}
-
-			}
+		for (Player player : GameManager.getPlayers().values()) {
+			renderer.circle(player.getPosition().x, player.getPosition().x, 1);
 		}
-	}
 
-	private void updateEntities(float delta) {
-		for (Entity e : GameManager.getActive()) {
-			e.update(delta);
-		}
+		// Draw good stuff here
+
+		renderer.end();
+
 	}
 
 	@Override

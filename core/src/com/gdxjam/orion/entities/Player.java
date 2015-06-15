@@ -1,7 +1,6 @@
 package com.gdxjam.orion.entities;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.ships.Ship;
@@ -22,10 +21,6 @@ public class Player extends Entity {
 		GameManager.getPlayers().put(getID(), this);
 	}
 
-	public Body getBody() {
-		return ship.getBody();
-	}
-
 	public int getID() {
 		return attributes.getID();
 	}
@@ -35,20 +30,15 @@ public class Player extends Entity {
 	}
 
 	public float getSpeed() {
-		return attributes.getSpeed();
-	}
-
-	public float getOrientation() {
-		return ship.getBody().getAngle();
-
+		return ship.getSpeed();
 	}
 
 	public Vector2 getPosition() {
-		return ship.getBody().getPosition();
+		return ship.getPosition();
 	}
 
 	public float getAngle() {
-		return ship.getBody().getAngle();
+		return ship.getRotation();
 	}
 
 }

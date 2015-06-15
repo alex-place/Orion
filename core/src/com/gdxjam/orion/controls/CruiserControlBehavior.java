@@ -29,33 +29,37 @@ public class CruiserControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		rotation = player.getBody().getAngle();
+		rotation = player.getAngle();
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
 		}
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		// player.getBody().applyForce(new Vector2(direction.x * speed * delta,
+		// direction.y * speed * delta), player.getBody().getWorldCenter(),
+		// true);
 	}
 
 	@Override
 	public void reverse(float delta) {
-		rotation = player.getBody().getAngle();
+		rotation = player.getAngle();
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
 		}
-		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * -speed * delta), player.getBody().getWorldCenter(), true);
+		// player.getBody().applyForce(new Vector2(direction.x * -speed * delta,
+		// direction.y * -speed * delta), player.getBody().getWorldCenter(),
+		// true);
 
 	}
 
 	@Override
 	public void left(float delta) {
-		player.getBody().applyAngularImpulse(-rotationSpeed, true);
+		// player.getBody().applyAngularImpulse(-rotationSpeed, true);
 	}
 
 	@Override
 	public void right(float delta) {
-		player.getBody().applyAngularImpulse(rotationSpeed, true);
+		// player.getBody().applyAngularImpulse(rotationSpeed, true);
 	}
 
 	@Override

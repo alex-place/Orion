@@ -75,23 +75,23 @@ public class DevInputProcessor implements InputProcessor {
 	public boolean scrolled(int amount) {
 		// Zoom out
 
-		int zoomScale = 50;
+		int zoomScale = 1;
+
+		// Zoom in
+		if (amount < 0) {
+			zoom -= zoomScale;
+		} else
 
 		if (amount > 0) {
 			zoom += zoomScale;
 		}
 
-		// Zoom in
-		if (amount < 0) {
-			zoom -= zoomScale;
-		}
+		if (zoom < 1) {
+			zoom = 1;
+		} else
 
-		if (zoom < 0) {
-			zoom = 0;
-		}
-
-		if (zoom > 1000) {
-			zoom = 1000;
+		if (zoom > 50) {
+			zoom = 50;
 		}
 
 		Gdx.app.log("Zoom", zoom + "");

@@ -28,48 +28,58 @@ public class FighterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		rotation = player.getBody().getAngle();
+		rotation = player.getAngle();
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
 		}
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		// player.getBody().applyForce(new Vector2(direction.x * speed * delta,
+		// direction.y * speed * delta), player.getBody().getWorldCenter(),
+		// true);
 	}
 
 	@Override
 	public void reverse(float delta) {
-		rotation = player.getBody().getAngle();
+		// rotation = player.getBody().getAngle();
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
 		}
-		player.getBody().applyForce(new Vector2(direction.x * -speed * delta, direction.y * -speed * delta), player.getBody().getWorldCenter(), true);
+		// player.getBody().applyForce(new Vector2(direction.x * -speed * delta,
+		// direction.y * -speed * delta), player.getBody().getWorldCenter(),
+		// true);
 	}
 
 	@Override
 	public void left(float delta) {
-		rotation = player.getBody().getAngle() + MathUtils.PI / 2;
+		// rotation = player.getBody().getAngle() + MathUtils.PI / 2;
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
 		}
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		// player.getBody().applyForce(new Vector2(direction.x * speed * delta,
+		// direction.y * speed * delta), player.getBody().getWorldCenter(),
+		// true);
 	}
 
 	@Override
 	public void right(float delta) {
-		rotation = player.getBody().getAngle() - MathUtils.PI / 2;
+		// rotation = player.getBody().getAngle() - MathUtils.PI / 2;
 		Vector2 direction = new Vector2(MathUtils.cos(rotation), MathUtils.sin(rotation));
 		if (direction.len() > 0) {
 			direction.nor();
 		}
-		player.getBody().applyForce(new Vector2(direction.x * speed * delta, direction.y * speed * delta), player.getBody().getWorldCenter(), true);
+		// player.getBody().applyForce(new Vector2(direction.x * speed * delta,
+		// direction.y * speed * delta), player.getBody().getWorldCenter(),
+		// true);
 	}
 
 	@Override
 	public void handleMouse(Vector2 position) {
-		float angle = MathUtils.atan2(position.y - player.getBody().getPosition().y, position.x - player.getBody().getPosition().y);
-		player.getBody().setTransform(player.getBody().getPosition(), angle);
+		// float angle = MathUtils.atan2(position.y -
+		// player.getBody().getPosition().y, position.x -
+		// player.getBody().getPosition().y);
+		// player.getBody().setTransform(player.getBody().getPosition(), angle);
 
 	}
 

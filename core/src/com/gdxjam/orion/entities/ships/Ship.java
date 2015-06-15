@@ -1,57 +1,63 @@
 package com.gdxjam.orion.entities.ships;
 
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.gdxjam.orion.GameManager;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.controls.ControlBehavior;
-import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
 
-	private Body body;
-	private FixtureDef fixture;
-	private final float speed = 1.0f;
+	private float speed = 1.0f;
 	private ControlBehavior behavior;
+	private float rotation;
 
-	public Ship(Vector3 position, ControlBehavior behavior) {
+	Polygon shape;
+
+	public Ship(Polygon shape, float rotation, ControlBehavior behavior) {
+		this.shape = shape;
+
+		this.rotation = rotation;
 		this.behavior = behavior;
 
-		PolygonShape rect = new PolygonShape();
-		rect.setAsBox(Constants.PLAYER_HALFWIDTH, Constants.PLAYER_HALFHEIGHT);
-
-		CircleShape circle = new CircleShape();
-		circle.setRadius(Constants.PLAYER_HALFHEIGHT);
-
-		fixture = new FixtureDef();
-		// fixture.shape = rect;
-		fixture.shape = circle;
-		fixture.density = 1;
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.type = BodyType.DynamicBody;
-		bodyDef.position.set(position.x, position.y);
-		bodyDef.angle = position.z;
-		bodyDef.angularDamping = Constants.ANGULAR_DAMPING;
-		bodyDef.linearDamping = Constants.LINEAR_DAMPING;
-		body = GameManager.getWorld().createBody(bodyDef);
-		body.createFixture(fixture);
-		body.setUserData(this);
-
-	}
-
-	public Body getBody() {
-		return body;
 	}
 
 	public float getSpeed() {
 		return speed;
 	}
 
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
 	public ControlBehavior getBehavior() {
 		return behavior;
 	}
+
+	public void setBehavior(ControlBehavior behavior) {
+		this.behavior = behavior;
+	}
+
+	public Vector2 getPosition() {
+		return new Vector2(shape.getX(), shape.getY());
+	}
+
+	public float getX() {
+		return shape.getX();
+	}
+
+	public float getY() {
+		return shape.getY();
+	}
+
+	public void setPosition(Vector2 position) {
+		shape.setPosition(position.x, position.y);
+	}
+
+	public float getRotation() {
+		return rotation;
+	}
+
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+	}
+
 }
