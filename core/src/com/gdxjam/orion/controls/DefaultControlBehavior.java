@@ -32,9 +32,7 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		// player.getBody().applyForceToCenter(new Vector2(0, speed * delta),
-		// true);
-
+		player.setAcceleration(5);
 	}
 
 	@Override

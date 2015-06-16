@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.ships.Ship;
+//import com.gdxjam.orion.entities.ships.pos;
 
 public class Player extends Entity {
 
@@ -24,13 +25,21 @@ public class Player extends Entity {
 	public int getID() {
 		return attributes.getID();
 	}
-
+	public void update(float delta){
+		ship.update(delta);
+	}
+	public void setAngle(float angle){
+		ship.setAngle(angle);
+	}
+	public void setAcceleration(float acceleration){
+		ship.setAcceleration(acceleration);
+	}
 	public ControlBehavior getBehavior() {
 		return ship.getBehavior();
 	}
 
 	public float getSpeed() {
-		return ship.getSpeed();
+		return ship.getVelocity();
 	}
 
 	public Vector2 getPosition() {
@@ -38,7 +47,7 @@ public class Player extends Entity {
 	}
 
 	public float getAngle() {
-		return ship.getRotation();
+		return ship.getAngle();
 	}
 
 }

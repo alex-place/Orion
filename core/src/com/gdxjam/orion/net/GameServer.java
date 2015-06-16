@@ -14,6 +14,7 @@ import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.CorvetteControlBehavior;
+import com.gdxjam.orion.controls.DefaultControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.PlayerAttributes;
@@ -68,7 +69,7 @@ public class GameServer {
 					 * CorvetteControlBehavior(); } else { behavior = new
 					 * DefaultControlBehavior(); }
 					 */
-					behavior = new CorvetteControlBehavior();
+					behavior = new DefaultControlBehavior();
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
