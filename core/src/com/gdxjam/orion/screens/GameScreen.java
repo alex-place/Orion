@@ -70,19 +70,19 @@ public class GameScreen implements Screen {
 		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
-		
+
 		for (Player player : GameManager.getPlayers().values()) {
 			player.update(delta);
 		}
-		
+
 		renderer.setProjectionMatrix(camera.combined);
 
-		renderer.begin(ShapeType.Filled);
+		renderer.begin(ShapeType.Line);
 		renderer.setColor(1, 0, 0, 1);
 		// renderer.circle(circle.x, circle.y, circle.radius);
-		
+
 		for (Player player : GameManager.getPlayers().values()) {
-			renderer.circle(player.getPosition().x, player.getPosition().y, 1);
+			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}
 
 		// Draw good stuff here

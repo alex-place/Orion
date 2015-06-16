@@ -7,18 +7,15 @@ import com.gdxjam.orion.controls.ControlBehavior;
 
 public class Ship {
 
-
 	private float acceleration = 0;
 	private float velocity = 0;
 	private float velocityMax = 100;
 	private float friction = 0;
 	private float damping = 0;
-	private float angle=0;
+	private float angle = 0;
 	private Vector2 position;
 	private ControlBehavior behavior;
-
-
-	Polygon shape;
+	private Polygon shape;
 
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
 		this.shape = shape;
@@ -27,18 +24,17 @@ public class Ship {
 		this.behavior = behavior;
 
 	}
-	
-	public void update(float delta){
-		if(velocity < velocityMax){
+
+	public void update(float delta) {
+		if (velocity < velocityMax) {
 			velocity += acceleration - damping - friction;
-		}
-		else{
+		} else {
 			velocity -= damping + friction;
 		}
 
 		position.x = velocity * MathUtils.cos(angle);
 		position.y = velocity * MathUtils.sin(angle);
-		
+
 	}
 
 	public ControlBehavior getBehavior() {
@@ -73,54 +69,48 @@ public class Ship {
 		this.angle = angle;
 	}
 
-
 	public float getAcceleration() {
 		return acceleration;
 	}
-
 
 	public void setAcceleration(float acceleration) {
 		this.acceleration = acceleration;
 	}
 
-
 	public float getVelocity() {
 		return velocity;
 	}
-
 
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
 	}
 
-
 	public float getVelocityMax() {
 		return velocityMax;
 	}
-
 
 	public void setVelocityMax(float velocityMax) {
 		this.velocityMax = velocityMax;
 	}
 
-
 	public float getFriction() {
 		return friction;
 	}
-
 
 	public void setFriction(float friction) {
 		this.friction = friction;
 	}
 
-
 	public float getDamping() {
 		return damping;
 	}
 
-
 	public void setDamping(float damping) {
 		this.damping = damping;
+	}
+
+	public Polygon getPolygon() {
+		return shape;
 	}
 
 }

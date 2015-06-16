@@ -12,7 +12,7 @@ public class Constants {
 	public static final float PLAYER_HALFHEIGHT = 0.5f;
 	public static final float PLAYER_HALFWIDTH = 0.5f;
 
-	public static final float CAMERA_SCALE = 30;
+	public static final float CAMERA_SCALE = 3;
 	public static final float CAMERA_WIDTH = 16 * CAMERA_SCALE;
 	public static final float CAMERA_HEIGHT = 9 * CAMERA_SCALE;
 
