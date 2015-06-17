@@ -14,9 +14,10 @@ public class Ship {
 	private float friction = 0;
 	
 	private float damping = 0.98f;
-	private float speed = 1f;
+	private float speed = 0.5f;
 	private float angle = 0;
-	private float angleStep = 0.7f;
+	private float angleStep = 0.01f;
+	private Vector2 positionChange;
 	private Vector2 position;
 	private ControlBehavior behavior;
 	private Polygon shape;
@@ -24,6 +25,7 @@ public class Ship {
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
 		this.shape = shape;
 		position = new Vector2(0, 0);
+
 		this.angle = angle;
 		this.behavior = behavior;
 
@@ -31,19 +33,15 @@ public class Ship {
 
 	public void update(float delta) {
 		
-		if(velocity <= velocityMax && velocity >= -velocityMax){
-			velocity += acceleration;
+		if(acceleration != 0){
+			velocity = acceleration;
+			position.x += velocity * MathUtils.cos(angle);
+			position.y += velocity * MathUtils.sin(angle);
 		}
-		if(acceleration == 0){
-			velocity *= damping;
+		else{
+			position.x *= damping;
+			position.y *= damping;
 		}
-		
-
-		velocity -= friction;		
-		velocity *= delta;
-		
-		position.x += velocity * MathUtils.cos(angle);
-		position.y += velocity * MathUtils.sin(angle);
 		
 		if(position.x < 0){
 			position.x = 0;
