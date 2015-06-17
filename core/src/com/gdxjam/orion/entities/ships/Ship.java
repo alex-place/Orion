@@ -9,7 +9,7 @@ public class Ship {
 
 	private float acceleration = 0;
 	private float velocity = 0;
-	private float velocityMax = 25;
+	private float velocityMax = 1;
 	private float friction = 0;
 	private float damping = 0.1f;
 	private float angle = 0;
@@ -26,19 +26,17 @@ public class Ship {
 	}
 
 	public void update(float delta) {
-		if (acceleration != 0) {
-			if(velocity < velocityMax)
-				velocity += acceleration - friction;
-		} 
-		else if(velocity != 0) {
-			velocity -= damping + friction;
-		}
+		velocity += acceleration;
+		if(acceleration == 0){ velocity -=damping;}
 		
-		System.out.println(""+velocity);
-		position.x = velocity * MathUtils.cos(angle);
-		position.y = velocity * MathUtils.sin(angle);
+		position.x += velocity * MathUtils.cos(angle);
+		position.y += velocity * MathUtils.sin(angle);
+
 		
+		shape.setPosition(position.x, position.y);
+		shape.setRotation(angle);
 		acceleration = 0;
+
 	}
 
 	public ControlBehavior getBehavior() {
@@ -85,10 +83,6 @@ public class Ship {
 		return velocity;
 	}
 
-	public void setVelocity(float velocity) {
-		this.velocity = velocity;
-	}
-
 	public float getVelocityMax() {
 		return velocityMax;
 	}
@@ -103,14 +97,6 @@ public class Ship {
 
 	public void setFriction(float friction) {
 		this.friction = friction;
-	}
-
-	public float getDamping() {
-		return damping;
-	}
-
-	public void setDamping(float damping) {
-		this.damping = damping;
 	}
 
 	public Polygon getPolygon() {

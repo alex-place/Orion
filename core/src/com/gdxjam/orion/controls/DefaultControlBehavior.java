@@ -17,7 +17,7 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	private Player player;
 
-	private final float speed = 0.5f;
+	private final float speed = 0.005f;
 
 	private final float attackSpeed = 0;
 
@@ -33,26 +33,22 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.setAngle(MathUtils.PI*0.5f);
-		player.setAcceleration(speed);
+		player.setAcceleration(0.1f);
 	}
 
 	@Override
 	public void reverse(float delta) {
-		player.setAngle(MathUtils.PI*1.5f);
-		player.setAcceleration(-speed);
+		
 	}
 
 	@Override
 	public void left(float delta) {
-		player.setAngle(MathUtils.PI*1f);
-		player.setAcceleration(-speed);
+		player.setAngle(player.getAngle()+0.1f);
 	}
 
 	@Override
 	public void right(float delta) {
-		player.setAngle(MathUtils.PI*0f);
-		player.setAcceleration(speed);
+		player.setAngle(player.getAngle()-0.1f);
 	}
 
 	@Override

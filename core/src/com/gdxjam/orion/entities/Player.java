@@ -29,6 +29,7 @@ public class Player extends Entity {
 	public void update(float delta){
 		ship.update(delta);
 	}
+
 	public void setAngle(float angle){
 		ship.setAngle(angle);
 	}
@@ -42,7 +43,9 @@ public class Player extends Entity {
 	public float getSpeed() {
 		return ship.getVelocity();
 	}
-
+	public void setPosition(Vector2 position){
+		ship.setPosition(position);
+	}
 	public Vector2 getPosition() {
 		return ship.getPosition();
 	}
