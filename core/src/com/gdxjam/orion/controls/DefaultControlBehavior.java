@@ -11,12 +11,13 @@ import com.gdxjam.orion.utils.EntityFactory;
  * These behaviors will define how a ship moves these should not handle client
  * requests (exiting to menu, toggling UI overlays)... these behaviors are
  * handled exclusively on the server
+ * angel are always in radians
  * */
 public class DefaultControlBehavior implements ControlBehavior {
 
 	private Player player;
 
-	private final float speed = 1000;
+	private final float speed = 0.5f;
 
 	private final float attackSpeed = 0;
 
@@ -32,26 +33,26 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.setAngle(270);
-		player.setAcceleration(5);
+		player.setAngle(MathUtils.PI*0.5f);
+		player.setAcceleration(speed);
 	}
 
 	@Override
 	public void reverse(float delta) {
-		player.setAngle(90);
-		player.setAcceleration(5);
+		player.setAngle(MathUtils.PI*1.5f);
+		player.setAcceleration(-speed);
 	}
 
 	@Override
 	public void left(float delta) {
-		player.setAngle(180);
-		player.setAcceleration(5);
+		player.setAngle(MathUtils.PI*1f);
+		player.setAcceleration(-speed);
 	}
 
 	@Override
 	public void right(float delta) {
-		player.setAngle(0);
-		player.setAcceleration(5);
+		player.setAngle(MathUtils.PI*0f);
+		player.setAcceleration(speed);
 	}
 
 	@Override

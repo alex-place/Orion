@@ -9,9 +9,9 @@ public class Ship {
 
 	private float acceleration = 0;
 	private float velocity = 0;
-	private float velocityMax = 100;
+	private float velocityMax = 25;
 	private float friction = 0;
-	private float damping = 0;
+	private float damping = 0.1f;
 	private float angle = 0;
 	private Vector2 position;
 	private ControlBehavior behavior;
@@ -26,15 +26,19 @@ public class Ship {
 	}
 
 	public void update(float delta) {
-		if (velocity < velocityMax) {
-			velocity += acceleration - damping - friction;
-		} else {
+		if (acceleration != 0) {
+			if(velocity < velocityMax)
+				velocity += acceleration - friction;
+		} 
+		else if(velocity != 0) {
 			velocity -= damping + friction;
 		}
-
+		
+		System.out.println(""+velocity);
 		position.x = velocity * MathUtils.cos(angle);
 		position.y = velocity * MathUtils.sin(angle);
-
+		
+		acceleration = 0;
 	}
 
 	public ControlBehavior getBehavior() {
