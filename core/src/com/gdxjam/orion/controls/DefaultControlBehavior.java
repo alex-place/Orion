@@ -33,22 +33,22 @@ public class DefaultControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forward(float delta) {
-		player.setAcceleration(0.1f);
+		player.setAcceleration(player.getSpeed());
 	}
 
 	@Override
 	public void reverse(float delta) {
-		
+		player.setAcceleration(-player.getSpeed());
 	}
 
 	@Override
 	public void left(float delta) {
-		player.setAngle(player.getAngle()+0.1f);
+		player.stepAngelNegtive();
 	}
 
 	@Override
 	public void right(float delta) {
-		player.setAngle(player.getAngle()-0.1f);
+		player.stepAngelPostive();
 	}
 
 	@Override
