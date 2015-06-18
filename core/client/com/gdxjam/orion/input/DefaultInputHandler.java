@@ -31,8 +31,8 @@ public class DefaultInputHandler implements InputProcessor {
 
 		default:
 			RequestUpdateKey update = new RequestUpdateKey();
-			update.key = keycode;
-
+			update.keyDown = keycode;
+			System.out.println("keydown111111111111111");
 			client.sendTCP(update);
 			break;
 		}
@@ -42,7 +42,10 @@ public class DefaultInputHandler implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
+		RequestUpdateKey update = new RequestUpdateKey();
+		update.keyUp = keycode;
+		System.out.println("keyup111111111111111");
+		client.sendTCP(update);
 		return false;
 	}
 

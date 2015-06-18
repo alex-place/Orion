@@ -73,7 +73,8 @@ public class Network {
 	}
 	
 	public static class RequestUpdateKey {
-		public int key;
+		public int keyDown;
+		public int keyUp;
 	}
 
 	public static class RequestUpdateMouse {

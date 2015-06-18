@@ -39,7 +39,9 @@ public class Player extends Entity {
 	public ControlBehavior getBehavior() {
 		return ship.getBehavior();
 	}
-
+	public Ship getShip(){
+		return ship;
+	}
 	public float getSpeed() {
 		return ship.getSpeed();
 	}

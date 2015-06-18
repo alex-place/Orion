@@ -72,7 +72,7 @@ public class ClientGameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		handleInput();
+//		handleInput();
 		client.update();
 		batch.setProjectionMatrix(cam.combined);
 
@@ -108,7 +108,7 @@ public class ClientGameScreen implements Screen {
 	public Color randomColor() {
 		return new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
 	}
-
+/*
 	private void handleInput() {
 
 		if (Gdx.input.isKeyPressed(Keys.W)) {
@@ -135,10 +135,10 @@ public class ClientGameScreen implements Screen {
 
 	public void sendKey(int keycode) {
 		updateKey = new RequestUpdateKey();
-		updateKey.key = keycode;
+		updateKey.keyDown = keycode;
 		client.sendTCP(updateKey);
 	}
-
+*/
 	private RequestUpdateMouse updateMouse;
 
 	public void handleMouseMove() {

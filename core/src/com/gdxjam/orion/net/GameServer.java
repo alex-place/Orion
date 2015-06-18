@@ -13,8 +13,7 @@ import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
-import com.gdxjam.orion.controls.CorvetteControlBehavior;
-import com.gdxjam.orion.controls.DefaultControlBehavior;
+import com.gdxjam.orion.controls.TestControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.PlayerAttributes;
@@ -69,7 +68,7 @@ public class GameServer {
 					 * CorvetteControlBehavior(); } else { behavior = new
 					 * DefaultControlBehavior(); }
 					 */
-					behavior = new DefaultControlBehavior();
+					behavior = new TestControlBehavior();
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
@@ -77,7 +76,7 @@ public class GameServer {
 
 					// Player player = new Player(((RequestAddPlayer)
 					// message).position, c.getID(), behavior);
-					behavior.init(player);
+					behavior.init(player.getShip());
 					GameManager.getPlayers().put(c.getID(), player);
 
 					ReplyAddPlayer reply = new ReplyAddPlayer();
@@ -135,13 +134,14 @@ public class GameServer {
 	}
 
 	protected void handleInputKey(Connection c, RequestUpdateKey request) {
-		switch (request.key) {
+		switch (request.keyDown) {
 		case Keys.ESCAPE:
 			c.close();
 			break;
 		default:
 			Player player = GameManager.getPlayers().get(c.getID());
-			player.getBehavior().handleKey(request.key);
+			player.getBehavior().handleKeyDown(request.keyDown);
+			player.getBehavior().handleKeyUp(request.keyUp);
 			break;
 
 		}
