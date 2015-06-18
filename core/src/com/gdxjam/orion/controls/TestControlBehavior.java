@@ -28,12 +28,12 @@ public class TestControlBehavior implements ControlBehavior {
 	}
 	@Override
 	public void forwardDown(float delta) {
-		ship.setVelocity(-ship.getSpeed());
+		ship.setVelocity(ship.getSpeed());
 	}
 
 	@Override
 	public void reverseDown(float delta) {
-		ship.setVelocity(ship.getSpeed());
+		ship.setVelocity(-ship.getSpeed());
 		
 	}
 
