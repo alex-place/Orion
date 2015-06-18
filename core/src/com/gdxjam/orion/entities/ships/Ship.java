@@ -28,12 +28,6 @@ public class Ship {
 
 	public void update(float delta) {
 		angle += angleStep;
-		if(angle > MathUtils.PI*2){
-			angle = 0;
-		}
-		if(angle < 0){
-			angle = MathUtils.PI*2;
-		}
 		
 		if (velocity != 0){
 			newPosition.x += MathUtils.sin(angle) * velocity;
