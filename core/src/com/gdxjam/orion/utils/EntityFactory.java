@@ -2,7 +2,6 @@ package com.gdxjam.orion.utils;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.BulletK;
 import com.gdxjam.orion.entities.ships.Ship;
@@ -19,7 +18,7 @@ public class EntityFactory {
 	public static Ship createShip(float x, float y, float angle, ControlBehavior behavior) {
 		float size = 1;
 		Polygon shape = new Polygon(new float[] { x, y, x + size, y, x + size, y + size, x, y + size });
-		shape.setOrigin(size/2, size/2);
+		shape.setOrigin(x + (size / 2), y + (size / 2));
 
 		return new Ship(shape, angle, behavior);
 

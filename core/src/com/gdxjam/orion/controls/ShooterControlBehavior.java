@@ -11,12 +11,10 @@ import com.gdxjam.orion.utils.EntityFactory;
 /**
  * These behaviors will define how a ship moves these should not handle client
  * requests (exiting to menu, toggling UI overlays)... these behaviors are
- * handled exclusively on the server
- * angel are always in radians
+ * handled exclusively on the server angel are always in radians
  * */
 public class ShooterControlBehavior implements ControlBehavior {
 
-	
 	private Ship ship;
 
 	public ShooterControlBehavior() {
@@ -26,6 +24,7 @@ public class ShooterControlBehavior implements ControlBehavior {
 	public void init(Ship ship) {
 		this.ship = ship;
 	}
+
 	@Override
 	public void forwardDown(float delta) {
 		ship.setVelocity(ship.getSpeed());
@@ -34,12 +33,12 @@ public class ShooterControlBehavior implements ControlBehavior {
 	@Override
 	public void reverseDown(float delta) {
 		ship.setVelocity(-ship.getSpeed());
-		
+
 	}
 
 	@Override
 	public void leftDown(float delta) {
-		
+
 	}
 
 	@Override
@@ -55,32 +54,30 @@ public class ShooterControlBehavior implements ControlBehavior {
 	@Override
 	public void reverseUp(float delta) {
 		ship.setVelocity(0.0f);
-		
+
 	}
 
 	@Override
 	public void leftUp(float delta) {
-		
+
 	}
 
 	@Override
 	public void rightUp(float delta) {
 
-		
 	}
-
 
 	@Override
 	public void handleMouse(Vector2 position) {
-		float i = MathUtils.atan2(ship.getPosition().y - position.y , ship.getPosition().x - position.x);
-		if(i < 0){i= i + MathUtils.PI*2;}
-		ship.setAngle(i);
+		float angle = MathUtils.atan2(ship.getPosition().y - position.y, ship.getPosition().x - position.x);
+		// if(angle < 0){angle= angle + MathUtils.PI*2;}
+		ship.setAngle(angle);
 	}
 
 	@Override
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		
+
 	}
 
 	@Override
@@ -103,7 +100,7 @@ public class ShooterControlBehavior implements ControlBehavior {
 		}
 
 	}
-	
+
 	public void handleKeyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:
