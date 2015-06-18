@@ -7,24 +7,19 @@ import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
-
-	private float acceleration = 0;
-	private float velocity = 0;
-	private float velocityMax = 1;
-	private float friction = 0;
 	
-	private float damping = 0.98f;
-	private float speed = 0.5f;
-	private float angle = 0;
-	private float angleStep = 0.01f;
-	private Vector2 positionChange;
+	private float angle = 0, velocity = 0, friction = 0.98f, angleStep = 0, speed = 0.01f;
+	private Vector2 newPosition;
 	private Vector2 position;
 	private ControlBehavior behavior;
 	private Polygon shape;
+	
+	public boolean forward, back, left, right;
 
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
 		this.shape = shape;
 		position = new Vector2(0, 0);
+		newPosition = new Vector2(0, 0);
 
 		this.angle = angle;
 		this.behavior = behavior;
@@ -32,37 +27,24 @@ public class Ship {
 	}
 
 	public void update(float delta) {
+		angle += angleStep;
 		
-		if(acceleration != 0){
-			velocity = acceleration;
-			position.x += velocity * MathUtils.cos(angle);
-			position.y += velocity * MathUtils.sin(angle);
-		}
-		else{
-			position.x *= damping;
-			position.y *= damping;
-		}
-		
-		if(position.x < 0){
-			position.x = 0;
-		}
-		if(position.x > Constants.WORLD_WIDTH){
-			position.x = Constants.WORLD_WIDTH;
-		}
-		
-		if(position.y < 0){
-			position.y = 0;
-		}
-		if(position.y > Constants.WORLD_HEIGHT){
-			position.y = Constants.WORLD_HEIGHT;
+		if (velocity != 0){
+			newPosition.x += MathUtils.sin(angle) * velocity;
+			newPosition.y += MathUtils.cos(angle) * velocity;
+		} else {
+			newPosition.x *= friction;
+			newPosition.y *= friction;
 		}
 
+		position.x += newPosition.x;
+		position.y += newPosition.y;
+		
+		shape.setRotation(angle*MathUtils.PI*2);
 		shape.setPosition(position.x, position.y);
-		shape.setRotation(angle);
-		acceleration = 0;
 
 	}
-
+	
 	public ControlBehavior getBehavior() {
 		return behavior;
 	}
@@ -75,14 +57,6 @@ public class Ship {
 		return position;
 	}
 
-	public float getX() {
-		return position.x;
-	}
-
-	public float getY() {
-		return position.y;
-	}
-
 	public void setPosition(Vector2 position) {
 		this.position = position;
 	}
@@ -93,6 +67,13 @@ public class Ship {
 	public void setAngle(float angle){
 		this.angle = angle;
 	}
+		public float getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(float velocity) {
+		this.velocity = velocity;
+	}
 	public float getSpeed() {
 		return speed;
 	}
@@ -101,43 +82,13 @@ public class Ship {
 		this.speed = speed;
 	}
 
-	public void stepAnglePostive() {
-		this.angle += angleStep;
-	}
-	
-	public void stepAngleNegtive() {
-		this.angle -= angleStep;
+	public float getAngleStep() {
+		return angleStep;
 	}
 
-
-	public float getAcceleration() {
-		return acceleration;
+	public void setAngleStep(float angleStep) {
+		this.angleStep = angleStep;
 	}
-
-	public void setAcceleration(float acceleration) {
-		this.acceleration = acceleration;
-	}
-
-	public float getVelocity() {
-		return velocity;
-	}
-
-	public float getVelocityMax() {
-		return velocityMax;
-	}
-
-	public void setVelocityMax(float velocityMax) {
-		this.velocityMax = velocityMax;
-	}
-
-	public float getFriction() {
-		return friction;
-	}
-
-	public void setFriction(float friction) {
-		this.friction = friction;
-	}
-
 	public Polygon getPolygon() {
 		return shape;
 	}

@@ -19,6 +19,7 @@ public class EntityFactory {
 	public static Ship createShip(float x, float y, float angle, ControlBehavior behavior) {
 		float size = 1;
 		Polygon shape = new Polygon(new float[] { x, y, x + size, y, x + size, y + size, x, y + size });
+		shape.setOrigin(size/2, size/2);
 
 		return new Ship(shape, angle, behavior);
 

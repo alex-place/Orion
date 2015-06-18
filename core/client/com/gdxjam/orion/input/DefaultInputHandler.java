@@ -32,7 +32,6 @@ public class DefaultInputHandler implements InputProcessor {
 		default:
 			RequestUpdateKey update = new RequestUpdateKey();
 			update.keyDown = keycode;
-			System.out.println("keydown111111111111111");
 			client.sendTCP(update);
 			break;
 		}
@@ -44,7 +43,6 @@ public class DefaultInputHandler implements InputProcessor {
 	public boolean keyUp(int keycode) {
 		RequestUpdateKey update = new RequestUpdateKey();
 		update.keyUp = keycode;
-		System.out.println("keyup111111111111111");
 		client.sendTCP(update);
 		return false;
 	}

@@ -28,49 +28,47 @@ public class TestControlBehavior implements ControlBehavior {
 	}
 	@Override
 	public void forwardDown(float delta) {
-		// TODO Auto-generated method stub
-		System.out.println("key down");
+		ship.setVelocity(-ship.getSpeed());
 	}
 
 	@Override
 	public void reverseDown(float delta) {
-		// TODO Auto-generated method stub
+		ship.setVelocity(ship.getSpeed());
 		
 	}
 
 	@Override
 	public void leftDown(float delta) {
-		// TODO Auto-generated method stub
+		ship.setAngleStep(0.1f);
 		
 	}
 
 	@Override
 	public void rightDown(float delta) {
-		// TODO Auto-generated method stub
+		ship.setAngleStep(-0.1f);
 		
 	}
 
 	@Override
 	public void forwardUp(float delta) {
-		// TODO Auto-generated method stub
-		System.out.println("key up");
+		ship.setVelocity(0.0f);
 	}
 
 	@Override
 	public void reverseUp(float delta) {
-		// TODO Auto-generated method stub
+		ship.setVelocity(0.0f);
 		
 	}
 
 	@Override
 	public void leftUp(float delta) {
-		// TODO Auto-generated method stub
+		ship.setAngleStep(0);
 		
 	}
 
 	@Override
 	public void rightUp(float delta) {
-		// TODO Auto-generated method stub
+		ship.setAngleStep(0);
 		
 	}
 

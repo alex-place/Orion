@@ -33,17 +33,11 @@ public class Player extends Entity {
 	public void setAngle(float angle){
 		ship.setAngle(angle);
 	}
-	public void setAcceleration(float acceleration){
-		ship.setAcceleration(acceleration);
-	}
 	public ControlBehavior getBehavior() {
 		return ship.getBehavior();
 	}
 	public Ship getShip(){
 		return ship;
-	}
-	public float getSpeed() {
-		return ship.getSpeed();
 	}
 	public void setPosition(Vector2 position){
 		ship.setPosition(position);
@@ -58,12 +52,6 @@ public class Player extends Entity {
 	
 	public Polygon getPolygon(){
 		return ship.getPolygon();
-	}
-	public void stepAngelPostive(){
-		ship.stepAnglePostive();
-	}
-	public void stepAngelNegtive(){
-		ship.stepAngleNegtive();
 	}
 
 }
