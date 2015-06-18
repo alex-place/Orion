@@ -8,7 +8,8 @@ import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
 	
-	private float angle = 0, velocity = 0, friction = 0.98f, angleStep = 0, speed = 0.01f;
+	private float angle = 0, velocity = 0, friction = 0.98f, angleStep = 0, speed = 0.001f;
+
 	private Vector2 newPosition;
 	private Vector2 position;
 	private ControlBehavior behavior;
@@ -36,15 +37,20 @@ public class Ship {
 			newPosition.x *= friction;
 			newPosition.y *= friction;
 		}
+		if(newPosition.x < 0.0001 && newPosition.y < 0.0001){
+			newPosition.x = 0; 
+			newPosition.y = 0;
+		}
 
 		position.x += newPosition.x;
 		position.y += newPosition.y;
+		
+		System.out.println(angle);
 		
 		shape.setRotation(angle*MathUtils.PI*2);
 		shape.setPosition(position.x, position.y);
 
 	}
-	
 	public ControlBehavior getBehavior() {
 		return behavior;
 	}
@@ -80,10 +86,6 @@ public class Ship {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
-	}
-
-	public float getAngleStep() {
-		return angleStep;
 	}
 
 	public void setAngleStep(float angleStep) {
