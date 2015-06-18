@@ -72,7 +72,7 @@ public class ClientGameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-//		handleInput();
+		// handleInput();
 		client.update();
 		batch.setProjectionMatrix(cam.combined);
 
@@ -98,7 +98,10 @@ public class ClientGameScreen implements Screen {
 				batch.setColor(d);
 			}
 
-			batch.draw(Assets.square.reg, player.position.x, player.position.y, 1, 1);
+			// batch.draw(Assets.square.reg, player.position.x,
+			// player.position.y, 1, 1);
+			batch.draw(Assets.square.reg, player.position.x, player.position.y, 0.5f, 0.5f, 1, 1, 1, 1, MathUtils.radiansToDegrees * player.position.z, false);
+
 			batch.setColor(0, 0, 0, 1);
 		}
 		batch.end();
@@ -108,37 +111,26 @@ public class ClientGameScreen implements Screen {
 	public Color randomColor() {
 		return new Color(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
 	}
-/*
-	private void handleInput() {
 
-		if (Gdx.input.isKeyPressed(Keys.W)) {
-			sendKey(Keys.W);
-		}
-		if (Gdx.input.isKeyPressed(Keys.A)) {
-			sendKey(Keys.A);
-
-		}
-		if (Gdx.input.isKeyPressed(Keys.S)) {
-			sendKey(Keys.S);
-
-		}
-		if (Gdx.input.isKeyPressed(Keys.D)) {
-			sendKey(Keys.D);
-
-		}
-
-		handleMouseMove();
-		handleMouseClick();
-	}
-
-	private RequestUpdateKey updateKey;
-
-	public void sendKey(int keycode) {
-		updateKey = new RequestUpdateKey();
-		updateKey.keyDown = keycode;
-		client.sendTCP(updateKey);
-	}
-*/
+	/*
+	 * private void handleInput() {
+	 * 
+	 * if (Gdx.input.isKeyPressed(Keys.W)) { sendKey(Keys.W); } if
+	 * (Gdx.input.isKeyPressed(Keys.A)) { sendKey(Keys.A);
+	 * 
+	 * } if (Gdx.input.isKeyPressed(Keys.S)) { sendKey(Keys.S);
+	 * 
+	 * } if (Gdx.input.isKeyPressed(Keys.D)) { sendKey(Keys.D);
+	 * 
+	 * }
+	 * 
+	 * handleMouseMove(); handleMouseClick(); }
+	 * 
+	 * private RequestUpdateKey updateKey;
+	 * 
+	 * public void sendKey(int keycode) { updateKey = new RequestUpdateKey();
+	 * updateKey.keyDown = keycode; client.sendTCP(updateKey); }
+	 */
 	private RequestUpdateMouse updateMouse;
 
 	public void handleMouseMove() {

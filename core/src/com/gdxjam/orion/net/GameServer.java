@@ -189,8 +189,7 @@ public class GameServer {
 	}
 
 	public ClientPlayer convertToClient(Player player) {
-		return new ClientPlayer().init(
-				new Vector3(player.getPosition().x - Constants.PLAYER_HALFWIDTH, player.getPosition().y - Constants.PLAYER_HALFHEIGHT, 0), player.getID());
+		return new ClientPlayer().init(new Vector3(player.getPosition().x, player.getPosition().y, player.getAngle()), player.getID());
 
 	}
 }
