@@ -5,14 +5,16 @@ import java.util.HashMap;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.Array;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.entities.ClientPlayer;
 
 public class ClientGameManager {
 	private static Game game;
 
-	private static ClientPlayer player;
 	private static HashMap<Integer, ClientPlayer> players = new HashMap<Integer, ClientPlayer>();
-	private static Array bullets = new Array();
+
+	private static ShipType shipType;
+	private static int id;
 
 	private ClientGameManager() {
 	}
@@ -20,14 +22,6 @@ public class ClientGameManager {
 	public static void init(Game game) {
 		ClientGameManager.game = game;
 
-	}
-
-	public static ClientPlayer getPlayer() {
-		return player;
-	}
-
-	public static void setPlayer(ClientPlayer player) {
-		ClientGameManager.player = player;
 	}
 
 	public static HashMap<Integer, ClientPlayer> getPlayers() {
@@ -40,6 +34,22 @@ public class ClientGameManager {
 
 	public static void setScreen(Screen screen) {
 		game.setScreen(screen);
+	}
+
+	public static void setShipType(ShipType selected) {
+		ClientGameManager.shipType = selected;
+	}
+
+	public static int getID() {
+		return id;
+	}
+
+	public static void setId(int id) {
+		ClientGameManager.id = id;
+	}
+
+	public static ShipType getShipType() {
+		return shipType;
 	}
 
 }

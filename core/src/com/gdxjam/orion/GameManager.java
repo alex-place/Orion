@@ -31,7 +31,7 @@ public class GameManager {
 	}
 
 	public static enum ShipType {
-		DEFAULT, FIGHTER, CRUISER, CORVETTE;
+		DEFAULT, SHOOTER, UFO, TESTSHIP;
 	}
 
 	public static Pool<BulletK> getBullets() {

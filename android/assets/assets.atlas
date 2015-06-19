@@ -1,9 +1,16 @@
 
 assets.png
-size: 32,32
+size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+space
+  rotate: false
+  xy: 2, 24
+  size: 1024, 1024
+  orig: 1024, 1024
+  offset: 0, 0
+  index: -1
 square
   rotate: false
   xy: 2, 2

@@ -48,7 +48,7 @@ public class GameClient {
 
 		defaultPos = new Vector3(1, 1, 0);
 		request.position = defaultPos;
-		request.type = ShipType.DEFAULT;
+		request.type = ClientGameManager.getShipType();
 		client.sendTCP(request);
 
 	}
@@ -58,7 +58,7 @@ public class GameClient {
 		if (message instanceof ReplyAddPlayer) {
 			ReplyAddPlayer reply = (ReplyAddPlayer) message;
 			player = new ClientPlayer().init(defaultPos, reply.id);
-			ClientGameManager.setPlayer(player);
+			ClientGameManager.setId(reply.id);
 			ClientGameManager.getPlayers().put(player.id, player);
 		}
 

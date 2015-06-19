@@ -17,6 +17,7 @@ public class Assets implements Disposable {
 
 	public static AssetManager manager;
 	public static AssetSquare square;
+	public static AssetBackground background;
 
 	public static AssetManager getManager() {
 		if (manager == null) {
@@ -41,6 +42,7 @@ public class Assets implements Disposable {
 	public static void create() {
 		TextureAtlas atlas = manager.get(TEXTURE_ATLAS_OBJECTS);
 		square = new AssetSquare(atlas);
+		background = new AssetBackground(atlas);
 		skin = manager.get(SKIN);
 
 	}
@@ -50,6 +52,14 @@ public class Assets implements Disposable {
 
 		public AssetSquare(TextureAtlas atlas) {
 			reg = atlas.findRegion("square");
+		}
+	}
+
+	public static class AssetBackground {
+		public AtlasRegion reg;
+
+		public AssetBackground(TextureAtlas atlas) {
+			reg = atlas.findRegion("space");
 		}
 	}
 

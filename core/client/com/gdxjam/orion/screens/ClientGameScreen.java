@@ -17,12 +17,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.gdxjam.orion.Assets;
 import com.gdxjam.orion.ClientGameManager;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.input.DefaultInputHandler;
 import com.gdxjam.orion.net.GameClient;
 import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
+import com.gdxjam.orion.utils.Constants;
 
 public class ClientGameScreen implements Screen {
 
@@ -76,7 +78,7 @@ public class ClientGameScreen implements Screen {
 		client.update();
 		batch.setProjectionMatrix(cam.combined);
 
-		ClientPlayer id = ClientGameManager.getPlayers().get(ClientGameManager.getPlayer().id);
+		ClientPlayer id = ClientGameManager.getPlayers().get(ClientGameManager.getID());
 		cam.position.set(id.position.x, id.position.y, 0);
 		cam.update();
 
@@ -100,6 +102,7 @@ public class ClientGameScreen implements Screen {
 
 			// batch.draw(Assets.square.reg, player.position.x,
 			// player.position.y, 1, 1);
+			batch.draw(Assets.background.reg, 0, 0, 10, 10);
 			batch.draw(Assets.square.reg, player.position.x, player.position.y, 0.5f, 0.5f, 1, 1, 1, 1, MathUtils.radiansToDegrees * player.position.z, false);
 
 			batch.setColor(0, 0, 0, 1);

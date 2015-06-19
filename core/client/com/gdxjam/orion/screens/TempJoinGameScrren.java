@@ -1,18 +1,24 @@
 package com.gdxjam.orion.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.TextInputListener;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.gdxjam.orion.Assets;
 import com.gdxjam.orion.ClientGameManager;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.net.Network;
 
 public class TempJoinGameScrren implements Screen {
@@ -24,6 +30,8 @@ public class TempJoinGameScrren implements Screen {
 
 	private TextButton buttonPlay = new TextButton("Play", skin), buttonExit = new TextButton("Exit", skin);
 	private TextField ip = new TextField("127.0.0.1", skin);
+	private SelectBox<ShipType> shipType;
+	private ShipType selected;
 
 	@Override
 	public void show() {
@@ -33,13 +41,26 @@ public class TempJoinGameScrren implements Screen {
 
 		Assets.getManager().finishLoading();
 
+		shipType = new SelectBox<ShipType>(Assets.skin);
+		shipType.setItems(ShipType.DEFAULT, ShipType.SHOOTER, ShipType.TESTSHIP);
+		shipType.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				selected = shipType.getSelected();
+
+			}
+		});
+
 		buttonPlay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				ClientGameManager.setShipType(selected);
 				Network.setIP(ip.getText());
 				ClientGameManager.setScreen(new ClientGameScreen());
 			}
 		});
+
 		buttonExit.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -48,6 +69,7 @@ public class TempJoinGameScrren implements Screen {
 		});
 
 		table.add(ip).row();
+		table.add(shipType).row();
 		table.add(buttonPlay);
 		table.add(buttonExit);
 

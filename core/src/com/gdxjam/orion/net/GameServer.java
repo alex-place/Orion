@@ -15,6 +15,7 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.ShooterControlBehavior;
 import com.gdxjam.orion.controls.TestControlBehavior;
+import com.gdxjam.orion.controls.UFOControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.PlayerAttributes;
@@ -59,17 +60,11 @@ public class GameServer {
 
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
-					ControlBehavior behavior; // = new CruiserControlBehavior();
-					/*
-					 * if (request.type == ShipType.FIGHTER) { behavior = new
-					 * FighterControlBehavior(); } if (request.type ==
-					 * ShipType.CRUISER) { behavior = new
-					 * CruiserControlBehavior(); } if (request.type ==
-					 * ShipType.CORVETTE) { behavior = new
-					 * CorvetteControlBehavior(); } else { behavior = new
-					 * DefaultControlBehavior(); }
-					 */
-					behavior = new ShooterControlBehavior();
+					ControlBehavior behavior;
+					behavior
+					// = new ShooterControlBehavior();
+					= new UFOControlBehavior();
+					// = new TestControlBehavior();
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
