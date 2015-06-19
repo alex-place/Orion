@@ -7,14 +7,14 @@ import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
-
+	
 	private float angle = 0, velocity = 0, friction = 0.98f, angleStep = 0, speed = 0.001f;
 
 	private Vector2 newPosition;
 	private Vector2 position;
 	private ControlBehavior behavior;
 	private Polygon shape;
-
+	
 	public boolean forward, back, left, right;
 
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
@@ -29,29 +29,28 @@ public class Ship {
 
 	public void update(float delta) {
 		angle += angleStep;
-
-		if (velocity != 0) {
+		
+		if (velocity != 0){
 			newPosition.x += MathUtils.sin(angle) * velocity;
 			newPosition.y += MathUtils.cos(angle) * velocity;
 		} else {
 			newPosition.x *= friction;
 			newPosition.y *= friction;
 		}
-		if (newPosition.x < 0.0001 && newPosition.y < 0.0001) {
-			newPosition.x = 0;
+		if(newPosition.x < 0.0001 && newPosition.y < 0.0001){
+			newPosition.x = 0; 
 			newPosition.y = 0;
 		}
 
 		position.x += newPosition.x;
 		position.y += newPosition.y;
-
+		
 		System.out.println(angle);
-
-		shape.setRotation(angle * MathUtils.radiansToDegrees);
+		
+		shape.setRotation(angle*MathUtils.PI*2);
 		shape.setPosition(position.x, position.y);
 
 	}
-
 	public ControlBehavior getBehavior() {
 		return behavior;
 	}
@@ -71,22 +70,16 @@ public class Ship {
 	public float getAngle() {
 		return angle;
 	}
-
-	/**
-	 * Sets the angle in radians
-	 * */
-	public void setAngle(float angle) {
+	public void setAngle(float angle){
 		this.angle = angle;
 	}
-
-	public float getVelocity() {
+		public float getVelocity() {
 		return velocity;
 	}
 
 	public void setVelocity(float velocity) {
 		this.velocity = velocity;
 	}
-
 	public float getSpeed() {
 		return speed;
 	}
@@ -98,7 +91,6 @@ public class Ship {
 	public void setAngleStep(float angleStep) {
 		this.angleStep = angleStep;
 	}
-
 	public Polygon getPolygon() {
 		return shape;
 	}

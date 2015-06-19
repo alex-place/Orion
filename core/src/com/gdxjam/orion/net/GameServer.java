@@ -15,6 +15,7 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.ShooterControlBehavior;
 import com.gdxjam.orion.controls.TestControlBehavior;
+import com.gdxjam.orion.controls.UFOControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.PlayerAttributes;
@@ -69,7 +70,7 @@ public class GameServer {
 					 * CorvetteControlBehavior(); } else { behavior = new
 					 * DefaultControlBehavior(); }
 					 */
-					behavior = new ShooterControlBehavior();
+					behavior = new UFOControlBehavior();
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
