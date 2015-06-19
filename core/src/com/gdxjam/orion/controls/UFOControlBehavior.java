@@ -28,7 +28,7 @@ public class UFOControlBehavior implements ControlBehavior {
 	@Override
 	public void forwardDown(float delta) {
 		ship.setAngle(90*MathUtils.degreesToRadians);
-		ship.setVelocity(-ship.getSpeed());
+		ship.setVelocity(ship.getSpeed());
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class UFOControlBehavior implements ControlBehavior {
 	@Override
 	public void leftDown(float delta) {
 		ship.setAngle(180*MathUtils.degreesToRadians);
-		ship.setVelocity(-ship.getSpeed());
+		ship.setVelocity(ship.getSpeed());
 	}
 
 	@Override

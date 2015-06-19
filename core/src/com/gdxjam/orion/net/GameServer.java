@@ -12,6 +12,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.controls.AsteroidsControlBehavior;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.ShooterControlBehavior;
 import com.gdxjam.orion.controls.TestControlBehavior;
@@ -70,7 +71,7 @@ public class GameServer {
 					 * CorvetteControlBehavior(); } else { behavior = new
 					 * DefaultControlBehavior(); }
 					 */
-					behavior = new UFOControlBehavior();
+					behavior = new AsteroidsControlBehavior();
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 

@@ -38,12 +38,12 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 
 	@Override
 	public void leftDown(float delta) {
-
+		ship.stepAngle(0.1f);
 	}
-
+	
 	@Override
 	public void rightDown(float delta) {
-
+		ship.stepAngle(-0.1f);
 	}
 
 	@Override
@@ -59,19 +59,17 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 
 	@Override
 	public void leftUp(float delta) {
-
+		ship.stepAngle(0);
 	}
 
 	@Override
 	public void rightUp(float delta) {
-
+		ship.stepAngle(0);
 	}
 
 	@Override
 	public void handleMouse(Vector2 position) {
-		float angle = MathUtils.atan2(ship.getPosition().y - position.y, ship.getPosition().x - position.x);
-		// if(angle < 0){angle= angle + MathUtils.PI*2;}
-		ship.setAngle(angle);
+
 	}
 
 	@Override
