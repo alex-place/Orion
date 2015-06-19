@@ -8,7 +8,11 @@ import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
 
-	private float angle = 0, velocity = 0, friction = 0.98f, angleStep = 0, speed = 1f;
+	private float angle = 0;
+	private float velocity = 0;
+	private float friction = 0.98f;
+	private float angleStep = 0;
+	private float speed = 1f;
 
 	private Vector2 newPosition;
 	private Vector2 position;

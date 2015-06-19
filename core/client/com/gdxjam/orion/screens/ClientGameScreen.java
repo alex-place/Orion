@@ -78,8 +78,9 @@ public class ClientGameScreen implements Screen {
 		client.update();
 		batch.setProjectionMatrix(cam.combined);
 
-		ClientPlayer id = ClientGameManager.getPlayers().get(ClientGameManager.getID());
-		cam.position.set(id.position.x, id.position.y, 0);
+		// ClientPlayer id =
+		// ClientGameManager.getPlayers().get(ClientGameManager.getID());
+		// cam.position.set(id.position.x, id.position.y, 0);
 		cam.update();
 
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);

@@ -12,6 +12,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.ShooterControlBehavior;
 import com.gdxjam.orion.controls.TestControlBehavior;
@@ -25,7 +26,6 @@ import com.gdxjam.orion.net.Network.RequestAddPlayer;
 import com.gdxjam.orion.net.Network.RequestClick;
 import com.gdxjam.orion.net.Network.RequestUpdateKey;
 import com.gdxjam.orion.net.Network.RequestUpdateMouse;
-import com.gdxjam.orion.utils.Constants;
 import com.gdxjam.orion.utils.EntityFactory;
 
 public class GameServer {
@@ -61,10 +61,28 @@ public class GameServer {
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
 					ControlBehavior behavior;
-					behavior
 					// = new ShooterControlBehavior();
-					= new UFOControlBehavior();
 					// = new TestControlBehavior();
+
+					if (request.type == null) {
+						request.type = ShipType.DEFAULT;
+						System.out.print("Server recieved a null shiptype request");
+					}
+
+					switch (request.type) {
+					case SHOOTER:
+						behavior = new ShooterControlBehavior();
+						break;
+					case TESTSHIP:
+						behavior = new TestControlBehavior();
+						break;
+					case UFO:
+						behavior = new UFOControlBehavior();
+						break;
+					default:
+						behavior = new UFOControlBehavior();
+						break;
+					}
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
