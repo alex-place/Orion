@@ -27,44 +27,34 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forwardDown(float delta) {
-		ship.setVelocity(ship.getSpeed());
 	}
 
 	@Override
 	public void reverseDown(float delta) {
-		ship.setVelocity(-ship.getSpeed());
-
 	}
 
 	@Override
 	public void leftDown(float delta) {
-		ship.stepAngle(0.1f);
 	}
 	
 	@Override
 	public void rightDown(float delta) {
-		ship.stepAngle(-0.1f);
 	}
 
 	@Override
 	public void forwardUp(float delta) {
-		ship.setVelocity(0.0f);
 	}
 
 	@Override
 	public void reverseUp(float delta) {
-		ship.setVelocity(0.0f);
-
 	}
 
 	@Override
 	public void leftUp(float delta) {
-		ship.stepAngle(0);
 	}
 
 	@Override
 	public void rightUp(float delta) {
-		ship.stepAngle(0);
 	}
 
 	@Override

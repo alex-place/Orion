@@ -27,52 +27,34 @@ public class UFOControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forwardDown(float delta) {
-		ship.setAngle(90*MathUtils.degreesToRadians);
-		ship.setVelocity(ship.getSpeed());
 	}
 
 	@Override
 	public void reverseDown(float delta) {
-		ship.setAngle(270*MathUtils.degreesToRadians);
-		ship.setVelocity(-ship.getSpeed());
-
 	}
 
 	@Override
 	public void leftDown(float delta) {
-		ship.setAngle(180*MathUtils.degreesToRadians);
-		ship.setVelocity(ship.getSpeed());
 	}
 
 	@Override
 	public void rightDown(float delta) {
-		ship.setAngle(0*MathUtils.degreesToRadians);
-		ship.setVelocity(-ship.getSpeed());
 	}
 
 	@Override
 	public void forwardUp(float delta) {
-		ship.setAngle(0);
-		ship.setVelocity(0.0f);
 	}
 
 	@Override
 	public void reverseUp(float delta) {
-		ship.setAngle(0);
-		ship.setVelocity(0.0f);
-
 	}
 
 	@Override
 	public void leftUp(float delta) {
-		ship.setAngle(0);
-		ship.setVelocity(0.0f);
 	}
 
 	@Override
 	public void rightUp(float delta) {
-		ship.setAngle(0);
-		ship.setVelocity(0.0f);
 	}
 
 	@Override

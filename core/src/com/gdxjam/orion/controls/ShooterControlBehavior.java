@@ -27,13 +27,11 @@ public class ShooterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forwardDown(float delta) {
-		ship.setVelocity(ship.getSpeed());
+	
 	}
 
 	@Override
 	public void reverseDown(float delta) {
-		ship.setVelocity(-ship.getSpeed());
-
 	}
 
 	@Override
@@ -48,14 +46,10 @@ public class ShooterControlBehavior implements ControlBehavior {
 
 	@Override
 	public void forwardUp(float delta) {
-		ship.setVelocity(0.0f);
 	}
 
 	@Override
-	public void reverseUp(float delta) {
-		ship.setVelocity(0.0f);
-
-	}
+	public void reverseUp(float delta) {	}
 
 	@Override
 	public void leftUp(float delta) {
@@ -71,7 +65,7 @@ public class ShooterControlBehavior implements ControlBehavior {
 	public void handleMouse(Vector2 position) {
 		float angle = MathUtils.atan2(ship.getPosition().y - position.y, ship.getPosition().x - position.x);
 		// if(angle < 0){angle= angle + MathUtils.PI*2;}
-		ship.setAngle(angle);
+		//ship.setAngle(angle);
 	}
 
 	@Override

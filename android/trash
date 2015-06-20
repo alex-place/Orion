@@ -1,0 +1,65 @@
+//basic 90* movement	
+		if (forwardMove){
+			newPosition.x += MathUtils.sin(0) * velocity.x;
+			newPosition.y += MathUtils.cos(0) * velocity.y;
+		}
+		else if (reverseMove){
+			newPosition.x += MathUtils.sin(3.14159265f) * velocity.x;
+			newPosition.y += MathUtils.cos(3.14159265f) * velocity.y;
+		}
+		if(leftMove){
+			newPosition.x += MathUtils.sin(4.71238898f) * velocity.x;
+			newPosition.y += MathUtils.cos(4.71238898f) * velocity.y;
+		}
+		else if(rightMove){
+			newPosition.x += MathUtils.sin(1.57079633f) * velocity.x;
+			newPosition.y += MathUtils.cos(1.57079633f) * velocity.y;
+		}
+		System.out.println(newPosition.x + "   " + newPosition.y);
+//basic movement base on a set angel
+		if(leftTurn){
+			angle += .1;
+			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
+		}
+		else if(rightTurn){
+			angle -= .1;
+			if (angle < 0){angle = MathUtils.PI*2 + angle;}
+		}
+		if (leftStrafe){
+			a = angle - 1.57079633f;
+			if (a > MathUtils.PI*2){a = MathUtils.PI*2 - a;} 
+			if (a < 0){a = a - MathUtils.PI*2;}
+			newPosition.x += MathUtils.sin(a) * velocity.x;
+			newPosition.y += MathUtils.cos(a) * velocity.y;
+		}
+		else if (rightStrafe){
+			a = angle + 1.57079633f;
+			if (a > MathUtils.PI*2){a = MathUtils.PI*2 - a;} 
+			if (a < 0){a = a - MathUtils.PI*2;}
+			newPosition.x += MathUtils.sin(a) * velocity.x;
+			newPosition.y += MathUtils.cos(a) * velocity.y;
+		}
+		System.out.println("angle "+angle+" newx "+ newPosition.x+ "new y"+newPosition.y);
+		if (forward){
+			newPosition.x += MathUtils.sin(angle) * velocity.x;
+			newPosition.y += MathUtils.cos(angle) * velocity.y;
+		}
+		else if (reverse){
+			newPosition.x += MathUtils.sin(angle * MathUtils.PI) * velocity.x;
+			newPosition.y += MathUtils.cos(angle * MathUtils.PI) * velocity.y;
+		}
+		else {
+			newPosition.x *= friction;
+			newPosition.y *= friction;
+		}
+		
+		if(newPosition.x < 0.0001 && newPosition.y < 0.0001){
+			newPosition.x = 0; 
+			newPosition.y = 0;
+		}
+
+		position.x += newPosition.x;
+		position.y += newPosition.y;
+		
+		shape.setRotation(angle*MathUtils.radiansToDegrees);
+		shape.setPosition(position.x, position.y);

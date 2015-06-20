@@ -33,7 +33,7 @@ public class Player extends Entity {
 	}
 
 	public void setAngle(float angle) {
-		ship.setAngle(angle);
+		//ship.setAngle(angle);
 	}
 
 	public ControlBehavior getBehavior() {

@@ -24,7 +24,6 @@ public class DefaultInputHandler implements InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		switch (keycode) {
-
 		case Keys.ESCAPE:
 			Gdx.app.exit();
 			break;

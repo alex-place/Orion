@@ -12,6 +12,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.controls.AsteroidsControlBehavior;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.controls.ShooterControlBehavior;
@@ -62,23 +63,31 @@ public class GameServer {
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
 					ControlBehavior behavior; // = new CruiserControlBehavior();
-					/*
-					 * if (request.type == ShipType.FIGHTER) { behavior = new
-					 * FighterControlBehavior(); } if (request.type ==
-					 * ShipType.CRUISER) { behavior = new
-					 * CruiserControlBehavior(); } if (request.type ==
-					 * ShipType.CORVETTE) { behavior = new
-					 * CorvetteControlBehavior(); } else { behavior = new
-					 * DefaultControlBehavior(); }
-					 */
-					behavior = new AsteroidsControlBehavior();
+					
+					if (request.type == null) {
+						request.type = ShipType.DEFAULT;
+						System.out.print("Server recieved a null shiptype request");
+					}
+
+					switch (request.type) {
+					case SHOOTER:
+						behavior = new ShooterControlBehavior();
+						break;
+					case UFO:
+						behavior = new UFOControlBehavior();
+						break;
+					case TESTSHIP:
+						behavior = new TestControlBehavior();
+						break;
+					default:
+						behavior = new TestControlBehavior();
+						break;
+					}
 
 					PlayerAttributes a = new PlayerAttributes(c.getID());
 
 					Player player = new Player(a, EntityFactory.createShip(request.position.x, request.position.y, request.position.z, behavior));
 
-					// Player player = new Player(((RequestAddPlayer)
-					// message).position, c.getID(), behavior);
 					behavior.init(player.getShip());
 					GameManager.getPlayers().put(c.getID(), player);
 

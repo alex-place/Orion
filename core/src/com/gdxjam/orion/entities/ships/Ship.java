@@ -7,20 +7,19 @@ import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
-	
-	private float angle = 0, velocity = 0, friction = 0.98f, angleStep = 0.1f, speed = 0.001f;
-
-	private Vector2 newPosition;
-	private Vector2 position;
+	public boolean forward, reverse, forwardMove, reverseMove, leftMove, rightMove, leftTurn, rightTurn, leftStrafe, rightStrafe;
+	private float angle = 0, stepLenght = 0, friction = 0.98f, angleStep = 0.01f, speed = 0.001f, a;
+	private Vector2 newPosition, position, velocity;
 	private ControlBehavior behavior;
 	private Polygon shape;
-	
-	public boolean forward, back, left, right;
+	private float i;
 
+	
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
 		this.shape = shape;
 		position = new Vector2(0, 0);
 		newPosition = new Vector2(0, 0);
+		velocity = new Vector2(0.005f, 0.010f);
 
 		this.angle = angle;
 		this.behavior = behavior;
@@ -28,31 +27,54 @@ public class Ship {
 	}
 
 	public void update(float delta) {
-		if (velocity != 0){
-			newPosition.x += MathUtils.sin(angle) * velocity;
-			newPosition.y += MathUtils.cos(angle) * velocity;
-		} else {
-			newPosition.x *= friction;
+		System.out.println("angle = "+angle+" Dregress:"+angle*MathUtils.radiansToDegrees);
+//basic 90* movement	
+		if(forwardMove){
+			move(1.57079633f);
+		}
+		else if(reverseMove){
+			move(4.71238898f);
+		}
+		if(leftMove){
+			move(3.14159265f);
+		}
+		else if(rightMove){
+			move(0);
+		}
+//movement base on angel
+		if (rightTurn){
+			angle += angleStep;
+			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
+		}
+		else if (leftTurn){
+			angle -= angleStep;
+			if (angle < 0){angle = MathUtils.PI*2 + angle;}
+		}
+		if (rightStrafe){
+			move(angle+1.57079633f);
+		}
+		else if (leftStrafe){
+			move(angle-1.57079633f);
+		}
+		if (forward){move(angle);} 		
+		else if (reverse){move(angle+3.14159265f);} 
+		else {
 			newPosition.y *= friction;
+			newPosition.x *= friction;
 		}
-		if(newPosition.x < 0.0001 && newPosition.y < 0.0001){
-			newPosition.x = 0; 
-			newPosition.y = 0;
-		}
-
-		position.x += newPosition.x;
 		position.y += newPosition.y;
-		
-		System.out.println(angle);
+		position.x += newPosition.x;
 		
 		shape.setRotation(angle*MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);
-
+	}
+	private void move(float setAngle){
+		newPosition.y += Math.sin(setAngle) * velocity.y;
+		newPosition.x += Math.cos(setAngle) * velocity.x;
 	}
 	public ControlBehavior getBehavior() {
 		return behavior;
 	}
-
 	public void setBehavior(ControlBehavior behavior) {
 		this.behavior = behavior;
 	}
@@ -70,13 +92,6 @@ public class Ship {
 	}
 	public void setAngle(float angle){
 		this.angle = angle;
-	}
-		public float getVelocity() {
-		return velocity;
-	}
-
-	public void setVelocity(float velocity) {
-		this.velocity = velocity;
 	}
 	public float getSpeed() {
 		return speed;

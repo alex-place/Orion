@@ -28,54 +28,49 @@ public class TestControlBehavior implements ControlBehavior {
 	}
 	@Override
 	public void forwardDown(float delta) {
-		ship.setVelocity(ship.getSpeed());
+		ship.forward = true;
 	}
 
 	@Override
 	public void reverseDown(float delta) {
-		ship.setVelocity(-ship.getSpeed());
-		
+		ship.reverse = true;
 	}
 
 	@Override
 	public void leftDown(float delta) {
-		ship.setAngleStep(0.1f);
-		
+		ship.leftStrafe = true;
 	}
 
 	@Override
 	public void rightDown(float delta) {
-		ship.setAngleStep(-0.1f);
-		
+		ship.rightStrafe = true;
 	}
 
 	@Override
 	public void forwardUp(float delta) {
-		ship.setVelocity(0.0f);
+		ship.forward = false;
 	}
 
 	@Override
 	public void reverseUp(float delta) {
-		ship.setVelocity(0.0f);
-		
+		ship.reverse = false;
 	}
 
 	@Override
 	public void leftUp(float delta) {
-		ship.setAngleStep(0);
-		
+		ship.leftStrafe = false;
+	
 	}
 
 	@Override
 	public void rightUp(float delta) {
-		ship.setAngleStep(0);
-		
+		ship.rightStrafe = false;
 	}
 
 
 	@Override
 	public void handleMouse(Vector2 position) {
-
+		ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
 	}
 
 	@Override
