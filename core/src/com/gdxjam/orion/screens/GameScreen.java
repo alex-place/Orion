@@ -90,8 +90,8 @@ public class GameScreen implements Screen {
 			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}
 //debug render entitys
-		for (Entity e : GameManager.getActive()) {
-			renderer.polygon(e.getPolygon().getTransformedVertices());
+		for (Entity entity : GameManager.getActive()) {
+			renderer.polygon(entity.getPolygon().getTransformedVertices());
 		}
 
 // Draw good stuff here
