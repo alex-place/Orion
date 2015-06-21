@@ -52,22 +52,22 @@ public class Ship {
 		}
 		if (rightStrafe){
 			float i = angle+1.57079633f;
-			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
-			if (angle < 0){angle = MathUtils.PI*2 + angle;}
+			if (i > MathUtils.PI*2){i = MathUtils.PI*2 - angle;} 
+			if (i < 0){angle = MathUtils.PI*2 + i;}
 			move(i);
 		}
 		else if (leftStrafe){
-			float i = angle+1.57079633f;
-			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
-			if (angle < 0){angle = MathUtils.PI*2 + angle;}
-			move(angle-1.57079633f);
+			float i = angle-1.57079633f;
+			if (i > MathUtils.PI*2){i = MathUtils.PI*2 - angle;} 
+			if (i < 0){angle = MathUtils.PI*2 + i;}
+			move(i);
 		}
 		if (forward){move(angle);} 	
-			float i = angle+3.14159265f;
-			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
-			if (angle < 0){angle = MathUtils.PI*2 + angle;
-		}
-		else if (reverse){move(i);} 
+		else if (reverse){
+			float i = angle-3.14159265f;
+			if (i > MathUtils.PI*2){i = MathUtils.PI*2 - angle;} 
+			if (i < 0){angle = MathUtils.PI*2 + i;}
+			move(i);} 
 		else {
 			newPosition.y *= friction;
 			newPosition.x *= friction;
@@ -81,6 +81,11 @@ public class Ship {
 	private void move(float setAngle){
 		newPosition.y += Math.sin(setAngle) * velocity.y;
 		newPosition.x += Math.cos(setAngle) * velocity.x;
+	}
+	public float validAngle(float i){
+		if (i > MathUtils.PI*2){i = MathUtils.PI*2 - angle;} 
+		if (i < 0){angle = MathUtils.PI*2 + i;}
+		return i;
 	}
 	public ControlBehavior getBehavior() {
 		return behavior;
