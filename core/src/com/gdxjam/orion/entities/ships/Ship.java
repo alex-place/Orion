@@ -7,7 +7,7 @@ import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
-	public boolean forward, reverse, forwardMove, reverseMove, leftMove, rightMove, leftTurn, rightTurn, leftStrafe, rightStrafe;
+	public boolean forward, reverse, forwardMove, reverseMove, leftMove, rightMove, leftTurn, rightTurn, leftStrafe, rightStrafe, moved;
 	private float angle = 0, stepLenght = 0, friction = 0.98f, angleStep = 0.01f, speed = 0.001f, a;
 	private Vector2 newPosition, position, velocity;
 	private ControlBehavior behavior;
@@ -27,10 +27,9 @@ public class Ship {
 	}
 
 	public void update(float delta) {
-		System.out.println("angle = "+angle+" Dregress:"+angle*MathUtils.radiansToDegrees);
 //basic 90* movement	
 		if(forwardMove){
-			move(1.57079633f);
+			move(1.57079633f); //I'm hard coding the angle in radians.
 		}
 		else if(reverseMove){
 			move(4.71238898f);
@@ -44,11 +43,11 @@ public class Ship {
 //movement base on angel
 		if (rightTurn){
 			angle += angleStep;
-			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
+			if (angle > 6.283185307179586476925286766559f){angle = 6.283185307179586476925286766559f - angle;} //PI*2
 		}
 		else if (leftTurn){
 			angle -= angleStep;
-			if (angle < 0){angle = MathUtils.PI*2 + angle;}
+			if (angle < 0){angle = 6.283185307179586476925286766559f + angle;}
 		}
 		if (rightStrafe){
 			move(validAngle(angle+1.57079633f));
@@ -58,26 +57,39 @@ public class Ship {
 		}
 		if (forward){
 			move(angle);
-			} 	
+		} 	
 		else if (reverse){
 			move(validAngle(angle+3.14159265f));} 
-		else {
+//slow down and stop;
+		if(!moved){
 			newPosition.y *= friction;
 			newPosition.x *= friction;
 		}
+	//	if(newPosition.y < 0.00001 && newPosition.x < 0.00001){
+	//		System.out.println("is this the issuse");
+	//		newPosition.y *= 0;
+	//		newPosition.x *= 0;
+	//	}
+		moved = false;
+//To do: set max speed
+		if(newPosition.y - position.y > 10){
+			System.out.println(newPosition.y - position.y);
+		}
+//add to position
 		position.y += newPosition.y;
 		position.x += newPosition.x;
-		
+//apply to bounding box
 		shape.setRotation(angle*MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);
 	}
 	private void move(float setAngle){
+		moved = true;
 		newPosition.y += Math.sin(setAngle) * velocity.y;
 		newPosition.x += Math.cos(setAngle) * velocity.x;
 	}
 	private float validAngle(float i){
-		if (i > MathUtils.PI*2){i = MathUtils.PI*2 - angle;} 
-		if (i < 0){angle = MathUtils.PI*2 + i;}
+		//if (i > 6.283185307179586476925286766559f){i = 6.283185307179586476925286766559f % angle;} 
+		//if (i < 0){angle = 6.283185307179586476925286766559f + i;}
 		return i;
 	}
 	public ControlBehavior getBehavior() {

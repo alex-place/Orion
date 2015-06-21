@@ -43,82 +43,83 @@ public class TestControlBehavior implements ControlBehavior {
 	@Override
 	public void handleKeyDown(int keycode) {
 		switch (keycode) {
-		case Keys.W:
-			ship.forward = true;
-			break;
-		case Keys.A:
-			ship.leftStrafe = true;
-			break;
-		case Keys.S:
-			ship.reverse = true;
-			break;
-		case Keys.D:
-			ship.rightStrafe = true;
-			break;
-		case Keys.Q:
-			ship.leftTurn = true;
-			break;
-		case Keys.E:
-			ship.rightTurn = true;
-			break;
-		case Keys.T:
-			ship.forwardMove = true;
-			break;
-		case Keys.G:
-			ship.reverseMove = true;
-			break;
-		case Keys.F:
-			ship.leftMove = true;
-			break;
-		case Keys.H:
-			ship.rightMove = true;
-			break;
-		case Keys.M:
-			if(mouseLook == false)
-				mouseLook = true;
-			else if(mouseLook == true)
-				mouseLook = false;
-			break;
-		default:
-			break;
+			case Keys.W:
+				ship.forward = true;
+				break;
+			case Keys.A:
+				ship.leftStrafe = true;
+				break;
+			case Keys.S:
+				ship.reverse = true;
+				break;
+			case Keys.D:
+				ship.rightStrafe = true;
+				break;
+			case Keys.Q:
+				ship.leftTurn = true;
+				break;
+			case Keys.E:
+				ship.rightTurn = true;
+				break;
+			case Keys.T:
+				ship.forwardMove = true;
+				break;
+			case Keys.G:
+				ship.reverseMove = true;
+				break;
+			case Keys.F:
+				ship.leftMove = true;
+				break;
+			case Keys.H:
+				ship.rightMove = true;
+				break;
+			case Keys.M:
+				if(mouseLook == false)
+					mouseLook = true;
+				else if(mouseLook == true)
+					mouseLook = false;
+				break;
+			default:
+				break;
 		}
 
 	}
 	
 	public void handleKeyUp(int keycode) {
+		ship.moved = false;
 		switch (keycode) {
-		case Keys.W:
-			ship.forward = false;
-			break;
-		case Keys.A:
-			ship.leftStrafe = false;
-			break;
-		case Keys.S:
-			ship.reverse = false;
-			break;
-		case Keys.D:
-			ship.rightStrafe = false;
-			break;
-		case Keys.Q:
-			ship.leftTurn = false;
-			break;
-		case Keys.E:
-			ship.rightTurn = false;
-			break;
-		case Keys.T:
-			ship.forwardMove = false;
-			break;
-		case Keys.G:
-			ship.reverseMove = false;
-			break;
-		case Keys.F:
-			ship.leftMove = false;
-			break;
-		case Keys.H:
-			ship.rightMove = false;
-			break;
-		default:
-			break;
+			case Keys.W:
+				ship.forward = false;
+				break;
+			case Keys.A:
+				ship.leftStrafe = false;
+				break;
+			case Keys.S:
+				ship.reverse = false;
+				break;
+			case Keys.D:
+				ship.rightStrafe = false;
+				break;
+			case Keys.Q:
+				ship.leftTurn = false;
+				break;
+			case Keys.E:
+				ship.rightTurn = false;
+				break;
+			case Keys.T:
+				ship.forwardMove = false;
+				break;
+			case Keys.G:
+				ship.reverseMove = false;
+				break;
+			case Keys.F:
+				ship.leftMove = false;
+				break;
+			case Keys.H:
+				ship.rightMove = false;
+				break;
+			default:
+				break;
 		}
 	}
 
