@@ -5,8 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.BulletK;
+import com.gdxjam.orion.entities.Satellite;
 import com.gdxjam.orion.entities.Sun;
 import com.gdxjam.orion.entities.ships.Ship;
+import com.sun.xml.internal.stream.Entity;
 
 public class EntityFactory {
 
@@ -26,28 +28,26 @@ public class EntityFactory {
 
 	}
 	public static Sun createSun(){
-		float[] vectors = {
-				3, 0,
-				4, 0,
-				5, 1,
-				6, 2,
-				7, 3,
-				7, 4,
-				6, 5,
-				5, 6,
-				4, 7,
-				3, 7,
-				2, 6,
-				1, 5,
-				0, 4,
-				0, 3,
-				1, 2,
-				2, 1};
 		Polygon poly = new Polygon();
+		float scale = 100;
+		float[] vectors = {3*scale, 0*scale, 4*scale, 0*scale, 5*scale, 1*scale, 6*scale, 2*scale, 7*scale, 3*scale,7*scale, 4*scale, 6*scale, 5*scale, 5*scale, 6*scale, 4*scale,
+				7*scale, 3*scale, 7*scale, 2*scale, 6*scale, 1*scale, 5*scale, 0*scale, 4*scale, 0*scale, 3*scale, 1*scale, 2*scale, 2*scale, 1*scale}; // very ugly circle need replaced
 		poly.setVertices(vectors);
-		poly.scale(Float.MAX_VALUE);
-		Sun sun = new  Sun(poly, new Vector2( 0, 0));
+		poly.scale(Float.MAX_VALUE); // this isn't doing anything
+		Sun sun = new  Sun(poly, new Vector2( Constants.WORLD_WIDTH/2, Constants.CAMERA_HEIGHT/2));
 		GameManager.getActive().add(sun);
 		return sun;
+	}	
+	
+	public static Satellite createsatellite(com.gdxjam.orion.entities.Entity parent){
+		Polygon poly = new Polygon();
+		float scale = 10;
+		float[] vectors = {3*scale, 0*scale, 4*scale, 0*scale, 5*scale, 1*scale, 6*scale, 2*scale, 7*scale, 3*scale,7*scale, 4*scale, 6*scale, 5*scale, 5*scale, 6*scale, 4*scale,
+				7*scale, 3*scale, 7*scale, 2*scale, 6*scale, 1*scale, 5*scale, 0*scale, 4*scale, 0*scale, 3*scale, 1*scale, 2*scale, 2*scale, 1*scale}; // very ugly circle need replaced
+		poly.setVertices(vectors);
+		poly.scale(Float.MAX_VALUE); // this isn't doing anything
+		Satellite satellite = new  Satellite(poly, parent, 50f);
+		GameManager.getActive().add(satellite);
+		return satellite;
 	}
 }

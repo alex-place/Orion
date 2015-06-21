@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Sun extends Entity{
 	private Polygon poly; 
 	private Vector2 position;
+
 	public Sun(Polygon poly, Vector2 position){
 		this.position = position;
 		this.poly = poly;

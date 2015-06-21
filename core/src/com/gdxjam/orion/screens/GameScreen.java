@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Circle;
 import com.gdxjam.orion.GameManager;
+import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.input.DevGestureInput;
 import com.gdxjam.orion.input.DevInputProcessor;
@@ -20,7 +21,7 @@ import com.gdxjam.orion.net.GameServer;
 import com.gdxjam.orion.utils.Constants;
 import com.gdxjam.orion.utils.WorldGenerator;
 import com.gdxjam.orion.utils.WorldParameters;
-import com.sun.xml.internal.stream.Entity;
+
 
 public class GameScreen implements Screen {
 
@@ -71,30 +72,29 @@ public class GameScreen implements Screen {
 		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
-
+//update players
 		for (Player player : GameManager.getPlayers().values()) {
 			player.update(delta);
 		}
-		
-		for (com.gdxjam.orion.entities.Entity e : GameManager.getActive()) {
+//update entitys	
+		for (Entity e : GameManager.getActive()) {
 			e.update(delta);;
 		}
+//start debug render
 		renderer.setProjectionMatrix(camera.combined);
-
 		renderer.begin(ShapeType.Line);
 		renderer.setColor(1, 0, 0, 1);
 		// renderer.circle(circle.x, circle.y, circle.radius);
-
-		for (com.gdxjam.orion.entities.Entity e : GameManager.getActive()) {
-			System.out.println("balls");
-			renderer.polygon(e.getPolygon().getVertices());
-		}
-		
+//debug render	players
 		for (Player player : GameManager.getPlayers().values()) {
 			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}
+//debug render entitys
+		for (Entity e : GameManager.getActive()) {
+			renderer.polygon(e.getPolygon().getTransformedVertices());
+		}
 
-		// Draw good stuff here
+// Draw good stuff here
 
 		renderer.end();
 
