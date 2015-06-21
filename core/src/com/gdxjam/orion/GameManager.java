@@ -18,9 +18,8 @@ public class GameManager {
 
 	private static Pool<BulletK> bullets = Pools.get(BulletK.class, 1000000);
 
-	private static Array<Entity> toBeAdded = new Array<Entity>();
 	private static Array<Entity> active = new Array<Entity>();
-	private static Array<Entity> toBeDestroyed = new Array<Entity>();
+
 
 	public static void init() {
 		// world.setContactListener(new WorldContactListener());
@@ -38,16 +37,11 @@ public class GameManager {
 		return bullets;
 	}
 
-	public static Array<Entity> getToBeAdded() {
-		return toBeAdded;
-	}
+
 
 	public static Array<Entity> getActive() {
 		return active;
 	}
 
-	public static Array<Entity> getToBeDestroyed() {
-		return toBeDestroyed;
-	}
 
 }

@@ -20,6 +20,7 @@ import com.gdxjam.orion.net.GameServer;
 import com.gdxjam.orion.utils.Constants;
 import com.gdxjam.orion.utils.WorldGenerator;
 import com.gdxjam.orion.utils.WorldParameters;
+import com.sun.xml.internal.stream.Entity;
 
 public class GameScreen implements Screen {
 
@@ -74,13 +75,21 @@ public class GameScreen implements Screen {
 		for (Player player : GameManager.getPlayers().values()) {
 			player.update(delta);
 		}
-
+		
+		for (com.gdxjam.orion.entities.Entity e : GameManager.getActive()) {
+			e.update(delta);;
+		}
 		renderer.setProjectionMatrix(camera.combined);
 
 		renderer.begin(ShapeType.Line);
 		renderer.setColor(1, 0, 0, 1);
 		// renderer.circle(circle.x, circle.y, circle.radius);
 
+		for (com.gdxjam.orion.entities.Entity e : GameManager.getActive()) {
+			System.out.println("balls");
+			renderer.polygon(e.getPolygon().getVertices());
+		}
+		
 		for (Player player : GameManager.getPlayers().values()) {
 			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}

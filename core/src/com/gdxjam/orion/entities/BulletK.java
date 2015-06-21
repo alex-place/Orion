@@ -16,7 +16,7 @@ public class BulletK extends Entity implements Poolable {
 
 	public BulletK() {
 	}
-
+	
 	public void init(float angle, Vector2 start) {
 		this.angle = angle;
 		this.start = start;

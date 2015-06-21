@@ -10,6 +10,6 @@ public class WorldGenerator {
 	}
 
 	public void createSolarSystem() {
-
+		EntityFactory.createSun();
 	}
 }
