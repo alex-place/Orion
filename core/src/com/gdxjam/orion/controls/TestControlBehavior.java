@@ -47,10 +47,10 @@ public class TestControlBehavior implements ControlBehavior {
 			ship.forward = true;
 			break;
 		case Keys.A:
-			ship.reverse = true;
+			ship.leftStrafe = true;
 			break;
 		case Keys.S:
-			ship.leftStrafe = true;
+			ship.reverse = true;
 			break;
 		case Keys.D:
 			ship.rightStrafe = true;
@@ -76,7 +76,7 @@ public class TestControlBehavior implements ControlBehavior {
 		case Keys.M:
 			if(mouseLook == false)
 				mouseLook = true;
-			if(mouseLook == true)
+			else if(mouseLook == true)
 				mouseLook = false;
 			break;
 		default:
@@ -91,10 +91,10 @@ public class TestControlBehavior implements ControlBehavior {
 			ship.forward = false;
 			break;
 		case Keys.A:
-			ship.reverse = false;
+			ship.leftStrafe = false;
 			break;
 		case Keys.S:
-			ship.leftStrafe = false;
+			ship.reverse = false;
 			break;
 		case Keys.D:
 			ship.rightStrafe = false;
