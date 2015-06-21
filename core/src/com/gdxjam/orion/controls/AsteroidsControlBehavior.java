@@ -26,7 +26,6 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 	}
 	@Override
 	public void handleMouse(Vector2 position) {
-		ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
 	}
 
 	@Override
@@ -45,10 +44,10 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 			ship.reverse = true;
 			break;
 		case Keys.S:
-			ship.leftStrafe = true;
+			ship.leftTurn = true;
 			break;
 		case Keys.D:
-			ship.rightStrafe = true;
+			ship.rightTurn = true;
 			break;
 		default:
 			break;
@@ -65,10 +64,10 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 			ship.reverse = false;
 			break;
 		case Keys.S:
-			ship.leftStrafe = false;
+			ship.leftTurn = false;
 			break;
 		case Keys.D:
-			ship.rightStrafe = false;
+			ship.rightTurn = false;
 			break;
 		default:
 			break;

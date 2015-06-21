@@ -25,7 +25,6 @@ public class UFOControlBehavior implements ControlBehavior {
 	}
 	@Override
 	public void handleMouse(Vector2 position) {
-		ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
 	}
 
 	@Override
@@ -38,16 +37,16 @@ public class UFOControlBehavior implements ControlBehavior {
 	public void handleKeyDown(int keycode) {
 		switch (keycode) {
 		case Keys.W:
-			ship.forward = true;
+			ship.forwardMove = true;
 			break;
 		case Keys.A:
-			ship.reverse = true;
+			ship.reverseMove = true;
 			break;
 		case Keys.S:
-			ship.leftStrafe = true;
+			ship.leftMove = true;
 			break;
 		case Keys.D:
-			ship.rightStrafe = true;
+			ship.rightMove = true;
 			break;
 		default:
 			break;
@@ -58,16 +57,16 @@ public class UFOControlBehavior implements ControlBehavior {
 	public void handleKeyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:
-			ship.forward = false;
+			ship.forwardMove = false;
 			break;
 		case Keys.A:
-			ship.reverse = false;
+			ship.reverseMove = false;
 			break;
 		case Keys.S:
-			ship.leftStrafe = false;
+			ship.leftMove = false;
 			break;
 		case Keys.D:
-			ship.rightStrafe = false;
+			ship.rightMove = false;
 			break;
 		default:
 			break;

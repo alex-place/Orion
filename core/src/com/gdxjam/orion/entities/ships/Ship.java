@@ -88,6 +88,7 @@ public class Ship {
 		newPosition.x += Math.cos(setAngle) * velocity.x;
 	}
 	private float validAngle(float i){
+		//woks without it but this need fixed
 		//if (i > 6.283185307179586476925286766559f){i = 6.283185307179586476925286766559f % angle;} 
 		//if (i < 0){angle = 6.283185307179586476925286766559f + i;}
 		return i;
