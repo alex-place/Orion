@@ -51,13 +51,23 @@ public class Ship {
 			if (angle < 0){angle = MathUtils.PI*2 + angle;}
 		}
 		if (rightStrafe){
-			move(angle+1.57079633f);
+			float i = angle+1.57079633f;
+			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
+			if (angle < 0){angle = MathUtils.PI*2 + angle;}
+			move(i);
 		}
 		else if (leftStrafe){
+			float i = angle+1.57079633f;
+			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
+			if (angle < 0){angle = MathUtils.PI*2 + angle;}
 			move(angle-1.57079633f);
 		}
-		if (forward){move(angle);} 		
-		else if (reverse){move(angle+3.14159265f);} 
+		if (forward){move(angle);} 	
+			float i = angle+3.14159265f;
+			if (angle > MathUtils.PI*2){angle = MathUtils.PI*2 - angle;} 
+			if (angle < 0){angle = MathUtils.PI*2 + angle;
+		}
+		else if (reverse){move(i);} 
 		else {
 			newPosition.y *= friction;
 			newPosition.x *= friction;

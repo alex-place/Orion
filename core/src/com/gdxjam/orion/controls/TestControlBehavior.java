@@ -16,7 +16,7 @@ import com.gdxjam.orion.utils.EntityFactory;
  * */
 public class TestControlBehavior implements ControlBehavior {
 
-	
+	private boolean mouseLook = false;
 	private Ship ship;
 
 	public TestControlBehavior() {
@@ -24,53 +24,14 @@ public class TestControlBehavior implements ControlBehavior {
 
 	@Override
 	public void init(Ship ship) {
+		System.out.println("TestControlBehavior");
 		this.ship = ship;
 	}
 	@Override
-	public void forwardDown(float delta) {
-		ship.forward = true;
-	}
-
-	@Override
-	public void reverseDown(float delta) {
-		ship.reverse = true;
-	}
-
-	@Override
-	public void leftDown(float delta) {
-		ship.leftStrafe = true;
-	}
-
-	@Override
-	public void rightDown(float delta) {
-		ship.rightStrafe = true;
-	}
-
-	@Override
-	public void forwardUp(float delta) {
-		ship.forward = false;
-	}
-
-	@Override
-	public void reverseUp(float delta) {
-		ship.reverse = false;
-	}
-
-	@Override
-	public void leftUp(float delta) {
-		ship.leftStrafe = false;
-	
-	}
-
-	@Override
-	public void rightUp(float delta) {
-		ship.rightStrafe = false;
-	}
-
-
-	@Override
 	public void handleMouse(Vector2 position) {
-		ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
+		if(mouseLook){
+			ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
+		}
 	}
 
 	@Override
@@ -83,16 +44,40 @@ public class TestControlBehavior implements ControlBehavior {
 	public void handleKeyDown(int keycode) {
 		switch (keycode) {
 		case Keys.W:
-			forwardDown(Gdx.graphics.getDeltaTime());
+			ship.forward = true;
 			break;
 		case Keys.A:
-			leftDown(Gdx.graphics.getDeltaTime());
+			ship.reverse = true;
 			break;
 		case Keys.S:
-			reverseDown(Gdx.graphics.getDeltaTime());
+			ship.leftStrafe = true;
 			break;
 		case Keys.D:
-			rightDown(Gdx.graphics.getDeltaTime());
+			ship.rightStrafe = true;
+			break;
+		case Keys.Q:
+			ship.leftTurn = true;
+			break;
+		case Keys.E:
+			ship.rightTurn = true;
+			break;
+		case Keys.T:
+			ship.forwardMove = true;
+			break;
+		case Keys.G:
+			ship.reverseMove = true;
+			break;
+		case Keys.F:
+			ship.leftMove = true;
+			break;
+		case Keys.H:
+			ship.rightMove = true;
+			break;
+		case Keys.M:
+			if(mouseLook == false)
+				mouseLook = true;
+			if(mouseLook == true)
+				mouseLook = false;
 			break;
 		default:
 			break;
@@ -103,20 +88,38 @@ public class TestControlBehavior implements ControlBehavior {
 	public void handleKeyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:
-			forwardUp(Gdx.graphics.getDeltaTime());
+			ship.forward = false;
 			break;
 		case Keys.A:
-			leftUp(Gdx.graphics.getDeltaTime());
+			ship.reverse = false;
 			break;
 		case Keys.S:
-			reverseUp(Gdx.graphics.getDeltaTime());
+			ship.leftStrafe = false;
 			break;
 		case Keys.D:
-			rightUp(Gdx.graphics.getDeltaTime());
+			ship.rightStrafe = false;
+			break;
+		case Keys.Q:
+			ship.leftTurn = false;
+			break;
+		case Keys.E:
+			ship.rightTurn = false;
+			break;
+		case Keys.T:
+			ship.forwardMove = false;
+			break;
+		case Keys.G:
+			ship.reverseMove = false;
+			break;
+		case Keys.F:
+			ship.leftMove = false;
+			break;
+		case Keys.H:
+			ship.rightMove = false;
 			break;
 		default:
 			break;
 		}
-
 	}
+
 }
