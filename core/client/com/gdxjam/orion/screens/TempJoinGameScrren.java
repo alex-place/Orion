@@ -42,7 +42,7 @@ public class TempJoinGameScrren implements Screen {
 		Assets.getManager().finishLoading();
 
 		shipType = new SelectBox<ShipType>(Assets.skin);
-		shipType.setItems(ShipType.DEFAULT, ShipType.SHOOTER, ShipType.TESTSHIP);
+		shipType.setItems(ShipType.values());
 		shipType.addListener(new ChangeListener() {
 
 			@Override
