@@ -15,13 +15,14 @@ import com.badlogic.gdx.math.Circle;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.entities.bullets.LinearBullet;
+import com.gdxjam.orion.entities.bullets.Projectile;
 import com.gdxjam.orion.input.DevGestureInput;
 import com.gdxjam.orion.input.DevInputProcessor;
 import com.gdxjam.orion.net.GameServer;
 import com.gdxjam.orion.utils.Constants;
 import com.gdxjam.orion.utils.WorldGenerator;
 import com.gdxjam.orion.utils.WorldParameters;
-
 
 public class GameScreen implements Screen {
 
@@ -72,29 +73,41 @@ public class GameScreen implements Screen {
 		server.update();
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl20.glClearColor(0, 0, 0, 1);
-//update players
+		// update players
 		for (Player player : GameManager.getPlayers().values()) {
 			player.update(delta);
 		}
-//update entitys	
-		for (Entity e : GameManager.getActive()) {
-			e.update(delta);;
+		// update entitys
+		for (Entity e : GameManager.getActiveEntities()) {
+			e.update(delta);
+			;
 		}
-//start debug render
+
+		for (Projectile p : GameManager.getActiveBullets()) {
+			p.update(delta);
+		}
+
+		// start debug render
 		renderer.setProjectionMatrix(camera.combined);
 		renderer.begin(ShapeType.Line);
 		renderer.setColor(1, 0, 0, 1);
 		// renderer.circle(circle.x, circle.y, circle.radius);
-//debug render	players
+		// debug render players
 		for (Player player : GameManager.getPlayers().values()) {
 			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}
-//debug render entitys
-		for (Entity entity : GameManager.getActive()) {
+		// debug render entitys
+		for (Entity entity : GameManager.getActiveEntities()) {
 			renderer.polygon(entity.getPolygon().getTransformedVertices());
 		}
 
-// Draw good stuff here
+		for (Projectile p : GameManager.getActiveBullets()) {
+			if (p instanceof LinearBullet) {
+				LinearBullet bullet = (LinearBullet) p;
+				renderer.circle(bullet.getPosition().x, bullet.getPosition().y, bullet.getRadius());
+			}
+
+		}
 
 		renderer.end();
 

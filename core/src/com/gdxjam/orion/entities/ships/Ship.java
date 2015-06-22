@@ -14,7 +14,6 @@ public class Ship {
 	private Polygon shape;
 	private float i;
 
-	
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
 		this.shape = shape;
 		position = new Vector2(0, 0);
@@ -27,75 +26,80 @@ public class Ship {
 	}
 
 	public void update(float delta) {
-//basic 90* movement	
-		if(forwardMove){
-			move(1.57079633f); //I'm hard coding the angle in radians.
+		// basic 90* movement
+		if (forwardMove) {
+			move(1.57079633f, delta); // I'm hard coding the angle in radians.
+		} else if (reverseMove) {
+			move(4.71238898f, delta);
 		}
-		else if(reverseMove){
-			move(4.71238898f);
+		if (leftMove) {
+			move(3.14159265f, delta);
+		} else if (rightMove) {
+			move(0, delta);
 		}
-		if(leftMove){
-			move(3.14159265f);
-		}
-		else if(rightMove){
-			move(0);
-		}
-//movement base on angel
-		if (rightTurn){
+		// movement base on angel
+		if (rightTurn) {
 			angle += angleStep;
-			if (angle > 6.283185307179586476925286766559f){angle = 6.283185307179586476925286766559f - angle;} //PI*2
-		}
-		else if (leftTurn){
+			if (angle > 6.283185307179586476925286766559f) {
+				angle = 6.283185307179586476925286766559f - angle;
+			} // PI*2
+		} else if (leftTurn) {
 			angle -= angleStep;
-			if (angle < 0){angle = 6.283185307179586476925286766559f + angle;}
+			if (angle < 0) {
+				angle = 6.283185307179586476925286766559f + angle;
+			}
 		}
-		if (rightStrafe){
-			move(validAngle(angle+1.57079633f));
+		if (rightStrafe) {
+			move(validAngle(angle + 1.57079633f), delta);
+		} else if (leftStrafe) {
+			move(validAngle(angle - 1.57079633f), delta);
 		}
-		else if (leftStrafe){
-			move(validAngle(angle-1.57079633f));
+		if (forward) {
+			move(angle, delta);
+		} else if (reverse) {
+			move(validAngle(angle + 3.14159265f), delta);
 		}
-		if (forward){
-			move(angle);
-		} 	
-		else if (reverse){
-			move(validAngle(angle+3.14159265f));} 
-//slow down and stop;
-		if(!moved){
+		// slow down and stop;
+		if (!moved) {
 			newPosition.y *= friction;
 			newPosition.x *= friction;
 		}
-	//	if(newPosition.y < 0.00001 && newPosition.x < 0.00001){
-	//		System.out.println("is this the issuse");
-	//		newPosition.y *= 0;
-	//		newPosition.x *= 0;
-	//	}
+		// if(newPosition.y < 0.00001 && newPosition.x < 0.00001){
+		// System.out.println("is this the issuse");
+		// newPosition.y *= 0;
+		// newPosition.x *= 0;
+		// }
 		moved = false;
-//To do: set max speed
-		if(newPosition.y - position.y > 10){
+		// To do: set max speed
+		if (newPosition.y - position.y > 10) {
 			System.out.println(newPosition.y - position.y);
 		}
-//add to position
+		// add to position
 		position.y += newPosition.y;
 		position.x += newPosition.x;
-//apply to bounding box
-		shape.setRotation(angle*MathUtils.radiansToDegrees);
+		// apply to bounding box
+		shape.setRotation(angle * MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);
 	}
-	private void move(float setAngle){
+
+	private void move(float setAngle, float delta) {
 		moved = true;
-		newPosition.y += Math.sin(setAngle) * velocity.y;
-		newPosition.x += Math.cos(setAngle) * velocity.x;
+		newPosition.y += Math.sin(setAngle) * velocity.y * delta;
+		newPosition.x += Math.cos(setAngle) * velocity.x * delta;
 	}
-	private float validAngle(float i){
-		//woks without it but this need fixed
-		//if (i > 6.283185307179586476925286766559f){i = 6.283185307179586476925286766559f % angle;} 
-		//if (i < 0){angle = 6.283185307179586476925286766559f + i;}
+
+	private float validAngle(float i) {
+		// woks without it but this need fixed
+		// if (i > 6.283185307179586476925286766559f){i =
+		// 6.283185307179586476925286766559f % angle;}
+		// if (i < 0){angle = 6.283185307179586476925286766559f + i;}
 		return i;
 	}
+
 	public ControlBehavior getBehavior() {
 		return behavior;
 	}
+
 	public void setBehavior(ControlBehavior behavior) {
 		this.behavior = behavior;
 	}
@@ -111,9 +115,11 @@ public class Ship {
 	public float getAngle() {
 		return angle;
 	}
-	public void setAngle(float angle){
+
+	public void setAngle(float angle) {
 		this.angle = angle;
 	}
+
 	public float getSpeed() {
 		return speed;
 	}
@@ -121,6 +127,7 @@ public class Ship {
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
+
 	public void stepAngle(float step) {
 		this.angle += step;
 	}
@@ -128,6 +135,7 @@ public class Ship {
 	public void setAngleStep(float angleStep) {
 		this.angleStep = angleStep;
 	}
+
 	public Polygon getPolygon() {
 		return shape;
 	}

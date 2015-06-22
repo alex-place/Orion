@@ -4,10 +4,10 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
-import com.gdxjam.orion.entities.BulletK;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Satellite;
 import com.gdxjam.orion.entities.Sun;
+import com.gdxjam.orion.entities.bullets.LinearBullet;
 import com.gdxjam.orion.entities.ships.Ship;
 
 public class EntityFactory {
@@ -15,8 +15,10 @@ public class EntityFactory {
 	static int locked = 0;
 	static int unlocked = 0;
 
-	public static void createBulletK(float angle, Vector2 start) {
-		BulletK bullet = new BulletK(angle, start);
+	public static void createBullet(Vector2 start, Vector2 target) {
+		LinearBullet bullet = (LinearBullet) GameManager.getBulletPool().obtain();
+		bullet.init(start, target, 1, 1);
+
 	}
 
 	public static Ship createShip(float x, float y, float angle, ControlBehavior behavior) {
@@ -41,7 +43,7 @@ public class EntityFactory {
 		poly.setVertices(vectors);
 		poly.scale(Float.MAX_VALUE); // this isn't doing anything
 		Sun sun = new Sun(poly, new Vector2(Constants.WORLD_WIDTH / 2, Constants.CAMERA_HEIGHT / 2));
-		GameManager.getActive().add(sun);
+		GameManager.getActiveEntities().add(sun);
 		return sun;
 	}
 
@@ -57,7 +59,7 @@ public class EntityFactory {
 																								// replaced
 		poly.setVertices(vectors);
 		Satellite satellite = new Satellite(poly, parent, 50f);
-		GameManager.getActive().add(satellite);
+		GameManager.getActiveEntities().add(satellite);
 		return satellite;
 	}
 }
