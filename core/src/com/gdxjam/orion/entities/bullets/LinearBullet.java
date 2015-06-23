@@ -23,12 +23,12 @@ public class LinearBullet extends Projectile {
 	}
 
 	public void init(Vector2 start, Vector2 target, LinearBulletParameters p) {
-		this.start = start;
-		this.target = target;
+		this.start = new Vector2(start);
+		this.target = new Vector2(target);
 		this.p = p;
-		Vector2 tmp = start.sub(target);
+		Vector2 tmp = this.start.sub(target);
 		angle = MathUtils.atan2(tmp.y, tmp.x);
-		position = start;
+		position = new Vector2(start);
 
 		GameManager.getActiveBullets().add(this);
 
@@ -36,8 +36,8 @@ public class LinearBullet extends Projectile {
 
 	@Override
 	public void update(float delta) {
-		position.x += MathUtils.sin(angle) * p.speed * delta;
-		position.y += MathUtils.cos(angle) * p.speed * delta;
+		position.x += MathUtils.cos(angle) * p.speed * delta;
+		position.y += MathUtils.sin(angle) * p.speed * delta;
 	}
 
 	@Override

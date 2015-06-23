@@ -72,7 +72,7 @@ public class Ship {
 		moved = false;
 		// To do: set max speed
 		if (newPosition.y - position.y > 10) {
-			System.out.println(newPosition.y - position.y);
+			// System.out.println(newPosition.y - position.y);
 		}
 		// add to position
 		position.y += newPosition.y;

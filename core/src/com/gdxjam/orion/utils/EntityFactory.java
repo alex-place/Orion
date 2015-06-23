@@ -16,7 +16,7 @@ public class EntityFactory {
 	static int unlocked = 0;
 
 	public static void createBullet(Vector2 start, Vector2 target) {
-		LinearBullet bullet = (LinearBullet) GameManager.getBulletPool().obtain();
+		LinearBullet bullet = (LinearBullet) GameManager.getLinearBulletPool().obtain();
 		bullet.init(start, target, 1, 1);
 
 	}

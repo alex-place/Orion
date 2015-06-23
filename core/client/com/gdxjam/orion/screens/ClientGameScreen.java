@@ -74,7 +74,8 @@ public class ClientGameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		// handleInput();
+		handleMouseClick();
+		handleMouseMove();
 		client.update();
 		batch.setProjectionMatrix(cam.combined);
 
