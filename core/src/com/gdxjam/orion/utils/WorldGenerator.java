@@ -1,7 +1,7 @@
 package com.gdxjam.orion.utils;
 
-import com.gdxjam.orion.entities.Satellite;
-import com.gdxjam.orion.entities.Sun;
+import com.gdxjam.orion.entities.SolarSystem.Satellite;
+import com.gdxjam.orion.entities.SolarSystem.Sun;
 
 public class WorldGenerator {
 
@@ -14,7 +14,8 @@ public class WorldGenerator {
 
 	public void createSolarSystem() {
 		Sun sun = EntityFactory.createSun();
-		Satellite s1 = EntityFactory.createsatellite(sun);
+		Satellite s1 = EntityFactory.createsatellite(sun, 1050);
+		Satellite s3 = EntityFactory.createsatellite(s1,100);
 
 	}
 }
