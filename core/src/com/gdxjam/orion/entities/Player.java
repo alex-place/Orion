@@ -6,8 +6,6 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.ships.Ship;
 
-//import com.gdxjam.orion.entities.ships.pos;
-
 public class Player extends Entity {
 
 	private Ship ship;
@@ -33,7 +31,7 @@ public class Player extends Entity {
 	}
 
 	public void setAngle(float angle) {
-		//ship.setAngle(angle);
+		// ship.setAngle(angle);
 	}
 
 	public ControlBehavior getBehavior() {

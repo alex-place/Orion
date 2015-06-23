@@ -24,6 +24,7 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 	public void init(Ship ship) {
 		this.ship = ship;
 	}
+
 	@Override
 	public void handleMouse(Vector2 position) {
 	}
@@ -31,7 +32,7 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 	@Override
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		
+		EntityFactory.createBullet(ship.getPosition(), position);
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 		}
 
 	}
-	
+
 	public void handleKeyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:

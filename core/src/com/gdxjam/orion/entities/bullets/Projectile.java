@@ -23,8 +23,8 @@ public abstract class Projectile implements Poolable {
 	}
 
 	public void init(Vector2 start, Vector2 target) {
-		this.start = start;
-		this.target = target;
+		this.start = new Vector2(start);
+		this.target = new Vector2(target);
 	}
 
 	public Vector2 getStart() {

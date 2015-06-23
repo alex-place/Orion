@@ -4,14 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.ships.Ship;
 import com.gdxjam.orion.utils.EntityFactory;
 
 /**
  * These behaviors will define how a ship moves these should not handle client
  * requests (exiting to menu, toggling UI overlays)... these behaviors are
- * handled exclusively on the server angel are always in radians
+ * handled exclusively on the server angles are generally in radians
  * */
 public class ShooterControlBehavior implements ControlBehavior {
 
@@ -24,15 +23,18 @@ public class ShooterControlBehavior implements ControlBehavior {
 	public void init(Ship ship) {
 		this.ship = ship;
 	}
+
 	@Override
 	public void handleMouse(Vector2 position) {
-		ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
+		ship.setAngle(MathUtils.atan2(position.y - ship.getPosition().y, position.x - ship.getPosition().x));
+
 	}
 
 	@Override
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		
+		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
+		EntityFactory.createBullet(ship.getPosition(), position);
 	}
 
 	@Override
@@ -55,7 +57,7 @@ public class ShooterControlBehavior implements ControlBehavior {
 		}
 
 	}
-	
+
 	public void handleKeyUp(int keycode) {
 		switch (keycode) {
 		case Keys.W:
@@ -77,4 +79,3 @@ public class ShooterControlBehavior implements ControlBehavior {
 	}
 
 }
-

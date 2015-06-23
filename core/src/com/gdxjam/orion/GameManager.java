@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.badlogic.gdx.utils.Pools;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.entities.bullets.LinearBullet;
 import com.gdxjam.orion.entities.bullets.Projectile;
 
 public class GameManager {
@@ -16,7 +16,13 @@ public class GameManager {
 
 	private static HashMap<Integer, Player> players = new HashMap<Integer, Player>();
 
-	private static Pool<Projectile> bulletPool = Pools.get(Projectile.class, 1000000);
+	private static Pool<LinearBullet> linearBulletPool = new Pool<LinearBullet>() {
+		@Override
+		protected LinearBullet newObject() {
+			return new LinearBullet();
+		}
+	};
+
 	private static Array<Projectile> activeBullets = new Array<Projectile>(1000);
 
 	private static Array<Entity> active = new Array<Entity>();
@@ -32,8 +38,8 @@ public class GameManager {
 		DEFAULT, SHOOTER, UFO, TESTSHIP;
 	}
 
-	public static Pool<Projectile> getBulletPool() {
-		return bulletPool;
+	public static Pool<LinearBullet> getLinearBulletPool() {
+		return linearBulletPool;
 	}
 
 	public static Array<Entity> getActiveEntities() {

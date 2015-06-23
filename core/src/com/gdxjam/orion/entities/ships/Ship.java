@@ -1,5 +1,6 @@
 package com.gdxjam.orion.entities.ships;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -72,11 +73,12 @@ public class Ship {
 		moved = false;
 		// To do: set max speed
 		if (newPosition.y - position.y > 10) {
-			System.out.println(newPosition.y - position.y);
+			// System.out.println(newPosition.y - position.y);
 		}
 		// add to position
 		position.y += newPosition.y;
 		position.x += newPosition.x;
+//		Gdx.app.log(this.getClass().getSimpleName(), "Player position: " + position.toString());
 		// apply to bounding box
 		shape.setRotation(angle * MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);

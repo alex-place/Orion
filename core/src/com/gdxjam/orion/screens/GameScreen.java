@@ -76,15 +76,22 @@ public class GameScreen implements Screen {
 		// update players
 		for (Player player : GameManager.getPlayers().values()) {
 			player.update(delta);
+			// Gdx.app.log(this.getClass().getSimpleName(), "Player: " +
+			// player.getPosition().toString());
+
 		}
 		// update entitys
 		for (Entity e : GameManager.getActiveEntities()) {
 			e.update(delta);
-			;
 		}
 
 		for (Projectile p : GameManager.getActiveBullets()) {
 			p.update(delta);
+			if (p instanceof LinearBullet) {
+				LinearBullet bullet = (LinearBullet) p;
+				// Gdx.app.log(this.getClass().getSimpleName(), "Projectile: " +
+				// bullet.getPosition().toString());
+			}
 		}
 
 		// start debug render
@@ -104,7 +111,7 @@ public class GameScreen implements Screen {
 		for (Projectile p : GameManager.getActiveBullets()) {
 			if (p instanceof LinearBullet) {
 				LinearBullet bullet = (LinearBullet) p;
-				renderer.circle(bullet.getPosition().x, bullet.getPosition().y, bullet.getRadius());
+				renderer.circle(bullet.getPosition().x, bullet.getPosition().y, bullet.getRadius(), 8);
 			}
 
 		}

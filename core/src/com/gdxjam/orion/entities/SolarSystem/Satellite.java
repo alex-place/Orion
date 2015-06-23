@@ -29,7 +29,6 @@ public class Satellite extends Entity{
 		   // rotatedY = Math.sin(angle) * (point.x - center.x) + Math.cos(angle) * (point.y - center.y) + center.y;
 		position.y = MathUtils.sin(angle) * ((parent.getPosition().x + distance) - parent.getPosition().x) + MathUtils.cos(angle) * ((parent.getPosition().y + distance) - parent.getPosition().y) + parent.getPosition().y;
 		
-
 		poly.setPosition(position.x, position.y);
 		angle += angelStep;
 		
