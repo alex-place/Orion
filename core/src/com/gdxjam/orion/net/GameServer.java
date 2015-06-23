@@ -63,10 +63,10 @@ public class GameServer {
 				if (message instanceof RequestAddPlayer) {
 					RequestAddPlayer request = (RequestAddPlayer) message;
 					ControlBehavior behavior; // = new CruiserControlBehavior();
-					
+
 					if (request.type == null) {
-						request.type = ShipType.DEFAULT;
-						System.out.print("Server recieved a null shiptype request");
+						request.type = ShipType.UFO;
+						System.out.print("Server recieved a null shiptype request defaulting to " + request.type.toString());
 					}
 
 					switch (request.type) {

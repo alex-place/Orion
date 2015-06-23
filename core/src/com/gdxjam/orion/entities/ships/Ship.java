@@ -1,5 +1,6 @@
 package com.gdxjam.orion.entities.ships;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
@@ -77,6 +78,7 @@ public class Ship {
 		// add to position
 		position.y += newPosition.y;
 		position.x += newPosition.x;
+//		Gdx.app.log(this.getClass().getSimpleName(), "Player position: " + position.toString());
 		// apply to bounding box
 		shape.setRotation(angle * MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);

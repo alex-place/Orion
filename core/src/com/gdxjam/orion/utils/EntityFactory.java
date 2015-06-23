@@ -1,5 +1,6 @@
 package com.gdxjam.orion.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.GameManager;
@@ -17,7 +18,8 @@ public class EntityFactory {
 
 	public static void createBullet(Vector2 start, Vector2 target) {
 		LinearBullet bullet = (LinearBullet) GameManager.getLinearBulletPool().obtain();
-		bullet.init(start, target, 1, 1);
+		bullet.init(start, target, 1, 5f);
+		Gdx.app.log(EntityFactory.class.getSimpleName(), "Start: " + start.toString());
 
 	}
 

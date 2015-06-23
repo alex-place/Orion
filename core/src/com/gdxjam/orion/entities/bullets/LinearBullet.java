@@ -27,7 +27,7 @@ public class LinearBullet extends Projectile {
 		this.target = new Vector2(target);
 		this.p = p;
 		Vector2 tmp = this.start.sub(target);
-		angle = MathUtils.atan2(tmp.y, tmp.x);
+		angle = MathUtils.atan2(this.target.y - this.start.y, this.target.x - this.start.x);
 		position = new Vector2(start);
 
 		GameManager.getActiveBullets().add(this);

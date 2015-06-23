@@ -33,14 +33,13 @@ public class TestControlBehavior implements ControlBehavior {
 			ship.setAngle(MathUtils.atan2(position.y-ship.getPosition().y, position.x-ship.getPosition().x));
 		}
 		
-		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		EntityFactory.createBullet(ship.getPosition(), position);
+		
 	}
 
 	@Override
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		
+		EntityFactory.createBullet(ship.getPosition(), position);		
 	}
 
 	@Override
