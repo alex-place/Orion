@@ -2,12 +2,13 @@ package com.gdxjam.orion.entities.bullets;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Pool.Poolable;
+import com.gdxjam.orion.entities.Entity;
 
 /**
  * An abstract definition of a projectile assuming that most (Not all) will have
  * a begin point and a target.
  * */
-public abstract class Projectile implements Poolable {
+public abstract class Projectile implements Poolable, Entity{
 
 	protected Vector2 start;
 	protected Vector2 target;

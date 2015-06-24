@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Circle;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.entities.PolyEntity;
 import com.gdxjam.orion.entities.bullets.LinearBullet;
 import com.gdxjam.orion.entities.bullets.Projectile;
 import com.gdxjam.orion.input.DevGestureInput;
@@ -105,7 +106,10 @@ public class GameScreen implements Screen {
 		}
 		// debug render entitys
 		for (Entity entity : GameManager.getActiveEntities()) {
-			renderer.polygon(entity.getPolygon().getTransformedVertices());
+			if(entity instanceof PolyEntity){
+				PolyEntity p = (PolyEntity) entity;
+				renderer.polygon(p.getPolygon().getTransformedVertices());
+			}
 		}
 
 		for (Projectile p : GameManager.getActiveBullets()) {

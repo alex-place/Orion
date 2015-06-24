@@ -6,7 +6,7 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.ships.Ship;
 
-public class Player extends Entity {
+public class Player extends PolyEntity {
 
 	private Ship ship;
 	private PlayerAttributes attributes;

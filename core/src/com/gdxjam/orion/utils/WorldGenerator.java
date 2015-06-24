@@ -13,9 +13,5 @@ public class WorldGenerator {
 	}
 
 	public void createSolarSystem() {
-		Sun sun = EntityFactory.createSun();
-		Satellite s1 = EntityFactory.createsatellite(sun, 1050);
-		Satellite s3 = EntityFactory.createsatellite(s1,100);
-
 	}
 }

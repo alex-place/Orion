@@ -32,21 +32,10 @@ public class EntityFactory {
 
 	}
 
-	public static Sun createSun() {
-		Polygon poly = new Polygon();
-		poly.setVertices(Shapes.CIRCLE);
-		poly.scale(1000);
-		Sun sun = new Sun(poly, new Vector2(Constants.WORLD_WIDTH / 2, Constants.CAMERA_HEIGHT / 2));
-		GameManager.getActiveEntities().add(sun);
-		return sun;
+	public static void createSun() {
+
 	}
 
-	public static Satellite createsatellite(Entity parent, float d) {
-		Polygon poly = new Polygon();
-		poly.setVertices(Shapes.CIRCLE);
-		poly.scale(100);
-		Satellite satellite = new Satellite(poly, parent, d);
-		GameManager.getActiveEntities().add(satellite);
-		return satellite;
+	public static void createsatellite(Entity parent, float d) {
 	}
 }
