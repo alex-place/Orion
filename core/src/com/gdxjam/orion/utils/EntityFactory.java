@@ -18,7 +18,7 @@ public class EntityFactory {
 
 	public static void createBullet(Vector2 start, Vector2 target) {
 		LinearBullet bullet = (LinearBullet) GameManager.getLinearBulletPool().obtain();
-		bullet.init(start, target, 1, 5f);
+		bullet.init(start, target, 10, 0.25f);
 		Gdx.app.log(EntityFactory.class.getSimpleName(), "Start: " + start.toString());
 
 	}

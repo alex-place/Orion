@@ -32,7 +32,7 @@ public class AsteroidsControlBehavior implements ControlBehavior {
 	@Override
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		EntityFactory.createBullet(ship.getPosition(), position);
+		EntityFactory.createBullet(ship.getOrigin(), position);
 	}
 
 	@Override

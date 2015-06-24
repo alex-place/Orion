@@ -34,7 +34,7 @@ public class ShooterControlBehavior implements ControlBehavior {
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
 		Gdx.app.log("Debug", "Clicking" + position.x + " " + position.y);
-		EntityFactory.createBullet(ship.getPosition(), position);
+		EntityFactory.createBullet(ship.getOrigin(), position);
 	}
 
 	@Override

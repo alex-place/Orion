@@ -1,19 +1,16 @@
 package com.gdxjam.orion.entities.ships;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.controls.ControlBehavior;
-import com.gdxjam.orion.utils.Constants;
 
 public class Ship {
 	public boolean forward, reverse, forwardMove, reverseMove, leftMove, rightMove, leftTurn, rightTurn, leftStrafe, rightStrafe, moved;
-	private float angle = 0, stepLenght = 0, friction = 0.98f, angleStep = 0.01f, speed = 0.001f, a;
-	private Vector2 newPosition, position, velocity;
+	private float angle = 0, friction = 0.98f, angleStep = 0.01f, speed = 0.001f, a;
+	private Vector2 newPosition, position, velocity, origin;
 	private ControlBehavior behavior;
 	private Polygon shape;
-	private float i;
 
 	public Ship(Polygon shape, float angle, ControlBehavior behavior) {
 		this.shape = shape;
@@ -23,6 +20,7 @@ public class Ship {
 
 		this.angle = angle;
 		this.behavior = behavior;
+		this.origin = new Vector2(shape.getOriginX(), shape.getOriginY());
 
 	}
 
@@ -78,7 +76,8 @@ public class Ship {
 		// add to position
 		position.y += newPosition.y;
 		position.x += newPosition.x;
-//		Gdx.app.log(this.getClass().getSimpleName(), "Player position: " + position.toString());
+		// Gdx.app.log(this.getClass().getSimpleName(), "Player position: " +
+		// position.toString());
 		// apply to bounding box
 		shape.setRotation(angle * MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);
@@ -140,6 +139,12 @@ public class Ship {
 
 	public Polygon getPolygon() {
 		return shape;
+	}
+
+	public Vector2 getOrigin() {
+		origin.x = position.x + 1.5f;
+		origin.y = position.y + 1.5f;
+		return origin;
 	}
 
 }

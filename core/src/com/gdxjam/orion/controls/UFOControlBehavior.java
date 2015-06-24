@@ -32,7 +32,7 @@ public class UFOControlBehavior implements ControlBehavior {
 	@Override
 	public void handleClick(Vector2 position) {
 		Gdx.app.log("Debug", "Clicking @" + position.toString() + " ship @" + ship.getPosition());
-		EntityFactory.createBullet(ship.getPosition(), position);
+		EntityFactory.createBullet(ship.getOrigin(), position);
 
 	}
 

@@ -58,4 +58,8 @@ public class Player extends PolyEntity {
 		return ship.getPolygon();
 	}
 
+	public Vector2 getOrigin() {
+		return new Vector2(ship.getPolygon().getOriginX(), ship.getPolygon().getOriginY());
+	}
+
 }
