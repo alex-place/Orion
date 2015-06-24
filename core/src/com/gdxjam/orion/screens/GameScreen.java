@@ -106,7 +106,7 @@ public class GameScreen implements Screen {
 		}
 		// debug render entitys
 		for (Entity entity : GameManager.getActiveEntities()) {
-			if(entity instanceof PolyEntity){
+			if(entity instanceof PolyEntity){//this feels like a hack.
 				PolyEntity p = (PolyEntity) entity;
 				renderer.polygon(p.getPolygon().getTransformedVertices());
 			}
