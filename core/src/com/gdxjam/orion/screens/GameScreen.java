@@ -99,16 +99,15 @@ public class GameScreen implements Screen {
 		renderer.setProjectionMatrix(camera.combined);
 		renderer.begin(ShapeType.Line);
 		renderer.setColor(1, 0, 0, 1);
-		// renderer.circle(circle.x, circle.y, circle.radius);
+		
 		// debug render players
 		for (Player player : GameManager.getPlayers().values()) {
 			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}
 		// debug render entitys
 		for (Entity entity : GameManager.getActiveEntities()) {
-			if(entity instanceof PolyEntity){//this feels like a hack.
-				PolyEntity p = (PolyEntity) entity;
-				renderer.polygon(p.getPolygon().getTransformedVertices());
+			if(entity instanceof PolyEntity){
+				renderer.polygon(((PolyEntity) entity).getPolygon().getTransformedVertices());
 			}
 		}
 

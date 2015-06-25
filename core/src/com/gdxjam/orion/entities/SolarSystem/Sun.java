@@ -1,25 +1,29 @@
 package com.gdxjam.orion.entities.SolarSystem;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.PolyEntity;
+import com.gdxjam.orion.utils.Shapes;
 
 public class Sun extends PolyEntity{
-	private Polygon poly; 
+	private Polygon polygon; 
 	private Vector2 position;
 
-	public Sun(Polygon poly, Vector2 position){
+	public Sun(Vector2 position){
 		this.position = position;
-		this.poly = poly;
-		poly.setPosition(position.x, position.y);
+		polygon = new Polygon(Shapes.CIRCLE);
+		polygon.scale(10);
+		polygon.setPosition(position.x, position.y);
+		Gdx.app.log("Sun", "Sun created");
 		
 	}
 	public void update(){
 		
 	}
 	public Polygon getPolygon() {
-		return poly;
+		return polygon;
 	}
 	public Vector2 getPosition() {
 		return position;
@@ -29,7 +33,6 @@ public class Sun extends PolyEntity{
 	}
 	@Override
 	public void update(float delta) {
-		// TODO Auto-generated method stub
 		
 	}
 }

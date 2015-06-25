@@ -7,6 +7,7 @@ import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.SolarSystem.Satellite;
+import com.gdxjam.orion.entities.SolarSystem.SatelliteParameters;
 import com.gdxjam.orion.entities.SolarSystem.Sun;
 import com.gdxjam.orion.entities.bullets.LinearBullet;
 import com.gdxjam.orion.entities.ships.Ship;
@@ -32,10 +33,15 @@ public class EntityFactory {
 
 	}
 
-	public static void createSun() {
-
+	public static Sun createSun(Vector2 position) {
+		Sun sun = new Sun(position);
+		GameManager.getActiveEntities().add(sun);
+		return sun; 
 	}
 
-	public static void createsatellite(Entity parent, float d) {
+	public static Satellite createsatellite(SatelliteParameters p) {
+		Satellite satellite = new Satellite(p);
+		GameManager.getActiveEntities().add(satellite);
+		return satellite;
 	}
 }
