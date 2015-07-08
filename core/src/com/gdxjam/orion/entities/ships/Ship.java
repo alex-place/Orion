@@ -39,14 +39,8 @@ public class Ship {
 		// movement base on angel
 		if (rightTurn) {
 			angle += angleStep;
-			if (angle > 6.283185307179586476925286766559f) {
-				angle = 6.283185307179586476925286766559f - angle;
-			} // PI*2
 		} else if (leftTurn) {
 			angle -= angleStep;
-			if (angle < 0) {
-				angle = 6.283185307179586476925286766559f + angle;
-			}
 		}
 		if (rightStrafe) {
 			move(validAngle(angle + 1.57079633f), delta);
@@ -63,22 +57,16 @@ public class Ship {
 			newPosition.y *= friction;
 			newPosition.x *= friction;
 		}
-		// if(newPosition.y < 0.00001 && newPosition.x < 0.00001){
-		// System.out.println("is this the issuse");
-		// newPosition.y *= 0;
-		// newPosition.x *= 0;
-		// }
+
 		moved = false;
 		// To do: set max speed
 		if (newPosition.y - position.y > 10) {
 			// System.out.println(newPosition.y - position.y);
 		}
+		
 		// add to position
 		position.y += newPosition.y;
 		position.x += newPosition.x;
-		// Gdx.app.log(this.getClass().getSimpleName(), "Player position: " +
-		// position.toString());
-		// apply to bounding box
 		shape.setRotation(angle * MathUtils.radiansToDegrees);
 		shape.setPosition(position.x, position.y);
 	}

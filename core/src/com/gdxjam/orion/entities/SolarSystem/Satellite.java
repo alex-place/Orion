@@ -5,16 +5,19 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
+import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Entity;
 import com.gdxjam.orion.entities.PolyEntity;
 
-public class Satellite extends PolyEntity{
+public class Satellite implements PolyEntity {
+	Polygon polygon;
 	SatelliteParameters p;
 	private float angle;
 	Vector2 position = new Vector2(0,0);
 	
 	public Satellite(SatelliteParameters p){
 		this.p = p;
+		GameManager.getActiveEntities().add(this);
 	}
 	public void update(float delta){
 

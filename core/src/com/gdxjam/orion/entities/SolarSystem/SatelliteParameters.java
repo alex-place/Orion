@@ -18,8 +18,7 @@ public class SatelliteParameters {
 		this.angelStep = angelStep;
 		this.angle = angle;
 		
-		polygon = new Polygon(Shapes.CIRCLE);
-		polygon.scale(scale);
+		polygon = new Polygon(Shapes.circle(scale, 12));
 	}
 
 }

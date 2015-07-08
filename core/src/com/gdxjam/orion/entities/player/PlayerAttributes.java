@@ -1,4 +1,4 @@
-package com.gdxjam.orion.entities;
+package com.gdxjam.orion.entities.player;
 
 public class PlayerAttributes {
 	private int id;

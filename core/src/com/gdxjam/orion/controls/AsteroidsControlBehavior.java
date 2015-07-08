@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.entities.player.Player;
 import com.gdxjam.orion.entities.ships.Ship;
 import com.gdxjam.orion.utils.EntityFactory;
 

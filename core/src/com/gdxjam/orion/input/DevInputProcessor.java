@@ -90,8 +90,8 @@ public class DevInputProcessor implements InputProcessor {
 			zoom = 1;
 		} else
 
-		if (zoom > 50) {
-			zoom = 50;
+		if (zoom > 75) {
+			zoom = 75;
 		}
 
 		Gdx.app.log("Zoom", zoom + "");

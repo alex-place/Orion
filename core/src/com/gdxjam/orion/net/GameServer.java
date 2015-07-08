@@ -19,8 +19,8 @@ import com.gdxjam.orion.controls.ShooterControlBehavior;
 import com.gdxjam.orion.controls.TestControlBehavior;
 import com.gdxjam.orion.controls.UFOControlBehavior;
 import com.gdxjam.orion.entities.ClientPlayer;
-import com.gdxjam.orion.entities.Player;
-import com.gdxjam.orion.entities.PlayerAttributes;
+import com.gdxjam.orion.entities.player.Player;
+import com.gdxjam.orion.entities.player.PlayerAttributes;
 import com.gdxjam.orion.net.Network.ReplyAddPlayer;
 import com.gdxjam.orion.net.Network.ReplyUpdate;
 import com.gdxjam.orion.net.Network.RequestAddPlayer;
@@ -76,8 +76,8 @@ public class GameServer {
 					case UFO:
 						behavior = new UFOControlBehavior();
 						break;
-					case TESTSHIP:
-						behavior = new TestControlBehavior();
+					case ASTROIDS:
+						behavior = new AsteroidsControlBehavior();
 						break;
 					default:
 						behavior = new TestControlBehavior();

@@ -14,10 +14,10 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Circle;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.entities.Entity;
-import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.PolyEntity;
 import com.gdxjam.orion.entities.bullets.LinearBullet;
 import com.gdxjam.orion.entities.bullets.Projectile;
+import com.gdxjam.orion.entities.player.Player;
 import com.gdxjam.orion.input.DevGestureInput;
 import com.gdxjam.orion.input.DevInputProcessor;
 import com.gdxjam.orion.net.GameServer;
@@ -98,19 +98,22 @@ public class GameScreen implements Screen {
 		// start debug render
 		renderer.setProjectionMatrix(camera.combined);
 		renderer.begin(ShapeType.Line);
-		renderer.setColor(1, 0, 0, 1);
-		
+
+		renderer.setColor(0, 0, 1, 1);
 		// debug render players
 		for (Player player : GameManager.getPlayers().values()) {
+
 			renderer.polygon(player.getPolygon().getTransformedVertices());
 		}
 		// debug render entitys
+		renderer.setColor(1, 0, 0, 1);
 		for (Entity entity : GameManager.getActiveEntities()) {
+			
 			if(entity instanceof PolyEntity){
 				renderer.polygon(((PolyEntity) entity).getPolygon().getTransformedVertices());
 			}
 		}
-
+		renderer.setColor(0, 1, 0, 1);
 		for (Projectile p : GameManager.getActiveBullets()) {
 			if (p instanceof LinearBullet) {
 				LinearBullet bullet = (LinearBullet) p;

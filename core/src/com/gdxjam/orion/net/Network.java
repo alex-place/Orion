@@ -9,7 +9,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.gdxjam.orion.GameManager.ShipType;
 import com.gdxjam.orion.entities.ClientPlayer;
-import com.gdxjam.orion.entities.Player;
+import com.gdxjam.orion.entities.player.Player;
 
 public class Network {
 

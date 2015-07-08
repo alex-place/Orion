@@ -5,9 +5,9 @@ import java.util.HashMap;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.gdxjam.orion.entities.Entity;
-import com.gdxjam.orion.entities.Player;
 import com.gdxjam.orion.entities.bullets.LinearBullet;
 import com.gdxjam.orion.entities.bullets.Projectile;
+import com.gdxjam.orion.entities.player.Player;
 
 public class GameManager {
 
@@ -35,7 +35,7 @@ public class GameManager {
 	}
 
 	public static enum ShipType {
-		DEFAULT, SHOOTER, UFO, TESTSHIP;
+		ASTROIDS, SHOOTER, UFO, TEST;
 	}
 
 	public static Pool<LinearBullet> getLinearBulletPool() {

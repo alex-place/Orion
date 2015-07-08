@@ -1,12 +1,13 @@
-package com.gdxjam.orion.entities;
+package com.gdxjam.orion.entities.player;
 
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 import com.gdxjam.orion.GameManager;
 import com.gdxjam.orion.controls.ControlBehavior;
+import com.gdxjam.orion.entities.PolyEntity;
 import com.gdxjam.orion.entities.ships.Ship;
 
-public class Player extends PolyEntity {
+public class Player implements PolyEntity {
 
 	private Ship ship;
 	private PlayerAttributes attributes;
